@@ -1731,4 +1731,92 @@ $$
 	\right.
 	$$
 \end{enumerate}
+
+\part{Tema 2:}
+\chapter{El problema dual}
+6/11/2016
+
+\begin{theorem}[Teorema de la dualidad fuerte]
+	Sea un PPL [P] y su dual asociado [D] con $x_0$ y $w_0$ soluciones factibles de [P] y [D] respectivamente. \\
+	Si $f(x_0)=c^t x_0=b^t w_0=f^*(w_0)$ entonces $x_0$ y $w_0$ son soluciones óptimas de sus respectivos problemas.
+\end{theorem}
+
+\begin{proof}
+	Sea $x$ solución factible de [P] con [P] problema de minimizar (se razona igual para maximizar). \\
+	Por el teorema de la dualidad débil, $c^t x \geq b^t w_0=c^tx_0$, lo que implica que $x_0$ es solución óptima de [P].
+\end{proof}
+
+
+\begin{theorem}
+	Sea [P] un PPL y [D] su dual asociado. Si $x_0$ es la solución óptima de [P] entonces [D] tambien tiene solución óptima y está viene dada por $w_0^t=c_0^t B^{-1}$ con $B$ la base asociada a la solución $x_0$ y $c_B$ los costos asociados a las variables básicas. Además ambas soluciones $x_0$ y $w_0$ alcanzan el mismo valor de la función objetivo.
+\end{theorem}
+
+\begin{proof}
+	Sea [P] PPL en formato canónico:
+	$$
+	min ~ c^t x
+	$$
+	$$s.a \left\{
+	\begin{array}{c}
+	Ax\geq b \\
+	x \geq 0
+	\end{array}
+	\right.
+	$$
+	Pasando a formato estándar:
+		$$
+	min ~ c^t x
+	$$
+	$$s.a \left\{
+	\begin{array}{c}
+	Ax-Is=b \\
+	x, s \geq 0
+	\end{array}
+	\right.
+	$$
+	Escribimos la tabla simplex:
+	$$
+	\begin{array}{c|cc|c}
+	& x & s & b\\ \hline
+	& A & - Id & b \\ \hline
+	& & &
+	\end{array}
+	$$
+	Sin pérdida de generalidad podemos suponer que la solución óptima se encuentra en las $n$ primeras columnas (Es como hacer el simplex pero suponiendo de antemano quienes serán las soluciones óptimas):
+	$$
+	\begin{array}{c|ccc|c}
+	& x_b^t & x_n^t & s^t  & b\\ \hline
+	x_b& B & N & - Id & b \\ \hline
+	& & & &
+	\end{array}
+	$$
+	$$
+	\begin{array}{c|ccc|c}
+	& x_b^t & x_n^t & s^t  & b\\ \hline
+	c_b ~ x_b & Id &B^{-1} N & - B^{-1} &  B^{-1}b \\ \hline
+	& 0^t & c_b^tB^{-1}N-c_N^t& -c_b^t B^{-1} &
+	\end{array}
+	$$
+	Nuestro $x_0$ es $x_0=B^{-1}b$, por tanto el valor de nuestra función objetivo es $c_B^t B^{-1}b$. \\
+	¿Es $w_0=c_b^t B^{-1}$ solución factible del dual? Observemos:
+	$$A^tw_0=[B ~ ~N]^t[c_B^t B^{-1}]^t=$$
+	$$=\left[\begin{array}{c}
+		B^t \\ N^t
+	\end{array}\right](B^{-1})^t c_B=\left[\begin{array}{c}
+	B^t (B^{-1})^t c_b \\ N^t(B^{-1})^tc_b)
+	\end{array}\right]=\left[\begin{array}{c}
+	c_b \\ N^t(B^{-1})^t c_B
+	\end{array}\right]=\left[\begin{array}{c}
+	c_B \\ (B^{-1}N )^t c_b
+	\end{array}\right] \leq \left[\begin{array}{c}
+	c_b \\ c_n
+	\end{array}\right]$$
+	Por otro lado, $w_0^t=c_b^t B^{-1}\geq 0$, aplicando que las cotas relativas de las variables de holgura $-c_b^tB^{-1} \leq 0$. \\
+	Ahora veremos que $c^tx_0=b^t w_0$
+	$$b^t w_0= b^t (c_b^t B^{-1})^t=b^t (B^{-1})^t c_b=(B^{-1}b)^tc_b=((B^{-1}b)^t c_B)^t=c_B^t B^{-1}b=c_B^t x_b=c^t x_0$$
+\end{proof}
+
+\textbf{Ejercicio:} Si el dual es degenerado,entonces el primal tiene solución múltiple.
+
+\begin{co
 \end{document}
