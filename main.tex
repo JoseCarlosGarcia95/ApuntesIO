@@ -127,7 +127,7 @@ En general, una función lineal $f: D\subset \mathbb{R}^n \longrightarrow \mathb
 \begin{align}
 f(x_1,x_2,...,x_n)=c_1x_1+c_2+x_2+...+c_nx_n
 \end{align}
-\newpage
+
 \section{Problema de programación lineal}
 Una vez definido lo que es una función lineal, definimos el concepto de \textit{problema de programación lineal}.
 
@@ -181,7 +181,7 @@ De modo, que si tenemos un problema expresado en formato estándar podemos escri
 \end{definition}
 
 Por otro lado, veamos que todo PPL se puede escribir en formato estándar:
-\newpage
+
 \begin{proposition}
 	Todo problema de programación lineal se puede escribir en formato estándar
 \end{proposition}
@@ -435,8 +435,7 @@ Existen soluciones factibles que hacen mejorar a la función objetivo todo lo qu
 	\end{eqnarray}
 	Como la igualdad anterior es para todo $\lambda \geq 0$, necesariamente $Ad=0$. \\
 	$\Leftarrow$ \\
-	Supongamos que $Ad=0$, ¿Para todo $x_0 \in R$ se cumple que $x_0 + \lambda d  \in R$ para todo $\lambda \geq 0$? \\
-	En efecto, escribamos $A(x_0+\lambda d)$, aplicando la propiedad distributiva tenemos: \\
+	Escribamos $A(x_0+\lambda d)$, aplicando la propiedad distributiva tenemos: \\
 	$Ax_0+A \lambda d=Ax_0+0=Ax_0=b$. ¿$x_0+\lambda d \geq 0$? Sí, $x_0 \in R$, por tanto $x_0, \lambda, d \geq 0$.  
 \end{proof}
 
@@ -608,7 +607,7 @@ x_2
 	Usando la misma notación que antes, sea $x_0$ un punto extremo de $R$.
 	\begin{enumerate}
 		\item Si las columnas de $A$ asociadas a las componentes $x_{0i}$ con $i=1,...p$ son linealmente independientes, estaría demostrado, pues es solución factible que proviene de columnas linealmente independientes.
-		\item En caso contrario, se tiene que $a_1, a_2, ..., a_p$ son linealmente dependientes, existen unos escalares no todos nulos $\lambda_1, ..., \lambda_p$ tales que:
+		\item (Reducción al absurdo) En caso contrario, se tiene que $a_1, a_2, ..., a_p$ son linealmente dependientes, existen unos escalares no todos nulos $\lambda_1, ..., \lambda_p$ tales que:
 		$$
 			\lambda_1 a_1+\lambda_2+a_2+...+\lambda_p a_p=0
 		$$
@@ -642,10 +641,10 @@ x_2
 				 ... \\
 				 0
 				 \end{array}\right)+\varepsilon\left(\begin{array}{c}
-				 y_{01} \\
-				 y_{02} \\
+				 \lambda_{1} \\
+				 \lambda_{2} \\
 				 ... \\
-				 y_{0p} \\
+				 \lambda_{p} \\
 				 0 \\
 				 ... \\
 				 0
@@ -713,7 +712,7 @@ x_2
 	Si existen $\lambda_i < 0$, tomamos $\varepsilon_1= \min\{-\frac{x_{0i}}{\lambda_i} : \lambda_i < 0\}$. \\
 	Al tomar este $\varepsilon_1$, habría al menos una componente que se anule. \\
 	Entonces, $x_0^+=x_0+\varepsilon_1 \lambda$ tiene como mucho $p-1$ componentes mayores que cero, y el resto nulas. Si las componentes columnas de $A$ asociadas a las componentes mayores que son linealmente independientes => fin. \\
-	En caso contrario, reiteramos el razonamiento hasta llegar a un conjunto de columnas de $A$ linealmente independientes. \\
+	En caso contrario, reiteramos el razonamiento hasta llegar a un conjunto de columnas de $A$ linealmente independientes (Cuando nos queden $m$). \\
 	Si todos los $\lambda_i \geq 0$ \\
 	$$
 		x_0^-=x_0-\varepsilon \lambda_i, \varepsilon \geq 0
@@ -723,7 +722,7 @@ x_2
 	$$
 	Sea $\varepsilon_2=\min\{ \frac{x_{0i}}{\lambda_i} : \lambda_i \geq 0 \}$ tal que $x_0^-=x_0- \varepsilon_2 \lambda$. \\
 	Este $x_0^-$ tiene al menos una componente al menos mayor que cero. Reiterando el razonamiento => fin.
-	\item La demostración es igual a la anterior hasta donde tomamos $\lambda \in \mathbb{R}^n$, por la demostración anterior, $x_\varepsilon^+, x_\varepsilon^- \in R$ para cierto $\varepsilon \geq 0$. \\
+	\item Sean $x_\varepsilon^+, x_\varepsilon^- \in R$ los correspondientes $x_0^-, x_0^+$ del apartado anterior, para cierto $\varepsilon \geq 0$. \\
 	Sea $z_0=c^t x_0$ el valor de la función objetivo para $x_0$. \\
 	Supongamos que [P] es un problema de maximizar.
 	$$
@@ -763,7 +762,7 @@ El método Simplex nos calcula soluciones óptimas de un problema, para ello:
 \end{enumerate}
 \subsection{Pivotar, "saltar" de solución básica factible en solución básica factible}
 Sea $[P]$ un PPL en formato estándar:
-$$ mín(max) c^t x$$
+$$ min(max) c^t x$$
 $$
 s.a \left\{\begin{array}{c}
 Ax=b \\
@@ -781,7 +780,7 @@ x_B \\
 x_N
 \end{array}\right]=[B^{-1}][b]$$
 \subsubsection{Ejemplo}
-$$ máx/min ~c^t x$$
+$$ max/min ~c^t x$$
 $$s.a \left\{ \begin{array}{c}
 x_1+5x_4=57 \\
 x_1-4 x_4=12 \\
@@ -963,7 +962,7 @@ $$
 En este caso, el problema es no acotado, encuentro una solución que hace que la función objetivo mejore todo lo queramos. \\
 \textbf{Caso II: } Si existen algunos $a_{iq}>0$, queremos que:
 $$b_i-\varepsilon a_{iq}=0$$
-Tomando $$\varepsilon=\min\{\frac{b_i}{a_{i1}} : a_{iq} > 0\}$$ \\
+Tomando $$\varepsilon=\min\{\frac{b_i}{a_{iq}} : a_{iq} > 0\}$$ \\
 Entonces entra en la base la variable $x_q$, sale de la base la variable asociada a la ecuación $b_i-\varepsilon a_{iq}=0$ (En caso de empate, puede salir la que queramos)
 \subsubsection{Forma alternativa de la fase II}
 Supongamos que $x_q$ entra en la base y que $x_k$ es la variable básica que debe salir.
@@ -1199,7 +1198,10 @@ $$f(x_1, x_2, ..., x_n)=c_1 (b_1-\sum_{j=m+1}^{n}a_{1j}x_j)+c_2 (b_2-\sum_{j=m+1
 $$=c_1b_1+c_2+...+c_mb_m-c_1\sum_{j=m+1}^{n}a_{1j}x_j-c_2\sum_{j=m+1}^{n}a_{2j}x_j-...-c_m\sum_{j=m+1}^{n}a_{mj}x_j+x_{m+1}c_{m+1}+...+c_n x_n=$$
 $$=z_0+\left[c_{m+1}-\sum_{i=1}^{m}c_i a_{i~m+1}\right]x_{m+1}+\left[c_{m+2}-\sum_{i=1}^{m}c_ia_{i~m+2}\right]x_{m+2}+...+\left[c_n-\sum_{i=1}^{m}c_ia_{in}\right]x_n=$$
 $$=z_0-\left[\sum_{i=1}^{m}c_i a_{i~m+1}-c_{m+1}\right]x_{m+1}-\left[\sum_{i=1}^{m}c_ia_{i~m+2}-c_{m+2}\right]x_{m+2}-...-\left[\sum_{i=1}^{m}c_ia_{in}-c_n\right]x_n=$$
-Definimos $r_q=\displaystyle \sum_{i=1}^{m}c_ia_{i~q}-c_{q}$ como costo relativo asociado a la variable $x_i$
+Definimos $r_q=\displaystyle \sum_{i=1}^{m}c_ia_{i~q}-c_{q}$ como costo relativo asociado a la variable $x_i$. \\
+Si el problema es de minimizar, queremos que todos los $r_q>0$, de esta manera reducimos el valor objetivo. \\
+Por otro lado, si el problema es de maximizar queremos que todos los $r_q<0$, de esta manera aumentamos el valor objetivo. \\
+Por tanto, salen aquellos que no cumplan la condición de optimalidad.
 \newpage
 \begin{theorem}
 	Dado un PPL 
@@ -1472,7 +1474,7 @@ $$ max ~2x_1+3x_2-x_3-12x_4$$
 $$s.a \left\{
 \begin{array}{c}
 -2x_1-9x_2+x_3+9x_4 \leq 0 \\
-1/3x_1+x_2-1/3x_3-2x_4 \leq 
+1/3x_1+x_2-1/3x_3-2x_4 \leq 0
 \end{array}
 \right.
 $$
@@ -1818,5 +1820,4 @@ $$
 
 \textbf{Ejercicio:} Si el dual es degenerado,entonces el primal tiene solución múltiple.
 
-\begin{co
 \end{document}
