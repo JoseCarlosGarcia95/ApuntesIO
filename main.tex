@@ -1591,8 +1591,8 @@ Recordemos lo siguiente:
 	\item Solo coincide cuando en la solución del problema ampliado las variables artificiales sean $0$, $z_i$ para todo $i$.
 	\item Si $x_0$ es solución óptima del problema ampliado y todos los $z_i=0$, entonces $x_0$ es solución óptima del problema original. 
 	\item El problema ampliado siempre tiene solución.
-	\item Si $x_0$ es solución óptima del problema ampliado y existe algún. \\
-	Entonces el problema original NO tiene solución. $z_i\neq0$.
+	\item Si $x_0$ es solución óptima del problema ampliado y existe algún $z_i \neq 0$ \\
+	Entonces el problema original NO tiene solución.
 	\item Si el problema ampliado es no acotado entonces el problema original también es no acotado.
 \end{itemize} 
 Resolvamos entonces:
@@ -1736,8 +1736,133 @@ $$
 
 \part{Tema 2:}
 \chapter{El problema dual}
-6/11/2016
+\begin{definition}[Formato canónico]
+	Dado un PPL [P], decimos que está expresado en forma canónica  si:
+	$$
+		min ~ c^t x
+		$$
+		$$s.a \left\{
+		\begin{array}{c}
+		Ax\geq b \\
+		x \geq 0
+		\end{array}
+		\right.
+	$$
+\end{definition}
 
+
+\begin{definition}[Problema dual]
+	Dado un PPL [P], se define el problema dual asociado a [P] como:
+	$$
+	max ~ b^t w
+	$$
+	$$s.a \left\{
+	\begin{array}{c}
+	A^t  w \leq c \\
+	w \geq 0
+	\end{array}
+	\right.
+	$$
+\end{definition}
+
+\begin{proposition}
+	El dual del dual es el primal.
+\end{proposition}
+\begin{proof}
+	$$
+min ~ c^t x
+$$
+$$s.a \left\{
+\begin{array}{c}
+Ax\geq b \\
+x \geq 0
+\end{array}
+\right.
+$$
+
+$$ \Downarrow ~ (Dual)$$
+
+	$$
+max ~ b^t w
+$$
+$$s.a \left\{
+\begin{array}{c}
+A^t  w \leq c \\
+w \geq 0
+\end{array}
+\right.
+$$
+
+$$ \Downarrow ~ (Canonico) $$
+$$
+min ~ - b^t w
+$$
+$$s.a \left\{
+\begin{array}{c}
+-A^t  w \geq -c \\
+w \geq 0
+\end{array}
+\right.
+$$
+
+$$ \Downarrow ~ (Dual) $$
+$$
+max ~ -c^t y
+$$
+$$s.a \left\{
+\begin{array}{c}
+-A  y \leq -b \\
+w \geq 0
+\end{array}
+\right.
+$$
+
+$$ \Downarrow $$
+$$
+min ~ c^t y
+$$
+$$s.a \left\{
+\begin{array}{c}
+A  y \geq b \\
+w \geq 0
+\end{array}
+\right.
+$$
+\end{proof}
+
+\subsection{Tabla de conversión primal a dual}
+
+\begin{center}
+	\begin{tabular}{| l | l |}
+		\hline
+		Minimizar & Maximizar \\ \hline \hline
+		\textbf{Variables} & \textbf{Restricciones} \\ \hline
+		$\leq$ & $\geq$ \\ \hline
+		libre & $=$ \\ \hline
+		$\geq$ & $\leq$ \\ \hline \hline
+		\textbf{Restricciones} & \textbf{Variables} \\ \hline
+		$\leq$ & $\leq$ \\ \hline
+		$=$ & libre \\ \hline
+		$\geq$ & $\geq$ \\ \hline
+	\end{tabular}
+\end{center}
+\newpage
+\subsection{Teoremas de dualidad débil y fuerte}
+\begin{theorem}
+	Dado un PPL [P] en formato canónico, y [D] su dual. Si $x_0$ y $w_0$ son soluciones factibles de [P] y [D] entonces $c^t w_0 \geq b^t x_0$.
+\end{theorem}
+
+\begin{proof}
+	Sea $x_0$ una solución del problema [P] y $w_0$ una solución del problema [D], entonces se cumple $Ax_0 \geq b$ y $A^t w_0 \leq c$.
+	\begin{itemize}
+		\item Multiplicamos la primera desigualdad por $w_0^t$ a la izquierda: 
+		$$ w_0^t A x_0 \geq w_0^t b $$
+		\item Hacemos lo mismo para segunda desigualdad, pero esta vez multiplicando por $x_0^t$:
+		$$ x_0^t A^t w_0 \leq x_0^t c $$
+		\item Por tanto, 
+		$$ x_0^t c \geq x_0^t A^t w_0 = w_0^t A x_0 \geq w_0^t b$$
+	\end{itemize}
+\end{proof}
 \begin{theorem}[Teorema de la dualidad fuerte]
 	Sea un PPL [P] y su dual asociado [D] con $x_0$ y $w_0$ soluciones factibles de [P] y [D] respectivamente. \\
 	Si $f(x_0)=c^t x_0=b^t w_0=f^*(w_0)$ entonces $x_0$ y $w_0$ son soluciones óptimas de sus respectivos problemas.
@@ -1818,6 +1943,56 @@ $$
 	$$b^t w_0= b^t (c_b^t B^{-1})^t=b^t (B^{-1})^t c_b=(B^{-1}b)^tc_b=((B^{-1}b)^t c_B)^t=c_B^t B^{-1}b=c_B^t x_b=c^t x_0$$
 \end{proof}
 
-\textbf{Ejercicio:} Si el dual es degenerado,entonces el primal tiene solución múltiple.
+\subsection{Condiciones de holgura complementarias}
+
+Sea [P] un PPL en formato canónico y [D] su dual asociado. \\
+Sea $x_0$ solución óptima de [P] y $w_0$ solución óptima de [D]. 
+\begin{itemize}
+	\item $A x_0 \geq b$ $\longrightarrow$ multiplicamos por $w_0^t$ a la izquierda: 
+	$$ w_0^t A x_0 \geq w_0^t b $$
+	\item $w_0^t A \leq c_0^t$ $\longrightarrow$ multiplicamos por $x_0^t$ a la derecha: 
+	$$ x_0^t A^t w_0 \leq x_0^t c $$
+	\item Por tanto, dado que $x_0$ y $w_0$ son soluciones óptimas:
+	$$ x_0^t c = w_0^t A x_0 = w_0^t b$$
+\end{itemize}
+
+Ahora usando esa última igualdad, observemos:
+
+\begin{itemize}
+	\item $w_0^t A x_0 = w_0^t b$: \\
+	$$ w_0^t A x_0 - w_0^t b = 0 \Rightarrow w_0^t [Ax_0-b] = w_0^t S = 0$$
+	Donde $S$ es la matriz de las variables de holguras de [P], por tanto:
+	$$ w_{0j} s_j = 0 $$
+	De lo que se concluye que si $s_j \neq 0$ para algún $j$ entonces necesariamente $w_{0j}=0$.
+	\item $ x_0^t c = w_0^t A x_0$: \\
+	$$ c^t x_0 - w_0^t A x_0 = 0 \Rightarrow [c^t-w_0^t A]x_0 = 0=S'x_0=0$$
+	
+	Donde $S'$ es la matriz de las variables de holguras de [D], por tanto:
+	$$ x_{0j} s'_j = 0 $$
+	
+	De lo que se concluye que si $s'_j \neq 0$ para algún $j$ entonces necesariamente $x_{0j}=0$.
+\end{itemize}
+\begin{proposition}
+	Si el dual es degenerado,entonces el primal tiene solución múltiple.
+\end{proposition}
+
+\begin{proof}
+	Sin perdida de generalidad, sea $x_0$ la solución básica óptima, sea $B$ la matriz básica asociada a la solución básica, entonces la solución óptima del dual viene dada por $w_0^t=c_B^t B^{-1}$. \\
+	$w_0^t$ tiene alguna componente nula por hipótesis, entonces en la tabla óptima [P], $w_0^t$ aparece en los costes relativos de las variables de holguras (Véanse las condiciones de holgura complementarias). \\
+	Sabemos entonces que si existen variables no básicas con costos relativos distintos de cero, entonces [P] tiene solución múltiple.
+\end{proof}
+
+En resumen,
+\begin{center}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Primal} & \textbf{Dual} \\ \hline
+		Solución óptima & Solución óptima \\ \hline
+		Ilimitado & Infactible \\ \hline
+		Infactible & Ilimitado o infactible \\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Método simplex dual}
 
 \end{document}
