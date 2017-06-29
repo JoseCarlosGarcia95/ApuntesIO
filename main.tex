@@ -67,20 +67,20 @@
 \begingroup
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
-\coordinate [below=12cm] (midpoint) at (current page.north);
-\node at (current page.north west)
-{\begin{tikzpicture}[remember picture,overlay]
-	\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[height=\paperheight]{Wallpaper}}; % Background image
-	\draw[anchor=north] (midpoint) node [fill=darkjose!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering Apuntes Progamación Matemática\\[15pt] % Book title
-			{\huge Escrito por Jose Carlos García}}}; % Author name
-	\end{tikzpicture}};
+  \coordinate [below=12cm] (midpoint) at (current page.north);
+  \node at (current page.north west)
+        {\begin{tikzpicture}[remember picture,overlay]
+	        \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[height=\paperheight]{Wallpaper}}; % Background image
+	        \draw[anchor=north] (midpoint) node [fill=darkjose!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering Apuntes Progamación Matemática\\[15pt] % Book title
+			    {\huge Escrito por Jose Carlos García}}}; % Author name
+	    \end{tikzpicture}};
 \end{tikzpicture}
 \vfill
 \endgroup
 \newpage
 \textit{Los presentes apuntes han sido escrito por José Carlos García Ortega bajo la licencia GNU General Public License. Cualquier persona puede modificar, descargar y compartir cualquier modificación de este documento.\\ \\
-Por otro lado, los profesores de la asignatura no tienen \textbf{ninguna responsabilidad acerca de la revisión de estos apuntes}.\\ \\
-Estos apuntes han sido escrito basados en las clases de Programación Matemática del curso 2016-2017 del Grado de Matemáticas en la Universidad de Cádiz.}
+  Por otro lado, los profesores de la asignatura no tienen \textbf{ninguna responsabilidad acerca de la revisión de estos apuntes}.\\ \\
+  Estos apuntes han sido escrito basados en las clases de Programación Matemática del curso 2016-2017 del Grado de Matemáticas en la Universidad de Cádiz.}
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -117,99 +117,99 @@ Estos apuntes han sido escrito basados en las clases de Programación Matemátic
 \section{Funciones lineales}\index{Funciones lineales}
 En primer lugar definimos el concepto de función lineal, que nos ayudará a definir el concepto \textit{problema de programación lineal}
 \begin{definition}[Función lineal]
-	Dada una función $f: D\subset\mathbb{R}^n \longrightarrow \mathbb{R}$ se dice que es lineal si cumple lo siguiente:
-	\begin{align}
-		f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)
-	\end{align}
-	Donde $x, y \in D$ son variables y $\alpha, \beta \in \mathbb{R}$ son constantes reales.
+  Dada una función $f: D\subset\mathbb{R}^n \longrightarrow \mathbb{R}$ se dice que es lineal si cumple lo siguiente:
+  \begin{align}
+	f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)
+  \end{align}
+  Donde $x, y \in D$ son variables y $\alpha, \beta \in \mathbb{R}$ son constantes reales.
 \end{definition}
 En general, una función lineal $f: D\subset \mathbb{R}^n \longrightarrow \mathbb{R}$ vendrá definida de la siguiente forma:
 \begin{align}
-f(x_1,x_2,...,x_n)=c_1x_1+c_2+x_2+...+c_nx_n
+  f(x_1,x_2,...,x_n)=c_1x_1+c_2+x_2+...+c_nx_n
 \end{align}
 
 \section{Problema de programación lineal}
 Una vez definido lo que es una función lineal, definimos el concepto de \textit{problema de programación lineal}.
 
 \begin{definition}[Problema de programación lineal]
-	Un problema de programación lineal (PPL) es un problema matemático que se puede expresar de la siguiente forma: \\
-	Hallar el máximo / mínimo de una función lineal, $f(x)=c_1x_1+c_2+x_2+...+c_nx_n$ sujeto a una serie de restricciones que podemos expresar como:
-	\begin{equation*}
+  Un problema de programación lineal (PPL) es un problema matemático que se puede expresar de la siguiente forma: \\
+  Hallar el máximo / mínimo de una función lineal, $f(x)=c_1x_1+c_2+x_2+...+c_nx_n$ sujeto a una serie de restricciones que podemos expresar como:
+  \begin{equation*}
 	\left\lbrace
 	\begin{array}{l}
-	a_{11}x_1+a_{12}x_2+...+a_{1n}x_n \leq b_1 \\
-	... \\
-	a_{s1}x_1+a_{s2}x_2+...+a_{sn}x_n \leq b_s \\
-	... \\
-	a_{t1}x_1+a_{t2}x_2+...+a_{tn}x_n \leq b_t \\
-	... \\
-	a_{t+1,1}x_1+a_{t+1,2}x_2+...+a_{t+1,n}x_n = b_{t+1} \\
-	... \\
-	a_{m1}x_1+a_{m2}x_2+...+a_{mn}x_n = b_{m}
+	  a_{11}x_1+a_{12}x_2+...+a_{1n}x_n \leq b_1 \\
+	  ... \\
+	  a_{s1}x_1+a_{s2}x_2+...+a_{sn}x_n \leq b_s \\
+	  ... \\
+	  a_{t1}x_1+a_{t2}x_2+...+a_{tn}x_n \leq b_t \\
+	  ... \\
+	  a_{t+1,1}x_1+a_{t+1,2}x_2+...+a_{t+1,n}x_n = b_{t+1} \\
+	  ... \\
+	  a_{m1}x_1+a_{m2}x_2+...+a_{mn}x_n = b_{m}
 	\end{array}
 	\right.
-	\end{equation*}
-	Donde $x_i, a_{ij}, b_j \in \mathbb{R}$ para todo $1\leq i \leq n$, $1 \leq j \leq m$. \\
-	Nótese que lo que expresa entre llaves corresponde a una restricción que puede ser hecha a través de desigualdades o igualdades.
+  \end{equation*}
+  Donde $x_i, a_{ij}, b_j \in \mathbb{R}$ para todo $1\leq i \leq n$, $1 \leq j \leq m$. \\
+  Nótese que lo que expresa entre llaves corresponde a una restricción que puede ser hecha a través de desigualdades o igualdades.
 \end{definition}
 Por otro lado, para evitar problemas con las desigualdades, todas estas restricciones se pueden escribir como igualdades que cumplen ciertas propiedades. \\
 Cuando sucede esto, decimos que nuestro problema de programación lineal está expresado en formato estándar.
 
 \begin{definition}[Problema de programación lineal estándar]
-	Un PPL está expresado en formato estándar si se puede escribir como: \\
-		Hallar el máximo / mínimo de una función lineal, $f(x)=c_1x_1+c_2+x_2+...+c_nx_n$ sujeto a una serie de restricciones que podemos expresar como:
-		\begin{equation*}
-		\left\lbrace
-		\begin{array}{l}
-		a_{11}x_1+a_{12}x_2+...+a_{1n}x_n = b_1 \\
-		a_{21}x_1+a_{22}x_2+...+a_{2n}x_n = b_2 \\
-		... \\
-		a_{m1}x_1+a_{m2}x_2+...+a_{mn}x_n = b_{m}
-		\end{array}
-		\right.
-		\end{equation*}
-		Donde $x_i, b_j \in \mathbb{R}^+, a_{ij} \in \mathbb{R}$ para todo $1\leq i \leq n$, $1 \leq j \leq m$. \\
+  Un PPL está expresado en formato estándar si se puede escribir como: \\
+  Hallar el máximo / mínimo de una función lineal, $f(x)=c_1x_1+c_2+x_2+...+c_nx_n$ sujeto a una serie de restricciones que podemos expresar como:
+  \begin{equation*}
+	\left\lbrace
+	\begin{array}{l}
+	  a_{11}x_1+a_{12}x_2+...+a_{1n}x_n = b_1 \\
+	  a_{21}x_1+a_{22}x_2+...+a_{2n}x_n = b_2 \\
+	  ... \\
+	  a_{m1}x_1+a_{m2}x_2+...+a_{mn}x_n = b_{m}
+	\end{array}
+	\right.
+  \end{equation*}
+  Donde $x_i, b_j \in \mathbb{R}^+, a_{ij} \in \mathbb{R}$ para todo $1\leq i \leq n$, $1 \leq j \leq m$. \\
 \end{definition}
 De modo, que si tenemos un problema expresado en formato estándar podemos escribirlo con matrices; de forma que:
 \begin{definition}[Formato matricial de un PPL]
-	Todo PPL se puede expresar como: \\
-	mín / máx del vector $c^t$ donde $c^t$ es el vector costo.
-	\begin{align}
-		Ax=b, x\geq0
-	\end{align}
-	Donde $A$ es la matriz de los coeficientes, $b$ el vector de recursos y $x$ variable de interés.
+  Todo PPL se puede expresar como: \\
+  mín / máx del vector $c^t$ donde $c^t$ es el vector costo.
+  \begin{align}
+	Ax=b, x\geq0
+  \end{align}
+  Donde $A$ es la matriz de los coeficientes, $b$ el vector de recursos y $x$ variable de interés.
 \end{definition}
 
 Por otro lado, veamos que todo PPL se puede escribir en formato estándar:
 
 \begin{proposition}
-	Todo problema de programación lineal se puede escribir en formato estándar
+  Todo problema de programación lineal se puede escribir en formato estándar
 \end{proposition}
 \begin{proof}
-	Realicemos una serie de pasos para convertirlo en un problema de programación lineal en formato estándar.
-	\begin{enumerate}
-		\item En primer lugar, debemos hacer que todos los $x_i$ cumplan que $x_i \geq 0$. Para ello si $x_i<0$ tomamos $x_i^*=-x_i$
-		\item Sea $x_i \in \mathbb{R}$ entonces $x_i=x_i^+-x_i^-$ donde $x_i^+\geq 0$ y $x_i^- \geq 0$.
-		\item Supongamos que $a_{s1}x_1+a_{s2}x_2+...+a_{sn}x_n \leq b_{s}$, si añadimos un $s_s$ positivo podemos hacer que se cumpla: $a_{s1}x_1+a_{s2}x_2+...+a_{sn}x_n + s_s= b_{s}$
-		\item Para otro tipo de desigualdad se concluye igual.
-		\item Si $b_i < 0$, multiplicamos toda la restricción por $-1$.
-	\end{enumerate}
+  Realicemos una serie de pasos para convertirlo en un problema de programación lineal en formato estándar.
+  \begin{enumerate}
+  \item En primer lugar, debemos hacer que todos los $x_i$ cumplan que $x_i \geq 0$. Para ello si $x_i<0$ tomamos $x_i^*=-x_i$
+  \item Sea $x_i \in \mathbb{R}$ entonces $x_i=x_i^+-x_i^-$ donde $x_i^+\geq 0$ y $x_i^- \geq 0$.
+  \item Supongamos que $a_{s1}x_1+a_{s2}x_2+...+a_{sn}x_n \leq b_{s}$, si añadimos un $s_s$ positivo podemos hacer que se cumpla: $a_{s1}x_1+a_{s2}x_2+...+a_{sn}x_n + s_s= b_{s}$
+  \item Para otro tipo de desigualdad se concluye igual.
+  \item Si $b_i < 0$, multiplicamos toda la restricción por $-1$.
+  \end{enumerate}
 \end{proof}
 
 \textbf{Ejemplo: } Expresar el siguiente PPL en formato estándar: \\
 \begin{center}
-	mín $2x_1+3x_2+9x_3-x_4$
-	$$
-	s.a\left\lbrace
-	\begin{array}{l}
+  mín $2x_1+3x_2+9x_3-x_4$
+  $$
+  s.a\left\lbrace
+  \begin{array}{l}
 	x_1-x_2+4x_4 \leq 17 \\
 	x_1+x_2+x_3+x_4 = 100 \\
 	3x_1+2x_2+9x_3-8x_4  \geq 5 \\
 	-x_1+x_2-x_3-4x_4 \geq -3
-	\end{array}
-	\right.
-	$$
-	$$x_1 \leq 0; x_2 \geq 0; x_3 \in \mathbb{R} ; x_4 \geq 0$$
+  \end{array}
+  \right.
+  $$
+  $$x_1 \leq 0; x_2 \geq 0; x_3 \in \mathbb{R} ; x_4 \geq 0$$
 \end{center}
 \textbf{Resolución: } Procedamos del mismo modo que se hizo en la demostración de la proposición anterior;
 $x_1^*=-x_1\geq 0$, 
@@ -218,40 +218,40 @@ Ahora, dado que $x_3$ es libre,
 $x_3=x_3^+-x_3^-; x_3^+, x_3^- \geq 0$, con $x_4$ no debemos hacer nada. \\
 De modo, que hemos convertido el problema anterior al siguiente: 
 \begin{center}
-	mín $-2x_1^*+3x^2+9x_3^+-9x_3^--x_4$
-	$$s.a\left\lbrace
-	\begin{array}{l}
+  mín $-2x_1^*+3x^2+9x_3^+-9x_3^--x_4$
+  $$s.a\left\lbrace
+  \begin{array}{l}
 	-x_1^*-x_2+4x_3^+-4x_3^- \leq 17 \\
 	-x_1^*+x_2+x_3^+-x_3^-+x_4 = 100 \\
 	-3x_1^*+2x_2+9x_3^+-9x_3^--8x_4 \geq 5 \\
 	x_1+x_2-x_3^++x_3^--4x_4 \geq -3
-	\end{array}
-	\right.$$
-	$$x_1^*, x_2, x_3^+, x_3^-, x_4 \geq 0$$
+  \end{array}
+  \right.$$
+  $$x_1^*, x_2, x_3^+, x_3^-, x_4 \geq 0$$
 \end{center}
 Nos queda convertir las desigualdades en igualdades; para ello debemos añadir unas variables:
 $$
 s.a\left\lbrace
 \begin{array}{l}
--x_1^*-x_2+4x_3^+-4x_3^- + s_1= 17 \\
--x_1^*+x_2+x_3^+-x_3^-+x_4 = 100 \\
--3x_1^*+2x_2+9x_3^+-9x_3^--8x_4 -s_3= 5 \\
-x_1+x_2-x_3^++x_3^--4x_4 + s_4 =  -3
+  -x_1^*-x_2+4x_3^+-4x_3^- + s_1= 17 \\
+  -x_1^*+x_2+x_3^+-x_3^-+x_4 = 100 \\
+  -3x_1^*+2x_2+9x_3^+-9x_3^--8x_4 -s_3= 5 \\
+  x_1+x_2-x_3^++x_3^--4x_4 + s_4 =  -3
 \end{array}
 \right.
 $$
 
 \section{Factibilidad de una variable}
 \begin{definition}[Factibilidad de una variable]
-	Dado un PPL, $[P]$, sujeto a $Ax=b$ y $x\geq 0$, se dice que $x_0$ es factible de $[P]$ si $Ax_0=b$ y $x_0 \geq 0$.
+  Dado un PPL, $[P]$, sujeto a $Ax=b$ y $x\geq 0$, se dice que $x_0$ es factible de $[P]$ si $Ax_0=b$ y $x_0 \geq 0$.
 \end{definition}
 
 \begin{definition}[Región factible]
-	Al conjunto $\mathcal{R}$ formado por todas las soluciones factibles de $[P]$ se le denomina región factible.
+  Al conjunto $\mathcal{R}$ formado por todas las soluciones factibles de $[P]$ se le denomina región factible.
 \end{definition}
 \begin{definition}[Solución óptima]
-	Se dice que $x_0^*$ es solución óptima de $[P]$ si $x_0$ es solución factible y verifica: \\
-	$c^t x_0^* \geq (\leq) c^t x$ para todo $x \in \mathcal{R}$ es un problema de minimizar (maximizar).
+  Se dice que $x_0^*$ es solución óptima de $[P]$ si $x_0$ es solución factible y verifica: \\
+  $c^t x_0^* \geq (\leq) c^t x$ para todo $x \in \mathcal{R}$ es un problema de minimizar (maximizar).
 \end{definition}
 \section{Resolución gráfica de un PPL}
 \subsection*{Planteamiento de un PPL y resolución gráfica}
@@ -267,49 +267,49 @@ $(27-10-14)s+(21-9-10)t=3s+2t$ \\
 \textbf{3. Restriciones}
 $$s.a\left\lbrace
 \begin{array}{l}
-1s+1t \leq 80 \\
-2s+1t \leq 100 \\
-s \leq 40
+  1s+1t \leq 80 \\
+  2s+1t \leq 100 \\
+  s \leq 40
 \end{array}
 \right.
 $$
 Además, $s, t \geq 0$.
 Por tanto, nuestro PPL queda de la siguiente forma:
 \begin{center}
-	máx $3s+2t$
-	$$s.a\left\lbrace
-	\begin{array}{l}
+  máx $3s+2t$
+  $$s.a\left\lbrace
+  \begin{array}{l}
 	s+t \leq 80 \\
 	2s+t \leq 100 \\
 	s \leq 40
-	\end{array}
-	\right.
-	$$
-	$$s, t>0$$
+  \end{array}
+  \right.
+  $$
+  $$s, t>0$$
 \end{center}
 \newpage
 \textbf{4. Resolución gráfica de un PPL}
 En primer lugar, dibujamos las gráficas de las restricciones:
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=2in]{ResolucionGrafica1}
-	\caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
+  \centering
+  \includegraphics[width=2in]{ResolucionGrafica1}
+  \caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
 \end{figure}
 Y nos quedamos con la intersección de todas las gráficas:
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=2in]{ResolucionGrafica2}
-	\caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
+  \centering
+  \includegraphics[width=2in]{ResolucionGrafica2}
+  \caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
 \end{figure}
 Para mejorar nuestra función objetivo debemos movernos de forma perpendicular a la gráfica de la función $3s+2t$, esto es, que debemos movernos en la dirección del vector gradiente de $3s+2t$, esta dirección es $(3, 2)$, por tanto:
 \begin{figure}[!ht]
-	\centering
-	\includegraphics[width=2in]{ResolucionGrafica3}
-	\caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
+  \centering
+  \includegraphics[width=2in]{ResolucionGrafica3}
+  \caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
 \end{figure}
 \begin{definition}[Restricción activa]
-	Se dice que una restricción es activa para un punto $x_0$ si dicha restricción se verifica en forma de igualdad para este punto.
+  Se dice que una restricción es activa para un punto $x_0$ si dicha restricción se verifica en forma de igualdad para este punto.
 \end{definition}
 \section{Clasificación de PPL según sus soluciones}
 Dado un PPL, [P], si $R = \emptyset$, \textbf{el problema es infactible}, es decir, \textbf{no tiene solución.} [\ref{fig:Infactible}] \\
@@ -320,123 +320,123 @@ Por otro lado, si $R \neq  \emptyset$, podemos asegurar lo siguiente: \\
 \textbf{No acotado: } \\
 Existen soluciones factibles que hacen mejorar a la función objetivo todo lo que queramos, basta tomar el vector director de la función paralelo al lado inferior y superior del paralelogramo. \ref{fig:noacotada}
 \begin{figure}[ht]
-	\centering
-	\begin{subfigure}[b]{0.25\textwidth}
-		\includegraphics[width=\textwidth]{Infactible}
-		\caption{Problema infactible}
-		\label{fig:Infactible}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.25\textwidth}
-		\includegraphics[width=\textwidth]{SolucionUnica}
-		\caption{Solución única}
-		\label{fig:Unica}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.25\textwidth}
-		\includegraphics[width=\textwidth]{ResolucionGrafica2}
-		\caption{Solución múltiple}
-		\label{fig:Multiple}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.25\textwidth}
-		\includegraphics[width=\textwidth]{SolucionNoAcotada}
-		\caption{Solución no acotada}
-		\label{fig:noacotada}
-	\end{subfigure}
-	\caption{Clasificación de PPL según sus soluciones}
+  \centering
+  \begin{subfigure}[b]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{Infactible}
+	\caption{Problema infactible}
+	\label{fig:Infactible}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{SolucionUnica}
+	\caption{Solución única}
+	\label{fig:Unica}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{ResolucionGrafica2}
+	\caption{Solución múltiple}
+	\label{fig:Multiple}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{SolucionNoAcotada}
+	\caption{Solución no acotada}
+	\label{fig:noacotada}
+  \end{subfigure}
+  \caption{Clasificación de PPL según sus soluciones}
 \end{figure}
 
 \section{Formas geométricas de un PPL}
 \begin{definition}[Conjunto convexo]
-	Se dice que $S \subset \mathbb{R}^n$ es un conjunto convexo si para todo $x, y \in S$ y $x \neq y$ se verifica $\lambda x + (1-\lambda)y \in S$ para todo $\lambda \in (0, 1)$
+  Se dice que $S \subset \mathbb{R}^n$ es un conjunto convexo si para todo $x, y \in S$ y $x \neq y$ se verifica $\lambda x + (1-\lambda)y \in S$ para todo $\lambda \in (0, 1)$
 \end{definition}
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=2in]{Convexo}
-	\caption[Ejemplo de conjunto convexo]{Ejemplo de conjunto convexo, donde en rojo se indica un camino convexo}
+  \centering
+  \includegraphics[width=2in]{Convexo}
+  \caption[Ejemplo de conjunto convexo]{Ejemplo de conjunto convexo, donde en rojo se indica un camino convexo}
 \end{figure}
 
 \begin{proposition}
-	La intersección finita de conjuntos convexo es convexo.
+  La intersección finita de conjuntos convexo es convexo.
 \end{proposition}
 
 \begin{proof}
-	Sean $\{S_i\}_{i \in I}$ una familia de conjuntos convexos con $|I|<\infty$. \\
-	Veamos que la intersección de esta familia de conjuntos sigue siendo convexa. \\
-	Sean $x, y \in S=\cap S_i$ con $x \neq y$ entonces $x, y \in S_j$ para algún $j\in I$. \\
-	$S_j$ es conexo, por tanto, $\lambda x+(1-\lambda)y \in S_j$, por tanto, $\lambda x+(1-\lambda)y \in S$
+  Sean $\{S_i\}_{i \in I}$ una familia de conjuntos convexos con $|I|<\infty$. \\
+  Veamos que la intersección de esta familia de conjuntos sigue siendo convexa. \\
+  Sean $x, y \in S=\cap S_i$ con $x \neq y$ entonces $x, y \in S_j$ para algún $j\in I$. \\
+  $S_j$ es conexo, por tanto, $\lambda x+(1-\lambda)y \in S_j$, por tanto, $\lambda x+(1-\lambda)y \in S$
 \end{proof}
 
 \begin{definition}[Hiperplano en $\mathbb{R}^n$]
-	Se llama hiperplano de $\mathbb{R}^n$ el conjunto $\mathcal{H}=\{x \in \mathbb{R}^n : a^t x = b \}$ 
+  Se llama hiperplano de $\mathbb{R}^n$ el conjunto $\mathcal{H}=\{x \in \mathbb{R}^n : a^t x = b \}$ 
 \end{definition}
 
 \begin{definition}[Semiespacio cerrado positivo]
-	Se llama semiespacio cerrado positivo el conjunto $\mathcal{H}^+=\{x \in \mathbb{R}^n : a^t x \geq b \}$
+  Se llama semiespacio cerrado positivo el conjunto $\mathcal{H}^+=\{x \in \mathbb{R}^n : a^t x \geq b \}$
 \end{definition}
 \begin{definition}[Semiespacio cerrado negativo]
-	Se llama semiespacio cerrado negativo el conjunto $\mathcal{H}^-=\{x \in \mathbb{R}^n : a^t x \leq b \}$
+  Se llama semiespacio cerrado negativo el conjunto $\mathcal{H}^-=\{x \in \mathbb{R}^n : a^t x \leq b \}$
 \end{definition}
 
 \begin{definition}[Polítopo]
-	Se llama polítopo de $\mathbb{R}^n$ a la intersección finita de hiperplanos y semiespacios cerrados.
+  Se llama polítopo de $\mathbb{R}^n$ a la intersección finita de hiperplanos y semiespacios cerrados.
 \end{definition}
 \textbf{Observación: } Dado un PPL la región factible de $[P]$ es polítopo.
 
 \begin{definition}[Poliedro]
-	Cuando el polítopo es acotado se denomina poliedro.
+  Cuando el polítopo es acotado se denomina poliedro.
 \end{definition}
 
 \begin{proposition}
-	Todo polítopo es convexo.
+  Todo polítopo es convexo.
 \end{proposition}
 
 \begin{proof}
-	Sea $a \in \mathbb{R}^n$, $a \neq 0$ y $b \in \mathbb{R}$. \\
-	Por el anterior Lema, seria equivalente a ver si los semiespacios y los hiperplanos son convexos; si vemos esto, ya lo habríamos demostrado. \\
-	\textbf{$\mathcal{H}^+$ es convexo: } \\
-	Sean $x, y  \in \mathcal{H}^+$, $x \neq y$ tenemos que ver que $\lambda x + (1-\lambda)y \in \mathcal{R}^+$. \\
-	Por un lado, si $x \in \mathcal{R}^+$, entonces $a^t x \geq b$. \\
-	Por otro lado, si $y \in \mathcal{R}^+$, tenemos que $a^t y \geq b$. \\
-	De estas dos observaciones, $a^t(\lambda x + (1-\lambda) y )=\lambda a^t x + (1-\lambda)a^t y \geq \lambda b + (1-\lambda ) b =b$. \\
-	Por tanto, $\mathcal{H}^+$ es convexo, para ver si los demás son convexo se realiza de una forma similar a la seguida en esta.
+  Sea $a \in \mathbb{R}^n$, $a \neq 0$ y $b \in \mathbb{R}$. \\
+  Por el anterior Lema, seria equivalente a ver si los semiespacios y los hiperplanos son convexos; si vemos esto, ya lo habríamos demostrado. \\
+  \textbf{$\mathcal{H}^+$ es convexo: } \\
+  Sean $x, y  \in \mathcal{H}^+$, $x \neq y$ tenemos que ver que $\lambda x + (1-\lambda)y \in \mathcal{R}^+$. \\
+  Por un lado, si $x \in \mathcal{R}^+$, entonces $a^t x \geq b$. \\
+  Por otro lado, si $y \in \mathcal{R}^+$, tenemos que $a^t y \geq b$. \\
+  De estas dos observaciones, $a^t(\lambda x + (1-\lambda) y )=\lambda a^t x + (1-\lambda)a^t y \geq \lambda b + (1-\lambda ) b =b$. \\
+  Por tanto, $\mathcal{H}^+$ es convexo, para ver si los demás son convexo se realiza de una forma similar a la seguida en esta.
 \end{proof}
 
 \begin{definition}[Punto extremo]
-	Sea $S \subset \mathbb{R}^n$ un conjunto de $\mathbb{R}^n$, sea $e \in S$, se dice que $e$ es un \textbf{punto extremo} de $S$ si no existen $x , y \in S$, con $x \neq y$ tal que $e= \lambda x + (1-\lambda) y$ para algún $\lambda \in (0, 1)$
+  Sea $S \subset \mathbb{R}^n$ un conjunto de $\mathbb{R}^n$, sea $e \in S$, se dice que $e$ es un \textbf{punto extremo} de $S$ si no existen $x , y \in S$, con $x \neq y$ tal que $e= \lambda x + (1-\lambda) y$ para algún $\lambda \in (0, 1)$
 \end{definition}
 
 \begin{definition}[Dirección de ilimitación]
-	Dado un PPL [P] con $R \neq \emptyset $ la región factible de [P]. \\
-	Se dice que $d \in \mathbb{R}^n$ es dirección de ilimitación de $R$ si para cualquier $x_0 \in R$, y cualquier $\lambda \geq 0$ se tiene que $x_0 + \lambda d \in R$.
+  Dado un PPL [P] con $R \neq \emptyset $ la región factible de [P]. \\
+  Se dice que $d \in \mathbb{R}^n$ es dirección de ilimitación de $R$ si para cualquier $x_0 \in R$, y cualquier $\lambda \geq 0$ se tiene que $x_0 + \lambda d \in R$.
 \end{definition}
 
 \begin{definition}[Dirección de limitación extrema]
-	Dado un PPL [P] y $R$ su región factible se dice que $d \in \mathbb{R}^n$, $d \geq 0$, es dirección de limitación extrema no existe $d_1, d_2 \in \mathbb{R}^n$, $d_1, d_2 \geq 0$ direcciones de ilimitación de $R$ tales que $d= \lambda_1 d_1+\lambda_2 d_2$ con $\lambda_1, \lambda_2 \geq 0$. 
+  Dado un PPL [P] y $R$ su región factible se dice que $d \in \mathbb{R}^n$, $d \geq 0$, es dirección de limitación extrema no existe $d_1, d_2 \in \mathbb{R}^n$, $d_1, d_2 \geq 0$ direcciones de ilimitación de $R$ tales que $d= \lambda_1 d_1+\lambda_2 d_2$ con $\lambda_1, \lambda_2 \geq 0$. 
 \end{definition}
-	
+
 \begin{proposition}
-	Dado un PPL [P] y $R$ (no acotado) su región factible se tiene que: \\
-	$d \in \mathbb{R}^n, d \geq 0$ es dirección de ilimitación si y sólo sí $Ad=0$ 
+  Dado un PPL [P] y $R$ (no acotado) su región factible se tiene que: \\
+  $d \in \mathbb{R}^n, d \geq 0$ es dirección de ilimitación si y sólo sí $Ad=0$ 
 \end{proposition}
 
 \begin{proof}
-	Supongamos que $d$ es dirección de ilimitación de $R$. \\
-	
-	$\Rightarrow$ \\
-	
-	Para todo $x_0 \in R$ tenemos que $(x_0+\lambda d) \in R$ para todo $\lambda \geq 0$, por tanto:
-	\begin{eqnarray}
-		A(x_0+\lambda d) = b \\
-		Ax_0+\lambda A d = b
-	\end{eqnarray}
-	Sabemos que $x_0 \in R$, entonces $Ax_0=b$, de aquí:
-	\begin{eqnarray}
+  Supongamos que $d$ es dirección de ilimitación de $R$. \\
+  
+  $\Rightarrow$ \\
+  
+  Para todo $x_0 \in R$ tenemos que $(x_0+\lambda d) \in R$ para todo $\lambda \geq 0$, por tanto:
+  \begin{eqnarray}
+	A(x_0+\lambda d) = b \\
+	Ax_0+\lambda A d = b
+  \end{eqnarray}
+  Sabemos que $x_0 \in R$, entonces $Ax_0=b$, de aquí:
+  \begin{eqnarray}
 	b+\lambda A d = b \\
 	\lambda A d = 0
-	\end{eqnarray}
-	Como la igualdad anterior es para todo $\lambda \geq 0$, necesariamente $Ad=0$. \\
-	$\Leftarrow$ \\
-	Escribamos $A(x_0+\lambda d)$, aplicando la propiedad distributiva tenemos: \\
-	$Ax_0+A \lambda d=Ax_0+0=Ax_0=b$. ¿$x_0+\lambda d \geq 0$? Sí, $x_0 \in R$, por tanto $x_0, \lambda, d \geq 0$.  
+  \end{eqnarray}
+  Como la igualdad anterior es para todo $\lambda \geq 0$, necesariamente $Ad=0$. \\
+  $\Leftarrow$ \\
+  Escribamos $A(x_0+\lambda d)$, aplicando la propiedad distributiva tenemos: \\
+  $Ax_0+A \lambda d=Ax_0+0=Ax_0=b$. ¿$x_0+\lambda d \geq 0$? Sí, $x_0 \in R$, por tanto $x_0, \lambda, d \geq 0$.  
 \end{proof}
 
 \section{Hipótesis de rango completo}
@@ -451,89 +451,89 @@ Si el $rango(A)=rango(A|b)<m$ entonces tenemos un sistema compatible indetermina
 Para evitar trivialidades, en los problemas de teoría supondremos que $rango(A)=m$
 \section{Soluciones básicas}
 \begin{definition}[Solución básica]
-	Supongamos que [P] es un PPL en formato estándar y $rango(A)=m$
-	$$ [B ~ N] _{mxn} \cdot \left[\begin{array}{c}
-	x_B \\
-	x_N
+  Supongamos que [P] es un PPL en formato estándar y $rango(A)=m$
+  $$ [B ~ N] _{mxn} \cdot \left[\begin{array}{c}
+	  x_B \\
+	  x_N
 	\end{array}\right]_{nx1}=[b]_{mx1}
-	$$
-	Suponemos además que $rango(B)=m=rango(B | b)$ entonces tenemos que:
-	$ B \cdot x_b=b$ es un sistema compatible determinado.
-	
-	\begin{enumerate}
-		\item Si $m=n$ entonces el sistema es compatible determinado, por la tanto la solución es única.
-		\item Si $m<n$ entonces el sistema es compatible indeterminado, de aquí, existen infinitas soluciones.
-	\end{enumerate}
-	Tomemos ahora el vector $x=\left[\begin{array}{c}
-	x_B \\
-	0
+  $$
+  Suponemos además que $rango(B)=m=rango(B | b)$ entonces tenemos que:
+  $ B \cdot x_b=b$ es un sistema compatible determinado.
+  
+  \begin{enumerate}
+  \item Si $m=n$ entonces el sistema es compatible determinado, por la tanto la solución es única.
+  \item Si $m<n$ entonces el sistema es compatible indeterminado, de aquí, existen infinitas soluciones.
+  \end{enumerate}
+  Tomemos ahora el vector $x=\left[\begin{array}{c}
+	  x_B \\
+	  0
 	\end{array}\right]$, $x \in \mathbb{R}^n$, es \textbf{solución básica} de $[P]$ y se denomina \textbf{solución básica factible.}
-	\end{definition}
+\end{definition}
 Recordemos una propiedad de los menores: \\
 \textbf{Recordatorio: } Dada una matriz $A$ con $rango(A)=m$ entonces existe un menor de $A$ de orden $m$ A, es decir, existen $m$ columnas independientes. \\
 \textbf{Ejemplo: } \\
 Sea $3x_1+2x_2$ la función objetivo y sujeto a:
 \begin{equation*}
-\left\lbrace
-\begin{array}{l}
-x_1+4x_2 \geq 17 \\
-7x_2 \leq 10
-\end{array}
-\right.
-=
-\left\lbrace
-\begin{array}{l}
-x_1+4x_2 -s_1= 17 \\
-7x_2 + s_2 = 10
-\end{array}
-\right.\Rightarrow
-\left(\begin{array}{cc|cc}
+  \left\lbrace
+  \begin{array}{l}
+    x_1+4x_2 \geq 17 \\
+    7x_2 \leq 10
+  \end{array}
+  \right.
+  =
+  \left\lbrace
+  \begin{array}{l}
+    x_1+4x_2 -s_1= 17 \\
+    7x_2 + s_2 = 10
+  \end{array}
+  \right.\Rightarrow
+  \left(\begin{array}{cc|cc}
 	1&4&-1&0\\
 	0&7&0&1
-\end{array}\right)=
-\left(\begin{array}{c}
+  \end{array}\right)=
+  \left(\begin{array}{c}
 	x_1 \\
-	 x_2 \\
-	  s_1 \\
-	   s_2
-\end{array}\right)
-=
-\left(\begin{array}{c}
-17\\10
-\end{array}\right)
+	x_2 \\
+	s_1 \\
+	s_2
+  \end{array}\right)
+  =
+  \left(\begin{array}{c}
+    17\\10
+  \end{array}\right)
 \end{equation*}
 Tenemos que $rango(A)=rango(A | b)=1<4$ número de incógnitas, por tanto si consideramos: \\
 $B=\left(\begin{array}{cc}
-1&4\\
-0&7
+  1&4\\
+  0&7
 \end{array}\right)$, $\left(\begin{array}{cc}
-1&4\\
-0&7
+  1&4\\
+  0&7
 \end{array}\right)=\left(\begin{array}{c}
-x_1 \\
-x_2
+  x_1 \\
+  x_2
 \end{array}\right)=\left(\begin{array}{c}
-17 \\ 10
+  17 \\ 10
 \end{array}\right)$, por tanto $x_1=\frac{79}{7}, x_2=\frac{10}{7}$, por tanto $(\frac{79}{7}, \frac{10}{7},0,0)^t$ es solución básica. \\
 \begin{definition}[Variables básicas]
-	Dado [P] un PPL y $x_0$ una solución básica de [P] a las variables de $x_0$ que están asociadas a las columnnas de $B$ se las denomina \textbf{variables básicas}. En caso contrario, \textbf{son variables no básicas}.
+  Dado [P] un PPL y $x_0$ una solución básica de [P] a las variables de $x_0$ que están asociadas a las columnnas de $B$ se las denomina \textbf{variables básicas}. En caso contrario, \textbf{son variables no básicas}.
 \end{definition}
 \begin{definition}[Solución básica degenerada]
-	Se denomina solución básica degenerada a la solución básica que tiene algunas de sus variables básicas nulas. Las variables no básicas siempre valen cero.
+  Se denomina solución básica degenerada a la solución básica que tiene algunas de sus variables básicas nulas. Las variables no básicas siempre valen cero.
 \end{definition}
 \begin{definition}[Soluciones adyacentes]
-	Dadas dos soluciones básicas de un problema [P] se dice que son adyacentes si sus correspondientes matrices básicas son iguales excepto en una columna.
+  Dadas dos soluciones básicas de un problema [P] se dice que son adyacentes si sus correspondientes matrices básicas son iguales excepto en una columna.
 \end{definition}
 
 \begin{theorem}[Caracterización solución básica]
-	Sea [P] un PPL con región factible $R$ se tiene entonces que $x_0$ es solución básica factible si y sólo si $x_0$ es punto extremo de $R$.
+  Sea [P] un PPL con región factible $R$ se tiene entonces que $x_0$ es solución básica factible si y sólo si $x_0$ es punto extremo de $R$.
 \end{theorem}
 \begin{proof}
-	$\Rightarrow$ \\
-	Sea $x_0$ solución básica factible de [P], entonces $x_0 \in R$. Procedamos por reducción al absurdo: \\
-	Supongamos que $x_0$ no es punto extremo de $R$, entonces existen $x, y \in R$, con $x \neq y$ tales que $x_0 = \lambda x + (1-\lambda)y, \lambda \in (0, 1)$ \\
-	Como $x_0$ es solución básica: \\
-	$x_0=\left(\begin{array}{c}
+  $\Rightarrow$ \\
+  Sea $x_0$ solución básica factible de [P], entonces $x_0 \in R$. Procedamos por reducción al absurdo: \\
+  Supongamos que $x_0$ no es punto extremo de $R$, entonces existen $x, y \in R$, con $x \neq y$ tales que $x_0 = \lambda x + (1-\lambda)y, \lambda \in (0, 1)$ \\
+  Como $x_0$ es solución básica: \\
+  $x_0=\left(\begin{array}{c}
 	x_{01} \\
 	x_{02} \\
 	... \\
@@ -541,38 +541,38 @@ x_2
 	0 \\
 	... \\
 	0
-	\end{array}\right)$ con $x_{0i} > 0$ para todo $i=1,...,m$. \\
-	Supongamos que	$x_0=\left(\begin{array}{c}
+  \end{array}\right)$ con $x_{0i} > 0$ para todo $i=1,...,m$. \\
+  Supongamos que	$x_0=\left(\begin{array}{c}
 	0 \\
 	... \\
 	0
-	\end{array}\right), x_0 \in R$, por tanto: 
-	$$
-		\left(\begin{array}{c}
-		0 \\
-		... \\
-		0
-		\end{array}\right)=\lambda \left(\begin{array}{c}
-		x_1 \\
-		x_2 \\
-		... \\
-		x_n
-		\end{array}\right)+(1-\lambda)\left(\begin{array}{c}
-		y_1 \\
-		y_2 \\
-		... \\
-		y_n
-		\end{array}\right), \lambda \in (0, 1)
-	$$
-	Observemos que $x_0=\lambda x + (1-\lambda )y$, sólo se daría esta igualdad si $x=y=0$, pues $x, y \in R$, por lo que $x, y \geq 0$, esto contradice nuestras hipótesis \\
-	Entonces, si $x_0=\left(\begin{array}{c}
+  \end{array}\right), x_0 \in R$, por tanto: 
+  $$
+  \left(\begin{array}{c}
 	0 \\
 	... \\
 	0
-	\end{array}\right)$ tendríamos un punto extremo. \\
-	
-	Sean ahora:
-	$$x_0=\left(\begin{array}{c}
+  \end{array}\right)=\lambda \left(\begin{array}{c}
+	x_1 \\
+	x_2 \\
+	... \\
+	x_n
+  \end{array}\right)+(1-\lambda)\left(\begin{array}{c}
+	y_1 \\
+	y_2 \\
+	... \\
+	y_n
+  \end{array}\right), \lambda \in (0, 1)
+  $$
+  Observemos que $x_0=\lambda x + (1-\lambda )y$, sólo se daría esta igualdad si $x=y=0$, pues $x, y \in R$, por lo que $x, y \geq 0$, esto contradice nuestras hipótesis \\
+  Entonces, si $x_0=\left(\begin{array}{c}
+	0 \\
+	... \\
+	0
+  \end{array}\right)$ tendríamos un punto extremo. \\
+  
+  Sean ahora:
+  $$x_0=\left(\begin{array}{c}
 	x_{01} \\
 	x_{02} \\
 	... \\
@@ -580,7 +580,7 @@ x_2
 	0 \\
 	... \\
 	0
-	\end{array}\right) x=\left(\begin{array}{c}
+  \end{array}\right) x=\left(\begin{array}{c}
 	x_{1} \\
 	x_{2} \\
 	... \\
@@ -588,7 +588,7 @@ x_2
 	0 \\
 	... \\
 	0
-	\end{array}\right) y=\left(\begin{array}{c}
+  \end{array}\right) y=\left(\begin{array}{c}
 	y_{1} \\
 	y_{2} \\
 	... \\
@@ -596,95 +596,95 @@ x_2
 	0 \\
 	... \\
 	0
-	\end{array}\right)$$
-	Volviendo al caso general, $x_0=\lambda x + (1-\lambda)y$: \\
-	$\left.\begin{array}{c}
-		x \in R \Rightarrow Ax=b \\
-		y \in R \Rightarrow Ay=b
-	\end{array}\right\}=Ax-Ay=0; A(x-y)=0$. \\
-	Aplicando el producto de matrices, llegamos ahora:\\ $(x_1-y_1)(a_1)+(x_2-y_2)(a_2)+...+(x_p-y_p)(a_p)=0$, sabemos que $x_0 \in R$, y sabemos que las columnas asociadas a los $p$ primeros vectores son linealmente independientes, por lo tanto, por la independencia de las columnas $a_1, a_2, ..., a_p$, se tiene necesariamente que $x_i-y_i=0$. \\(Dado que al ser linealmente independiente, los coeficientes que multiplican las columnas deben ser obligatoriamente 0), por tanto, $x=y$, esto contradice nuestras hipótesis \\
-	$\Leftarrow$ \\
-	Usando la misma notación que antes, sea $x_0$ un punto extremo de $R$.
-	\begin{enumerate}
-		\item Si las columnas de $A$ asociadas a las componentes $x_{0i}$ con $i=1,...p$ son linealmente independientes, estaría demostrado, pues es solución factible que proviene de columnas linealmente independientes.
-		\item (Reducción al absurdo) En caso contrario, se tiene que $a_1, a_2, ..., a_p$ son linealmente dependientes, existen unos escalares no todos nulos $\lambda_1, ..., \lambda_p$ tales que:
-		$$
-			\lambda_1 a_1+\lambda_2+a_2+...+\lambda_p a_p=0
-		$$
-		Sea el vector $\lambda \in \mathbb{R}^n$, donde las $p$ primeras componentes coinciden con la igualdad anterior. \\
-		Se define: $\left\{
-		\begin{array}{c}
-		x_0^+=x_0+\varepsilon \lambda \\
-		x_0^-=x_0-\varepsilon \lambda
-		\end{array}
-		 \right.$ con $\varepsilon \geq 0$. \\
-		 Queremos encontrar un $\varepsilon>0$ tal que $\begin{array}{c}
-		 x_0^+ \in R \\
-		 x_0^- \in R
-		 \end{array}$, es decir, $\left\{
-		 \begin{array}{c}
-		 Ax_0^+=b \\x_0^+ \geq 0 \\ Ax_0^-=b \\ x_0^- \geq 0
-		 \end{array}\right.$ \\
-		 Observemos lo siguiente:
-		 $$
-			 Ax_o^+=A(x_0+\varepsilon \lambda)=Ax_0+ \varepsilon A \lambda = b
-		 $$
-		 Por el mismo razonamiento, podemos ver que $Ax_0^-=b$.  \\
-		 Veamos que $x_0^+, x_0^- \geq 0$. Lo veremos para $x_0^+$.
-		$$
-				 x_0^+=x_0+\varepsilon \lambda=\left(\begin{array}{c}
-				 x_{01} \\
-				 x_{02} \\
-				 ... \\
-				 x_{0p} \\
-				 0 \\
-				 ... \\
-				 0
-				 \end{array}\right)+\varepsilon\left(\begin{array}{c}
-				 \lambda_{1} \\
-				 \lambda_{2} \\
-				 ... \\
-				 \lambda_{p} \\
-				 0 \\
-				 ... \\
-				 0
-				 \end{array}\right)
-		$$
-		 Si \textit{existen} $\lambda_i < 0$ observamos que:
-		$$
-			 x_{0i}+\varepsilon\lambda_i\Rightarrow\varepsilon=-\frac{x_{0i}}{\lambda_i}
-		$$
-		 Si tomamos el mínimo de los epsilon, esto es $\varepsilon_1=\min\{-\frac{x_{0i}}{\lambda_i} : \lambda_i < 0\} \Rightarrow x_0^+=x_0+\varepsilon \lambda \in R$, por tanto, para $\varepsilon_1$, se tiene que $x_0^+ \in R$. \\
-		 Podemos razonar igual para $x_0^-$ para concluir que $x_0^- \in R$.\\
-		 Finalmente, si tomamos $\varepsilon^*=\min\{\varepsilon_1, \varepsilon_2\}$, tenemos que $x_0^+, x_0^- \in R$, pero tenemos que $x_0=\frac{1}{2}x_0^++\frac{1}{2}x_0^-$, es por lo tanto una combinación convexa con $x_0^+ \neq x_0^-$. Por tanto, hemos llegado una contradicción pues $x_0$ es un punto extremo.
-	\end{enumerate}
+  \end{array}\right)$$
+  Volviendo al caso general, $x_0=\lambda x + (1-\lambda)y$: \\
+  $\left.\begin{array}{c}
+	x \in R \Rightarrow Ax=b \\
+	y \in R \Rightarrow Ay=b
+  \end{array}\right\}=Ax-Ay=0; A(x-y)=0$. \\
+  Aplicando el producto de matrices, llegamos ahora:\\ $(x_1-y_1)(a_1)+(x_2-y_2)(a_2)+...+(x_p-y_p)(a_p)=0$, sabemos que $x_0 \in R$, y sabemos que las columnas asociadas a los $p$ primeros vectores son linealmente independientes, por lo tanto, por la independencia de las columnas $a_1, a_2, ..., a_p$, se tiene necesariamente que $x_i-y_i=0$. \\(Dado que al ser linealmente independiente, los coeficientes que multiplican las columnas deben ser obligatoriamente 0), por tanto, $x=y$, esto contradice nuestras hipótesis \\
+  $\Leftarrow$ \\
+  Usando la misma notación que antes, sea $x_0$ un punto extremo de $R$.
+  \begin{enumerate}
+  \item Si las columnas de $A$ asociadas a las componentes $x_{0i}$ con $i=1,...p$ son linealmente independientes, estaría demostrado, pues es solución factible que proviene de columnas linealmente independientes.
+  \item (Reducción al absurdo) En caso contrario, se tiene que $a_1, a_2, ..., a_p$ son linealmente dependientes, existen unos escalares no todos nulos $\lambda_1, ..., \lambda_p$ tales que:
+	$$
+	\lambda_1 a_1+\lambda_2+a_2+...+\lambda_p a_p=0
+	$$
+	Sea el vector $\lambda \in \mathbb{R}^n$, donde las $p$ primeras componentes coinciden con la igualdad anterior. \\
+	Se define: $\left\{
+	\begin{array}{c}
+	  x_0^+=x_0+\varepsilon \lambda \\
+	  x_0^-=x_0-\varepsilon \lambda
+	\end{array}
+	\right.$ con $\varepsilon \geq 0$. \\
+	Queremos encontrar un $\varepsilon>0$ tal que $\begin{array}{c}
+	  x_0^+ \in R \\
+	  x_0^- \in R
+	\end{array}$, es decir, $\left\{
+	\begin{array}{c}
+	  Ax_0^+=b \\x_0^+ \geq 0 \\ Ax_0^-=b \\ x_0^- \geq 0
+	\end{array}\right.$ \\
+	Observemos lo siguiente:
+	$$
+	Ax_o^+=A(x_0+\varepsilon \lambda)=Ax_0+ \varepsilon A \lambda = b
+	$$
+	Por el mismo razonamiento, podemos ver que $Ax_0^-=b$.  \\
+	Veamos que $x_0^+, x_0^- \geq 0$. Lo veremos para $x_0^+$.
+	$$
+	x_0^+=x_0+\varepsilon \lambda=\left(\begin{array}{c}
+	  x_{01} \\
+	  x_{02} \\
+	  ... \\
+	  x_{0p} \\
+	  0 \\
+	  ... \\
+	  0
+	\end{array}\right)+\varepsilon\left(\begin{array}{c}
+	  \lambda_{1} \\
+	  \lambda_{2} \\
+	  ... \\
+	  \lambda_{p} \\
+	  0 \\
+	  ... \\
+	  0
+	\end{array}\right)
+	$$
+	Si \textit{existen} $\lambda_i < 0$ observamos que:
+	$$
+	x_{0i}+\varepsilon\lambda_i\Rightarrow\varepsilon=-\frac{x_{0i}}{\lambda_i}
+	$$
+	Si tomamos el mínimo de los epsilon, esto es $\varepsilon_1=\min\{-\frac{x_{0i}}{\lambda_i} : \lambda_i < 0\} \Rightarrow x_0^+=x_0+\varepsilon \lambda \in R$, por tanto, para $\varepsilon_1$, se tiene que $x_0^+ \in R$. \\
+	Podemos razonar igual para $x_0^-$ para concluir que $x_0^- \in R$.\\
+	Finalmente, si tomamos $\varepsilon^*=\min\{\varepsilon_1, \varepsilon_2\}$, tenemos que $x_0^+, x_0^- \in R$, pero tenemos que $x_0=\frac{1}{2}x_0^++\frac{1}{2}x_0^-$, es por lo tanto una combinación convexa con $x_0^+ \neq x_0^-$. Por tanto, hemos llegado una contradicción pues $x_0$ es un punto extremo.
+  \end{enumerate}
 \end{proof}
 \begin{theorem}[Teorema fundamental de la programación lineal]
-	Sea [P] un PPL en formato estándar.
-	\begin{center}
-		máx/mín $f(x_1, ..., x_n)=c_1x_1+...+c_nx_n$
-	\end{center}
-	$$
-		s.a \left\{ \begin{array}{c}
-		Ax=b \\
-		x\geq0
-		\end{array}\right.
-		\begin{array}{c}
-			A\in \mathcal{M}_{mxn}\\
-			rango(A)=m\\
-			b\geq 0
-		\end{array}
-	$$
-	\begin{enumerate}
-		\item Si $x_0$ es solución factible de [P] entonces existe $x_0^*$ solución básica de [P].
-		\item Si $x_0$ es solución factible óptima de [P] entonces existe $x_0^*$ solución básica factible óptima de [P]
-	\end{enumerate}
+  Sea [P] un PPL en formato estándar.
+  \begin{center}
+	máx/mín $f(x_1, ..., x_n)=c_1x_1+...+c_nx_n$
+  \end{center}
+  $$
+  s.a \left\{ \begin{array}{c}
+	Ax=b \\
+	x\geq0
+  \end{array}\right.
+  \begin{array}{c}
+	A\in \mathcal{M}_{mxn}\\
+	rango(A)=m\\
+	b\geq 0
+  \end{array}
+  $$
+  \begin{enumerate}
+  \item Si $x_0$ es solución factible de [P] entonces existe $x_0^*$ solución básica de [P].
+  \item Si $x_0$ es solución factible óptima de [P] entonces existe $x_0^*$ solución básica factible óptima de [P]
+  \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-	Para probar este resultado, observemos: 
-\begin{enumerate}
-	\item Sea $x_0$ solución factible de [P], entonces $x_0$ se puede expresar como \\
+  Para probar este resultado, observemos: 
+  \begin{enumerate}
+  \item Sea $x_0$ solución factible de [P], entonces $x_0$ se puede expresar como \\
 	$$x_0=\left(\begin{array}{c}
 	x_{01} \\
 	x_{02} \\
@@ -693,16 +693,16 @@ x_2
 	0 \\
 	... \\
 	0
-	\end{array}\right) 
+  \end{array}\right) 
 	\begin{array}{c}
-	x_{0i}>0\\
-	1 \leq i \leq p \leq n
+	  x_{0i}>0\\
+	  1 \leq i \leq p \leq n
 	\end{array}
 	$$. \\
 	Si las columnas de $A$ $a_1, a_2, ..., a_p$ asociadas a las componentes de $x_0$ mayores que cero son linealmente independientes, entonces $x_0$ sería solución factible básica. 	\framebox[1.1\width]{Fin}  \\
 	Si por el contrario, $a_1, ..., a_p$ son linealmente dependientes, entonces existen $\lambda_1, \lambda_2, ..., \lambda_p$ escalares no todos nulos tales que:
 	$$
-		\lambda_1 a_1+\lambda_2 a_2+ ... + \lambda_p a_p=0
+	\lambda_1 a_1+\lambda_2 a_2+ ... + \lambda_p a_p=0
 	$$
 	Sea $\lambda \in \mathbb{R}^n$ el vector formado por $\lambda_i$ con $i=1,...,p$ donde las $n-p$ columnas valen $0$, $x_0^+=x_0+\varepsilon\lambda$, $\varepsilon \geq 0$. \\
 	¿$x_0^+ \in R$? \\
@@ -715,21 +715,21 @@ x_2
 	En caso contrario, reiteramos el razonamiento hasta llegar a un conjunto de columnas de $A$ linealmente independientes (Cuando nos queden $m$). \\
 	Si todos los $\lambda_i \geq 0$ \\
 	$$
-		x_0^-=x_0-\varepsilon \lambda_i, \varepsilon \geq 0
+	x_0^-=x_0-\varepsilon \lambda_i, \varepsilon \geq 0
 	$$
 	$$
-		Ax_0^-=Ax_0-\varepsilon A \lambda = b
+	Ax_0^-=Ax_0-\varepsilon A \lambda = b
 	$$
 	Sea $\varepsilon_2=\min\{ \frac{x_{0i}}{\lambda_i} : \lambda_i \geq 0 \}$ tal que $x_0^-=x_0- \varepsilon_2 \lambda$. \\
 	Este $x_0^-$ tiene al menos una componente al menos mayor que cero. Reiterando el razonamiento => fin.
-	\item Sean $x_\varepsilon^+, x_\varepsilon^- \in R$ los correspondientes $x_0^-, x_0^+$ del apartado anterior, para cierto $\varepsilon \geq 0$. \\
+  \item Sean $x_\varepsilon^+, x_\varepsilon^- \in R$ los correspondientes $x_0^-, x_0^+$ del apartado anterior, para cierto $\varepsilon \geq 0$. \\
 	Sea $z_0=c^t x_0$ el valor de la función objetivo para $x_0$. \\
 	Supongamos que [P] es un problema de maximizar.
 	$$
-		c^t x_\varepsilon^+=c^t(x_0+\varepsilon \lambda)=c^tx_\varepsilon+\varepsilon c^t \lambda=z_0+\varepsilon c^t \lambda
+	c^t x_\varepsilon^+=c^t(x_0+\varepsilon \lambda)=c^tx_\varepsilon+\varepsilon c^t \lambda=z_0+\varepsilon c^t \lambda
 	$$
 	$$
-		c^t x_\varepsilon^-=c^t(x_0-\varepsilon  \lambda)=c^t x_0-\varepsilon c^t \lambda = z_0- \varepsilon c^t\lambda
+	c^t x_\varepsilon^-=c^t(x_0-\varepsilon  \lambda)=c^t x_0-\varepsilon c^t \lambda = z_0- \varepsilon c^t\lambda
 	$$
 	\framebox[1.1\width]{Caso 1} \par 
 	Supongamos que $c^t \lambda >0$ entonces $c^t x_0=z_0< c^t x_\varepsilon^+$, pero esto es una contradicción pues es un problema de maximizar, y como $x_0$ es solución óptima, no puede haber una solución mayor. \\
@@ -738,27 +738,27 @@ x_2
 	\\
 	Por lo tanto, $c^t \lambda = 0$, entonces $c^t x_0=c^t x_\varepsilon^+=c^t x_\varepsilon^-=z_0$, por lo que $x_\varepsilon^+$ y $x_\varepsilon^-$ son soluciones factibles óptimas. \\
 	Ahora reiteramos el proceso de la primera parte de la demostración y obtendremos $x_\varepsilon^+, x_\varepsilon^-$ soluciones factibles óptimas básicas.
-\end{enumerate}
+  \end{enumerate}
 \end{proof}
 
 \begin{corollary}
-	Dado un PPL con región factible $R$ se tiene que si $R \neq \emptyset$ entonces siempre existen puntos extremos de $R$.
+  Dado un PPL con región factible $R$ se tiene que si $R \neq \emptyset$ entonces siempre existen puntos extremos de $R$.
 \end{corollary}
 \begin{corollary}
-En las mismas condiciones del corolario anterior, si existe solución óptima de [P] entonces existe un punto extremo de $R$ que es solución óptima de [P]
+  En las mismas condiciones del corolario anterior, si existe solución óptima de [P] entonces existe un punto extremo de $R$ que es solución óptima de [P]
 \end{corollary}
 \begin{corollary}
-	En las mismas condiciones del corolario anterior, el conjunto de puntos extremos de R es finito y a lo sumo tiene $\left(\begin{array}{c}
+  En las mismas condiciones del corolario anterior, el conjunto de puntos extremos de R es finito y a lo sumo tiene $\left(\begin{array}{c}
 	n \\ m
-	\end{array}\right)$ puntos
+  \end{array}\right)$ puntos
 \end{corollary}
 
 \section{Método Simplex}
 El método Simplex nos calcula soluciones óptimas de un problema, para ello:
 \begin{enumerate}
-	\item Como cambiar de solución básica adyacente en soluciones básicas adyacentes.
-	\item Como conseguir que la solución básica a la que he cambiado sea factible. ($x \geq 0$)
-	\item Que variable (columna) debe entrar para mejorar la función objetivo.
+\item Como cambiar de solución básica adyacente en soluciones básicas adyacentes.
+\item Como conseguir que la solución básica a la que he cambiado sea factible. ($x \geq 0$)
+\item Que variable (columna) debe entrar para mejorar la función objetivo.
 \end{enumerate}
 \subsection{Pivotar, "saltar" de solución básica factible en solución básica factible}
 Sea $[P]$ un PPL en formato estándar:
@@ -771,69 +771,69 @@ x \geq 0
 $$
 $$ A \in \mathcal{M}_{mxn}, b\geq 0, rango(A)=m$$
 Podemos suponer sin perdida de generaldiad que la matriz $A$ se puede escribir como $$[A][x]=[B_{mxn} ~ N_{mx(n-m)}]\left[\begin{array}{c}
-x_B \\
-x_N
-\end{array}\right]=[b]$$
+    x_B \\
+    x_N
+  \end{array}\right]=[b]$$
 La matriz $B$ es invertible, por tanto podemos multiplicar por $B^{-1}$ y tenemos:
 $$[Id_{mxn} ~ N_{mx(n-m)}]\left[\begin{array}{c}
-x_B \\
-x_N
-\end{array}\right]=[B^{-1}][b]$$
+    x_B \\
+    x_N
+  \end{array}\right]=[B^{-1}][b]$$
 \subsubsection{Ejemplo}
 $$ max/min ~c^t x$$
 $$s.a \left\{ \begin{array}{c}
-x_1+5x_4=57 \\
-x_1-4 x_4=12 \\
-x_1+x_4 = 5
+  x_1+5x_4=57 \\
+  x_1-4 x_4=12 \\
+  x_1+x_4 = 5
 \end{array}\right.$$
 \textbf{Tabla simplex}
 $$
 \begin{array}{c|cccc|c}
- & x_1 & x_2 & x_3 & x_4 &  \\ \hline
-x_1 & 1 & 0 & 0 & 5 & 57 \\
-x_2 & 0 & 1 & 0 & -4 & 12 \\
-x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
-& & & & &
+  & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+  x_1 & 1 & 0 & 0 & 5 & 57 \\
+  x_2 & 0 & 1 & 0 & -4 & 12 \\
+  x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
+  & & & & &
 \end{array}
 $$
 Supongamos que $x_4$ mejora a la solución actual. Cambiamos por ejemplo, $x_4$ por $x_3$
 $$
 \begin{array}{c|cccc|c}
-& x_1 & x_2 & x_3 & x_4 &  \\ \hline
-x_1 & 1 & 0 & 0 & 5 & 57 \\
-x_2 & 0 & 1 & 0 & -4 & 12 \\
-x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
-& & & & \uparrow &
+  & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+  x_1 & 1 & 0 & 0 & 5 & 57 \\
+  x_2 & 0 & 1 & 0 & -4 & 12 \\
+  x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
+  & & & & \uparrow &
 \end{array}
 $$
 Hacemos operaciones Gaussianas para poner la columna $x_4$ como básica:
 $$
 \begin{array}{c|cccc|c}
-& x_1 & x_2 & x_3 & x_4 &  \\ \hline
-x_1 & 1 & 0 & -5 & 0 & 32 \\
-x_2 & 0 & 1 & 4 & 0 & 32 \\
-x_4 & 0 & 0 & 1 & 1 & 5 \\ \hline
-& & & &  &
+  & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+  x_1 & 1 & 0 & -5 & 0 & 32 \\
+  x_2 & 0 & 1 & 4 & 0 & 32 \\
+  x_4 & 0 & 0 & 1 & 1 & 5 \\ \hline
+  & & & &  &
 \end{array}
 $$
 Ahora volvemos a la solución básica inicial
 $$
 \begin{array}{c|cccc|c}
-& x_1 & x_2 & x_3 & x_4 &  \\ \hline
-x_1 & 1 & 0 & 0 & 5 & 57 \\
-x_2 & 0 & 1 & 0 & -4 & 12 \\
-x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
-& & & & &
+  & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+  x_1 & 1 & 0 & 0 & 5 & 57 \\
+  x_2 & 0 & 1 & 0 & -4 & 12 \\
+  x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
+  & & & & &
 \end{array}
 $$
 Ahora queremos que entre en la base la variable $x_4$ y que salga la variable $x_2$
 $$
 \begin{array}{c|cccc|c}
-& x_1 & x_2 & x_3 & x_4 &  \\ \hline
-x_1 & 1 & \frac{5}{4} & 0 & 0 & 72 \\
-x_4 & 0 & -\frac{1}{4} & 0 & 1 & -3 \\
-x_3 & 0 & \frac{1}{4} & 1 & 0 & 8 \\ \hline
-& & & & &
+  & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+  x_1 & 1 & \frac{5}{4} & 0 & 0 & 72 \\
+  x_4 & 0 & -\frac{1}{4} & 0 & 1 & -3 \\
+  x_3 & 0 & \frac{1}{4} & 1 & 0 & 8 \\ \hline
+  & & & & &
 \end{array}
 $$
 
@@ -841,81 +841,81 @@ $$
 Sea $[P]$ un PPL en formato estándar:
 $$ min ~(max) c^tx$$
 $$s.a \left\{ \begin{array}{c}
-Ax=b \\x \geq 0
+  Ax=b \\x \geq 0
 \end{array} \right. $$
 La matriz
 $$ [A][x]=[b]$$
 Podemos reescribirla de forma que
 $$[B ~ N]
 \left[\begin{array}{c}
-x_B \\
-x_N
-\end{array}
-\right]=[b]
+    x_B \\
+    x_N
+  \end{array}
+  \right]=[b]
 $$
 Podemos suponer sin pérdida de generalidad que la $$B=I_{mxn}=\left(\begin{array}{cccc}
-1 & ... & ... & ... \\
-0 & 1 & ... & ... \\
-... & ... & ... & ... \\
-... & ... &  0  & 1
+  1 & ... & ... & ... \\
+  0 & 1 & ... & ... \\
+  ... & ... & ... & ... \\
+  ... & ... &  0  & 1
 \end{array}\right)
 $$
 Podemos escribir en formato tabla en formato simplex:
 
 $$\left[
-\begin{array}{cccc}
-1 & ... & ... & ... \\
-0 & 1 & ... & ... \\
-... & ... & ... & ... \\
-... & ... &  0  & 1
-\end{array} \left| 
-\begin{array}{ccccc}
-a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
-a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
-... & ... & ... & ... & ... \\
-a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn}
-\end{array}
-\right.
-\right]=\left[\begin{array}{c}
-x_B \\
-x_N
-\end{array}
-\right]=[b]
+  \begin{array}{cccc}
+    1 & ... & ... & ... \\
+    0 & 1 & ... & ... \\
+    ... & ... & ... & ... \\
+    ... & ... &  0  & 1
+  \end{array} \left| 
+  \begin{array}{ccccc}
+    a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+    a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+    ... & ... & ... & ... & ... \\
+    a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn}
+  \end{array}
+  \right.
+  \right]=\left[\begin{array}{c}
+    x_B \\
+    x_N
+  \end{array}
+  \right]=[b]
 $$
 $$
 \begin{array}{c}
- \\ \hline
-x_1 \\
-... \\
-... \\
-x_m \\ \hline
-~
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  x_m \\ \hline
+  ~
 \end{array}
 \left|
 \begin{array}{cccc}
-x_1 & x_2 & ... & x_m \\ \hline
-1 & ... & ... & ... \\
-0 & 1 & ... & ... \\
-... & ... & ... & ... \\
-... & ... &  0  & 1\\ \hline
-& & & 
+  x_1 & x_2 & ... & x_m \\ \hline
+  1 & ... & ... & ... \\
+  0 & 1 & ... & ... \\
+  ... & ... & ... & ... \\
+  ... & ... &  0  & 1\\ \hline
+  & & & 
 \end{array}
 \begin{array}{ccccc}
-x_{m+1} & ... & x_q & ... & x_n \\ \hline
-a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
-a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
-... & ... & ... & ... & ... \\
-a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
-& & & &
+  x_{m+1} & ... & x_q & ... & x_n \\ \hline
+  a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+  a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+  ... & ... & ... & ... & ... \\
+  a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+  & & & &
 \end{array}
 \right|
 \begin{array}{c}
-b \\ \hline
-b_1 \\
-... \\
-... \\
-b_m \\ \hline
-~
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  b_m \\ \hline
+  ~
 \end{array}
 $$
 Supongamos que $x_q$ mejora la solución actual, entonces $x_q$ quiere entrar en la base. \\ ¿Qué variable básica $x_1, ..., x_m$ debe salir?
@@ -935,26 +935,26 @@ Definamos ahora el vector:
 $$
 x_\varepsilon=\left(
 \begin{array}{c}
-b_1-\varepsilon a_{1 ~ q} \\
-b_2-\varepsilon a_{2 ~ q} \\ 
-... \\
-b_m-\varepsilon a_{m ~ q} \\
-... \\
-\varepsilon \\
-... \\
-0
+  b_1-\varepsilon a_{1 ~ q} \\
+  b_2-\varepsilon a_{2 ~ q} \\ 
+  ... \\
+  b_m-\varepsilon a_{m ~ q} \\
+  ... \\
+  \varepsilon \\
+  ... \\
+  0
 \end{array}
 \right)
 \left(
 \begin{array}{c}
-1 \\
-2 \\
-... \\
-m \\
-... \\
-q \\
-... \\
-0
+  1 \\
+  2 \\
+  ... \\
+  m \\
+  ... \\
+  q \\
+  ... \\
+  0
 \end{array}
 \right)
 $$
@@ -968,46 +968,46 @@ Entonces entra en la base la variable $x_q$, sale de la base la variable asociad
 Supongamos que $x_q$ entra en la base y que $x_k$ es la variable básica que debe salir.
 $$
 \begin{array}{c}
-\\ \hline
-x_1 \\
-... \\
-... \\
-\leftarrow x_k \\
-... \\
-x_m \\ \hline
-~
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  \leftarrow x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
 \end{array}
 \left|
 \begin{array}{cccccc}
-x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
-1 & ... & ... &...& ...& ... \\
-0 & 1 & ... & ...& ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ... & ... & 1 & ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ...& .... & ... &  0  & 1\\ \hline
-& & & 
+  x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+  1 & ... & ... &...& ...& ... \\
+  0 & 1 & ... & ...& ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ... & ... & 1 & ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ...& .... & ... &  0  & 1\\ \hline
+  & & & 
 \end{array}
 \begin{array}{ccccc}
-x_{m+1} & ... & x_q & ... & x_n \\ \hline
-a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
-a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
-... & ... & ... & ...& ... \\
-... & ... & a_{kq} & ...& ... \\
-... & ... & ... & ...& ... \\
-a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
-& & & &
+  x_{m+1} & ... & x_q & ... & x_n \\ \hline
+  a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+  a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+  ... & ... & ... & ...& ... \\
+  ... & ... & a_{kq} & ...& ... \\
+  ... & ... & ... & ...& ... \\
+  a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+  & & & &
 \end{array}
 \right|
 \begin{array}{c}
-b \\ \hline
-b_1 \\
-... \\
-... \\
-b_k \\
-... \\
-b_m \\ \hline
-~
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  b_k \\
+  ... \\
+  b_m \\ \hline
+  ~
 \end{array}
 $$
 Aplicamos operaciones Gaussianas
@@ -1015,46 +1015,46 @@ $$F_k'=\frac{1}{a_{kq}}F_k$$
 
 $$
 \begin{array}{c}
-\\ \hline
-x_1 \\
-... \\
-... \\
-\leftarrow x_k \\
-... \\
-x_m \\ \hline
-~
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  \leftarrow x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
 \end{array}
 \left|
 \begin{array}{cccccc}
-x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
-1 & ... & ... &...& ...& ... \\
-0 & 1 & ... & ...& ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ... & ... & \frac{1}{a_{kq}}  & ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ...& .... & ... &  0  & 1\\ \hline
-& & & 
+  x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+  1 & ... & ... &...& ...& ... \\
+  0 & 1 & ... & ...& ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ... & ... & \frac{1}{a_{kq}}  & ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ...& .... & ... &  0  & 1\\ \hline
+  & & & 
 \end{array}
 \begin{array}{ccccc}
-x_{m+1} & ... & x_q & ... & x_n \\ \hline
-a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
-a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
-... & ... & ... & ...& ... \\
-... & ... & \frac{a_{kq}}{a_{kq}} & ...& ... \\
-... & ... & ... & ...& ... \\
-a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
-& & & &
+  x_{m+1} & ... & x_q & ... & x_n \\ \hline
+  a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+  a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+  ... & ... & ... & ...& ... \\
+  ... & ... & \frac{a_{kq}}{a_{kq}} & ...& ... \\
+  ... & ... & ... & ...& ... \\
+  a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+  & & & &
 \end{array}
 \right|
 \begin{array}{c}
-b \\ \hline
-b_1 \\
-... \\
-... \\
-\frac{b_k}{a_{kq}} \\
-... \\
-b_m \\ \hline
-~
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  \frac{b_k}{a_{kq}} \\
+  ... \\
+  b_m \\ \hline
+  ~
 \end{array}
 $$
 Hacemos ahora la siguiente operación:
@@ -1062,58 +1062,58 @@ $$F_j=F_j - a_{jq}F_k ~ \forall j\neq q$$
 
 $$
 \begin{array}{c}
-\\ \hline
-x_1 \\
-... \\
-... \\
-\leftarrow x_k \\
-... \\
-x_m \\ \hline
-~
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  \leftarrow x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
 \end{array}
 \left|
 \begin{array}{cccccc}
-x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
-1 & ... & ... &...& ...& ... \\
-0 & 1 & ... & ...& ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ... & ... & ...  & ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ...& .... & ... &  0  & 1\\ \hline
-& & & 
+  x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+  1 & ... & ... &...& ...& ... \\
+  0 & 1 & ... & ...& ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ... & ... & ...  & ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ...& .... & ... &  0  & 1\\ \hline
+  & & & 
 \end{array}
 \begin{array}{ccccc}
-x_{m+1} & ... & x_q & ... & x_n \\ \hline
-a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
-a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
-... & ... & ... & ...& ... \\
-... & ... & 1 & ...& ... \\
-... & ... & ... & ...& ... \\
-a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
-& & & &
+  x_{m+1} & ... & x_q & ... & x_n \\ \hline
+  a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+  a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+  ... & ... & ... & ...& ... \\
+  ... & ... & 1 & ...& ... \\
+  ... & ... & ... & ...& ... \\
+  a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+  & & & &
 \end{array}
 \right|
 \begin{array}{c}
-b \\ \hline
-b_1 - a_{1q}\frac{b_k}{a_{kq}}\\
-... \\
-... \\
-\frac{b_k}{a_{kq}} \\
-... \\
-b_m- a_{mq}\frac{b_k}{a_{kq}} \\ \hline
-~
+  b \\ \hline
+  b_1 - a_{1q}\frac{b_k}{a_{kq}}\\
+  ... \\
+  ... \\
+  \frac{b_k}{a_{kq}} \\
+  ... \\
+  b_m- a_{mq}\frac{b_k}{a_{kq}} \\ \hline
+  ~
 \end{array}
 $$
 Como $b_i \geq 0$ entonces, $a_{kq}>0$ de modo que 
 $$ b_i-a_{iq}\frac{b_k}{a_{kq}} \geq 0 $$
 $$ b_i\geq a_{iq}\frac{b_k}{a_{kq}} $$
 \begin{enumerate}
-	\item Si $a_{iq}$ para todo $i=1,...,m$ para $i \neq k$ entra la nueva solución factible
-	\item Si existen algunos $a_{iq}>0$
-	$$ b_i-a_{iq}\frac{b_k}{a_{kq}} \geq 0 $$
-	$$ b_i\geq a_{iq}\frac{b_k}{a_{kq}} $$
-	Dado que $ a_{iq}>0$
-	$$ \frac{b_i}{ a_{iq}}\geq\frac{b_k}{a_{kq}} $$
+\item Si $a_{iq}$ para todo $i=1,...,m$ para $i \neq k$ entra la nueva solución factible
+\item Si existen algunos $a_{iq}>0$
+  $$ b_i-a_{iq}\frac{b_k}{a_{kq}} \geq 0 $$
+  $$ b_i\geq a_{iq}\frac{b_k}{a_{kq}} $$
+  Dado que $ a_{iq}>0$
+  $$ \frac{b_i}{ a_{iq}}\geq\frac{b_k}{a_{kq}} $$
 \end{enumerate}
 La fila asociada a $\displaystyle\min\{\frac{b_i}{a_{iq}}: a_{iq}>0\}$ indica la variable que debe salir.
 
@@ -1121,59 +1121,59 @@ La fila asociada a $\displaystyle\min\{\frac{b_i}{a_{iq}}: a_{iq}>0\}$ indica la
 Partimos del siguiente sistema:
 $$
 \begin{array}{c}
-\\ \hline
-x_1 \\
-... \\
-... \\
-x_k \\
-... \\
-x_m \\ \hline
-~
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
 \end{array}
 \left|
 \begin{array}{cccccc}
-x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
-1 & ... & ... &...& ...& ... \\
-0 & 1 & ... & ...& ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ... & ... & 1 & ...& ... \\
-... & ... & ... & ... & ...& ... \\
-... & ...& .... & ... &  0  & 1\\ \hline
-& & & 
+  x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+  1 & ... & ... &...& ...& ... \\
+  0 & 1 & ... & ...& ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ... & ... & 1 & ...& ... \\
+  ... & ... & ... & ... & ...& ... \\
+  ... & ...& .... & ... &  0  & 1\\ \hline
+  & & & 
 \end{array}
 \begin{array}{ccccc}
-x_{m+1} & ... & x_q & ... & x_n \\ \hline
-a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
-a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
-... & ... & ... & ...& ... \\
-... & ... & a_{kq} & ...& ... \\
-... & ... & ... & ...& ... \\
-a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
-& & & &
+  x_{m+1} & ... & x_q & ... & x_n \\ \hline
+  a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+  a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+  ... & ... & ... & ...& ... \\
+  ... & ... & a_{kq} & ...& ... \\
+  ... & ... & ... & ...& ... \\
+  a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+  & & & &
 \end{array}
 \right|
 \begin{array}{c}
-b \\ \hline
-b_1 \\
-... \\
-... \\
-b_k \\
-... \\
-b_m \\ \hline
-~
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  b_k \\
+  ... \\
+  b_m \\ \hline
+  ~
 \end{array}
 $$
 La solución básica asociada a la tabla anterior viene dada por:
 $$
 x_0=\left(
 \begin{array}{c}
-b_1 \\
-b_2 \\
-... \\
-b_m \\
-0 \\
-... \\
-0
+  b_1 \\
+  b_2 \\
+  ... \\
+  b_m \\
+  0 \\
+  ... \\
+  0
 \end{array}
 \right)
 $$
@@ -1184,10 +1184,10 @@ Vamos a despejar los $x_i$ para $i=1, ..., m$ en términos del resto de variable
 $$
 \left\{
 \begin{array}{c}
-\displaystyle x_1=b_1-\sum_{j=m+1}^{n}a_{1j}x_j \\
-\displaystyle x_2=b_2-\sum_{j=m+1}^{n}a_{2j}x_j \\
-... \\
-\displaystyle x_m=b_m-\sum_{j=m+1}^{n}a_{mj}x_j \\
+  \displaystyle x_1=b_1-\sum_{j=m+1}^{n}a_{1j}x_j \\
+  \displaystyle x_2=b_2-\sum_{j=m+1}^{n}a_{2j}x_j \\
+  ... \\
+  \displaystyle x_m=b_m-\sum_{j=m+1}^{n}a_{mj}x_j \\
 \end{array}
 \right.
 $$ 
@@ -1204,23 +1204,23 @@ Por otro lado, si el problema es de maximizar queremos que todos los $r_q<0$, de
 Por tanto, salen aquellos que no cumplan la condición de optimalidad.
 \newpage
 \begin{theorem}
-	Dado un PPL 
-	$$min (max) ~ c^t x $$
-	$$s.a \left\{ \begin{array}{c}
+  Dado un PPL 
+  $$min (max) ~ c^t x $$
+  $$s.a \left\{ \begin{array}{c}
 	Ax=b \\
 	x\geq 0
-	\end{array}\right.$$
-	Si $x_0$ es una solución básica factible de [P] entonces
+  \end{array}\right.$$
+  Si $x_0$ es una solución básica factible de [P] entonces
+  \begin{enumerate}
+  \item Si todos los costos relativos $r_j$ de las variables básica son positivas o nulas (negativas o nulas) en el caso de maximizar (en el caso de minimizar) entonces $x_0$ es solución óptima de [P].
+  \item Si alguno de los costos relativos es negativo (positivo) en el caso de maximizar (minimizar) entonces la solución actual no es óptima y la variable asociada a dicho coste relativo mejorará la solución actual.
 	\begin{enumerate}
-		\item Si todos los costos relativos $r_j$ de las variables básica son positivas o nulas (negativas o nulas) en el caso de maximizar (en el caso de minimizar) entonces $x_0$ es solución óptima de [P].
-		\item Si alguno de los costos relativos es negativo (positivo) en el caso de maximizar (minimizar) entonces la solución actual no es óptima y la variable asociada a dicho coste relativo mejorará la solución actual.
-		\begin{enumerate}
-			\item Si existe $\varepsilon\{\frac{b_i}{a_{ij}} : a_{ij} >0 \}$ entonces la variable que debe de salir es aquella asociada a la fila donde se alcanza el mínimo, $\varepsilon$
-			\item Si todos los componentes $a_{ij}<0$ asociados a la variable que \textit{entrar} entrar entonces el problema es no acotado. Podemos encontrar entonces una dirección de ilimitación.
-		\end{enumerate}
+	\item Si existe $\varepsilon\{\frac{b_i}{a_{ij}} : a_{ij} >0 \}$ entonces la variable que debe de salir es aquella asociada a la fila donde se alcanza el mínimo, $\varepsilon$
+	\item Si todos los componentes $a_{ij}<0$ asociados a la variable que \textit{entrar} entrar entonces el problema es no acotado. Podemos encontrar entonces una dirección de ilimitación.
 	\end{enumerate}
-	Recordemos, $$r_j=\sum_{i=1}^{m}c_i a_{ij}-c_j$$ 
-	Los costos relativos asociados a las variables básicas siempre es $0$.
+  \end{enumerate}
+  Recordemos, $$r_j=\sum_{i=1}^{m}c_i a_{ij}-c_j$$ 
+  Los costos relativos asociados a las variables básicas siempre es $0$.
 \end{theorem}
 
 \section{Resolución de un PPL aplicando el Método Simplex}
@@ -1228,9 +1228,9 @@ Por tanto, salen aquellos que no cumplan la condición de optimalidad.
 $$ max ~ 3x_1+2x_2 $$
 $$ s.a \left\{
 \begin{array}{c}
-2x_1+x_2 \leq 100 \\
-x_1+x_2 \leq 80 \\
-x_1 \leq 40
+  2x_1+x_2 \leq 100 \\
+  x_1+x_2 \leq 80 \\
+  x_1 \leq 40
 \end{array}
 \right.
 $$
@@ -1239,9 +1239,9 @@ En primer lugar, escribimos el problema en formato estándar:
 $$ max ~ 3x_1+2x_2 $$
 $$ s.a \left\{
 \begin{array}{c}
-2x_1+x_2 + s_1 = 100 \\
-x_1+x_2 + s_2 =  80 \\
-x_1 + s_3 =  40
+  2x_1+x_2 + s_1 = 100 \\
+  x_1+x_2 + s_2 =  80 \\
+  x_1 + s_3 =  40
 \end{array}
 \right.
 $$
@@ -1249,27 +1249,27 @@ $$ x_1, x_2, s_1, s_2, s_3 \geq 0$$
 Escribimos la tabla simplex:
 $$
 \begin{array}{c|ccccc|c}
-& x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
-s_1 & 2 & 1 & 1 & 0 & 0 & 100 \\
-s_2 & 1 & 1 & 0 & 1 & 0 & 80 \\
-s_3 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline
+  & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+  s_1 & 2 & 1 & 1 & 0 & 0 & 100 \\
+  s_2 & 1 & 1 & 0 & 1 & 0 & 80 \\
+  s_3 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline
 \end{array}
 $$
 En este caso, la solución básica actual es: $x_0^t=(0, 0, 100, 80, 40)$. \newpage
 Calculamos ahora los costos relativos:
 \begin{enumerate}
-	\item En cada variable escribimos su coste asociado.
-	\item En las variables básica se escribe también su coste relativo.
-	\item Multiplicamos los costos escritos en las variables básica con el valor asociado en la matriz en la misma fila y columna, y a continuación, restamos el coste asociado a la variable de la columna.
+\item En cada variable escribimos su coste asociado.
+\item En las variables básica se escribe también su coste relativo.
+\item Multiplicamos los costos escritos en las variables básica con el valor asociado en la matriz en la misma fila y columna, y a continuación, restamos el coste asociado a la variable de la columna.
 \end{enumerate}
 $$
 \begin{array}{c|ccccc|c}
-& 3 & 2 & 0 & 0 & 0 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
-0 ~ s_1 & 2 & 1 & 1 & 0 & 0 & 100 \\
-0 ~s_2 & 1 & 1 & 0 & 1 & 0 & 80 \\
-0 ~ s_3 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline 
-& -3 & -2 & 0 & 0 & 0 & 0
+  & 3 & 2 & 0 & 0 & 0 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+  0 ~ s_1 & 2 & 1 & 1 & 0 & 0 & 100 \\
+  0 ~s_2 & 1 & 1 & 0 & 1 & 0 & 80 \\
+  0 ~ s_3 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline 
+  & -3 & -2 & 0 & 0 & 0 & 0
 \end{array}
 $$
 Quiere entrar la variable $x_1$ por ser la más negativa, calculamos $100/2$, $80/1$ y $40/1$ dado, que $40/1$ es el mínimo debe salir $s_3$. \\
@@ -1278,44 +1278,44 @@ $$F_1'=F_1-2F_3$$
 $$F_2'=F_2'-F_3$$
 $$
 \begin{array}{c|ccccc|c}
-& 3 & 2 & 0 & 0 & 0 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
-0 ~s_1 & 0 & 1 & 1 & 0 &-2 & 20 \\
-0~ s_2 & 0 & 1 & 0 & 1 & -1 & 40 \\
-3 ~x_1 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline 
-& 0 & -2 & 0 & 0 & 3 & 120
+  & 3 & 2 & 0 & 0 & 0 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+  0 ~s_1 & 0 & 1 & 1 & 0 &-2 & 20 \\
+  0~ s_2 & 0 & 1 & 0 & 1 & -1 & 40 \\
+  3 ~x_1 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline 
+  & 0 & -2 & 0 & 0 & 3 & 120
 \end{array}
 $$
 Quiere entrar la variable $x_2$ por ser la más negativa, calculamos $20/1$, $40/1$ dado, que $20/1$ es el mínimo debe salir $s_1$. \\
 Debemos convertir la columna asociada a la variable $x_2$ en $(1, 0, 0)^t$.
 $$
 \begin{array}{c|ccccc|c}
-& 3 & 2 & 0 & 0 & 0 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
-2 ~x_1 & 0 & 1 & 1 & 0 &-2 & 20 \\
-0~ s_2 & 0 & 0 & -1 & 1 & 1 & 20 \\
-3 ~x_1 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline 
-& 0 & 0 & 2 & 0 & -1 & 160
+  & 3 & 2 & 0 & 0 & 0 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+  2 ~x_1 & 0 & 1 & 1 & 0 &-2 & 20 \\
+  0~ s_2 & 0 & 0 & -1 & 1 & 1 & 20 \\
+  3 ~x_1 & 1 & 0 & 0 & 0 & 1 & 40 \\ \hline 
+  & 0 & 0 & 2 & 0 & -1 & 160
 \end{array}
 $$
 Quiere entrar la variable $s_3$ por ser la más negativa,  y dado que $20/1$ es el mínimo, debe salir $s_2$.
 $$
 \begin{array}{c|ccccc|c}
-& 3 & 2 & 0 & 0 & 0 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
-2 ~x_1 & 0 & 1 & -1 & 2 & 0 & 60 \\
-0~ s_2 & 0 & 0 & -1 & 1 & 1 & 20 \\
-3 ~x_1 & 1 & 0 & 0 & 0 & 1 & 20 \\ \hline 
-& 0 & 0 & 1 & 1 & 0 & 180
+  & 3 & 2 & 0 & 0 & 0 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+  2 ~x_1 & 0 & 1 & -1 & 2 & 0 & 60 \\
+  0~ s_2 & 0 & 0 & -1 & 1 & 1 & 20 \\
+  3 ~x_1 & 1 & 0 & 0 & 0 & 1 & 20 \\ \hline 
+  & 0 & 0 & 1 & 1 & 0 & 180
 \end{array}
 $$
 \subsection{Ejemplo}
 $$  max ~ 3x_1+x_2+3x_3$$
 $$ s.a \left\{
 \begin{array}{c}
-2x_1+x_2+x_3\leq2\\
-x_1+2x_2+3x_3\leq 5 \\
-2x_1+2x_2+x_3\leq 6
+  2x_1+x_2+x_3\leq2\\
+  x_1+2x_2+3x_3\leq 5 \\
+  2x_1+2x_2+x_3\leq 6
 \end{array}
 \right.
 $$
@@ -1324,9 +1324,9 @@ Pasamos a formato estándar
 $$  max ~ 3x_1+x_2+3x_3$$
 $$ s.a \left\{
 \begin{array}{c}
-2x_1+x_2+x_3 + s_1=2\\
-x_1+2x_2+3x_3+ s_2 = 5 \\
-2x_1+2x_2+x_3 + s_3=  6
+  2x_1+x_2+x_3 + s_1=2\\
+  x_1+2x_2+3x_3+ s_2 = 5 \\
+  2x_1+2x_2+x_3 + s_3=  6
 \end{array}
 \right.
 $$
@@ -1334,24 +1334,24 @@ $$x_1, x_2, x_3, s_1, s_2, s_3 \geq 0$$
 Construimos la tabla simplex
 $$
 \begin{array}{c|cccccc|c}
-& 3 & 1 & 3 & 0 & 0 & 0 &  \\
-& x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
-0 ~ s_1 & 2 & 1 & 1 & 1 & 0 & 0 & 2 \\
-0 ~ s_2 & 1 & 2 & 3 & 0 & 1 & 0 & 5 \\
-0 ~ s_3 & 2 & 2 & 1 & 0 & 0 & -1 & 6 \\ \hline
-& -3 & -1 & -3 & 0 & 0 & 0 & 0
+  & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+  & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+  0 ~ s_1 & 2 & 1 & 1 & 1 & 0 & 0 & 2 \\
+  0 ~ s_2 & 1 & 2 & 3 & 0 & 1 & 0 & 5 \\
+  0 ~ s_3 & 2 & 2 & 1 & 0 & 0 & -1 & 6 \\ \hline
+  & -3 & -1 & -3 & 0 & 0 & 0 & 0
 \end{array}
 $$
 Vemos que la variable $x_1$ y $x_3$ quieren entrar, elegimos una, en este caso $x_1$, y debe salir $s_1$. 
 $$ F_1'=\frac{F_1}{2} $$
 $$
 \begin{array}{c|cccccc|c}
-& 3 & 1 & 3 & 0 & 0 & 0 &  \\
-& x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
-3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
-0 ~ s_2 & 1 & 2 & 3 & 0 & 1 & 0 & 5 \\
-0 ~ s_3 & 2 & 2 & 1 & 0 & 0 & -1 & 6 \\ \hline
-& -3 & -1 & -3 & 0 & 0 & 0 & 0
+  & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+  & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+  3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
+  0 ~ s_2 & 1 & 2 & 3 & 0 & 1 & 0 & 5 \\
+  0 ~ s_3 & 2 & 2 & 1 & 0 & 0 & -1 & 6 \\ \hline
+  & -3 & -1 & -3 & 0 & 0 & 0 & 0
 \end{array}
 $$
 
@@ -1359,12 +1359,12 @@ $$ F_2'=F_2-F_1 $$
 $$ F_3'=F_3-2F_1 $$
 $$
 \begin{array}{c|cccccc|c}
-& 3 & 1 & 3 & 0 & 0 & 0 &  \\
-& x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
-3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
-0 ~ s_2 & 0 & 3/2 & 5/2 & 1/2 & 1 & 0 & 4 \\
-0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
-& 0 & 1/2 & -3/2 & 3/2 & 0 & 0 & 3
+  & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+  & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+  3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
+  0 ~ s_2 & 0 & 3/2 & 5/2 & 1/2 & 1 & 0 & 4 \\
+  0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
+  & 0 & 1/2 & -3/2 & 3/2 & 0 & 0 & 3
 \end{array}
 $$
 
@@ -1373,12 +1373,12 @@ $$F_2'=\frac{2}{5}F_2$$
 
 $$
 \begin{array}{c|cccccc|c}
-& 3 & 1 & 3 & 0 & 0 & 0 &  \\
-& x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
-3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
-3 ~ x_3 & 0 & 3/5 & 1 & -2/10 & 2/5 & 0 & 8/5 \\
-0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
-& 0 & 1/2 & -3/2 & 3/2 & 0 & 0 & 3
+  & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+  & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+  3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
+  3 ~ x_3 & 0 & 3/5 & 1 & -2/10 & 2/5 & 0 & 8/5 \\
+  0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
+  & 0 & 1/2 & -3/2 & 3/2 & 0 & 0 & 3
 \end{array}
 $$
 
@@ -1387,23 +1387,23 @@ F_1'=F_1-\frac{1}{2}F_2$$$  $
 
 $$
 \begin{array}{c|cccccc|c}
-& 3 & 1 & 3 & 0 & 0 & 0 &  \\
-& x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
-3 ~ x_1 & 1 & 1/5 & 0 & 6/10 & -2/5 & 0 & 1 \\
-3 ~ x_3 & 0 & 3/5 & 1 & -2/10 & 2/5 & 0 & 8/5 \\
-0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
-& 0 &  7/5 & 0 & 6/5 & 3/5 & 0 & 27/5
+  & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+  & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+  3 ~ x_1 & 1 & 1/5 & 0 & 6/10 & -2/5 & 0 & 1 \\
+  3 ~ x_3 & 0 & 3/5 & 1 & -2/10 & 2/5 & 0 & 8/5 \\
+  0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
+  & 0 &  7/5 & 0 & 6/5 & 3/5 & 0 & 27/5
 \end{array}
 $$
 Por tanto, la solución óptima es:
 $$ x_0=\left(
 \begin{array}{c}
-\displaystyle \frac{1}{5} \\
-0 \\
-\displaystyle \frac{8}{5} \\
-0 \\
-0 \\
-4
+  \displaystyle \frac{1}{5} \\
+  0 \\
+  \displaystyle \frac{8}{5} \\
+  0 \\
+  0 \\
+  4
 \end{array}
 \right)
 $$
@@ -1412,9 +1412,9 @@ $$ max ~2x_1 - 5x_2 + x_3$$
 $$
 s.a \left\{ 
 \begin{array}{c}
-x_1-x_1 \leq 4 \\
-4x_1 \leq 2 \\
-x_1 - 2x_2 - x_3 \leq 1
+  x_1-x_1 \leq 4 \\
+  4x_1 \leq 2 \\
+  x_1 - 2x_2 - x_3 \leq 1
 \end{array}
 \right.$$
 $$x_1, x_2, x_3 \geq 0$$ \newpage
@@ -1423,49 +1423,49 @@ $$ max ~2x_1 - 5x_2 + x_3$$
 $$
 s.a \left\{ 
 \begin{array}{c}
-x_1-x_1+s_1 = 4 \\
-4x_1 s_2 = 2 \\
-x_1 - 2x_2 - x_3 + s_3 = 1
+  x_1-x_1+s_1 = 4 \\
+  4x_1 s_2 = 2 \\
+  x_1 - 2x_2 - x_3 + s_3 = 1
 \end{array}
 \right.$$
 $$x_1, x_2, x_3, s_1, s_2, s_3 \geq 0$$
 Escribimos la tabla simplex:
 $$
 \begin{array}{c|cccccc|c}
-& 2 & -5 & 1 & 0 & 0 & 0 & \\
-& x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
-0 ~s_1 & 1 & -1 & 0 & 1 & 0 & 0 & 4 \\
-0 ~ s_2 & 4 & 0 & 0 & 0 & 1 & 0 & 2 \\
-0 ~s_3 & 1 & -2 & -1 & 0 & 0 & 1 & 1 \\ \hline
-& -2 & 5 & -1 & 0 & 0 & 0 & 0
+  & 2 & -5 & 1 & 0 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+  0 ~s_1 & 1 & -1 & 0 & 1 & 0 & 0 & 4 \\
+  0 ~ s_2 & 4 & 0 & 0 & 0 & 1 & 0 & 2 \\
+  0 ~s_3 & 1 & -2 & -1 & 0 & 0 & 1 & 1 \\ \hline
+  & -2 & 5 & -1 & 0 & 0 & 0 & 0
 \end{array}
 $$
 Dado que el problema es de minimizar, debe entrar la variable $x_2$, sin embargo, ninguna variable puede salir, pues todas las componentes de $a_2$ son ceros o números negativos. \\
 Esto implica que el problema es no acotado. Podemos encontrar soluciones factible del problema [P] de manera qe la función objetivo mejore todo lo que queramos.
 $$ 4 a_4+2a_5+a_6=b$$
 $$4 \left(\begin{array}{c}
-1 \\ 0 \\ 0
+  1 \\ 0 \\ 0
 \end{array}\right)+2\left(\begin{array}{c}
-0 \\ 1 \\ 0
+  0 \\ 1 \\ 0
 \end{array}\right)+1\left(\begin{array}{c}
-0 \\ 0 \\ 1
+  0 \\ 0 \\ 1
 \end{array}\right)=\left(\begin{array}{c}
-4 \\ 2 \\ 1
+  4 \\ 2 \\ 1
 \end{array}\right) ~ [1]$$
 $$-1 \left(\begin{array}{c}
-1 \\ 0 \\ 0
+  1 \\ 0 \\ 0
 \end{array}\right)+0\left(\begin{array}{c}
-0 \\ 1 \\ 0
+  0 \\ 1 \\ 0
 \end{array}\right)-2\left(\begin{array}{c}
-0 \\ 0 \\ 1
+  0 \\ 0 \\ 1
 \end{array}\right)=\left(\begin{array}{c}
--1 \\ 0 \\ -2
+  -1 \\ 0 \\ -2
 \end{array}\right) ~ [2]$$
 $$[1]-\varepsilon[2]$$
 $$(4+\varepsilon)2a_5+(1+2\varepsilon)a_6=b-\varepsilon a_2 $$
 $$ \varepsilon a_2 + (4+\varepsilon)a_4+2a_5+(1+2\varepsilon)a_6=b$$
 $$ x_\varepsilon=\left(\begin{array}{c}
-0 \\ \varepsilon \\ 0 \\ 4 + \varepsilon \\ 1 + 2\varepsilon
+  0 \\ \varepsilon \\ 0 \\ 4 + \varepsilon \\ 1 + 2\varepsilon
 \end{array}\right)$$
 Evaluando $x_\varepsilon$ en la función objetivo tenemos que $f(x_\varepsilon)=-5 \varepsilon$, los coeficientes de los $\varepsilon$ son la dirección de ilimitación.
 
@@ -1473,8 +1473,8 @@ Evaluando $x_\varepsilon$ en la función objetivo tenemos que $f(x_\varepsilon)=
 $$ max ~2x_1+3x_2-x_3-12x_4$$
 $$s.a \left\{
 \begin{array}{c}
--2x_1-9x_2+x_3+9x_4 \leq 0 \\
-1/3x_1+x_2-1/3x_3-2x_4 \leq 0
+  -2x_1-9x_2+x_3+9x_4 \leq 0 \\
+  1/3x_1+x_2-1/3x_3-2x_4 \leq 0
 \end{array}
 \right.
 $$
@@ -1482,57 +1482,57 @@ $$x_1, x_2, x_3, x_4 \geq 0$$
 Pasamos el problema a formato estándar, y construimos la tabla SIMPLEX:
 $$
 \begin{array}{c|cccccc|c}
-& 2 & 3 & -1 & -12 & 0 & 0 & \\
-& x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
-0 ~ s_1 & -2 & -9 & 1 & 9 & 1 & 0 & 0 \\
-0 ~ s_2 & 1/3 & 1 & 1/3 & -2 & 0 & 1 & 0 \\ \hline
-& -2 & -3 & 1 & 12 & 0 & 0 & 0
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  0 ~ s_1 & -2 & -9 & 1 & 9 & 1 & 0 & 0 \\
+  0 ~ s_2 & 1/3 & 1 & 1/3 & -2 & 0 & 1 & 0 \\ \hline
+  & -2 & -3 & 1 & 12 & 0 & 0 & 0
 \end{array}
 $$
 
 $$
 \begin{array}{c|cccccc|c}
-& 2 & 3 & -1 & -12 & 0 & 0 & \\
-& x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
-0 ~ s_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
-3 ~ x_2 & 1/3 & 1 & -1/3 & -2 & 0 & 1 & 0 \\ \hline
-& -1 & 0 & 0 & 6 & 0 & 3 & 0
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  0 ~ s_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
+  3 ~ x_2 & 1/3 & 1 & -1/3 & -2 & 0 & 1 & 0 \\ \hline
+  & -1 & 0 & 0 & 6 & 0 & 3 & 0
 \end{array}
 $$
 
 $$
 \begin{array}{c|cccccc|c}
-& 2 & 3 & -1 & -12 & 0 & 0 & \\
-& x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
-2 ~ x_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
-3 ~ x_2 & 0 & 1 & 1/3 & 1 & -1/3 & -2 & 0 \\ \hline
-& 0 & 0 & -2 & -3 & 1 & 12 & 0
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  2 ~ x_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
+  3 ~ x_2 & 0 & 1 & 1/3 & 1 & -1/3 & -2 & 0 \\ \hline
+  & 0 & 0 & -2 & -3 & 1 & 12 & 0
 \end{array}
 $$
 
 $$
 \begin{array}{c|cccccc|c}
-& 2 & 3 & -1 & -12 & 0 & 0 & \\
-& x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
-2 ~ x_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
--12 ~ x_4 & 0 & 1 & 1/3 & 1 & -1/3 & -2 & 0 \\ \hline
-& 0 & 3 & -1 & 0 & 0 & 6 & 0
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  2 ~ x_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
+  -12 ~ x_4 & 0 & 1 & 1/3 & 1 & -1/3 & -2 & 0 \\ \hline
+  & 0 & 3 & -1 & 0 & 0 & 6 & 0
 \end{array}
 $$
 $$...$$
 $$
 \begin{array}{c|cccccc|c}
-	& 2 & 3 & -1 & -12 & 0 & 0 & \\
-	& x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
-	0 ~ s_1 & -2 & -9 & 1 & 9 & 1 & 0 & 0 \\
-	0 ~ s_2 & 1/3 & 1 & 1/3 & -2 & 0 & 1 & 0 \\ \hline
-	& -2 & -3 & 1 & 12 & 0 & 0 & 0
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  0 ~ s_1 & -2 & -9 & 1 & 9 & 1 & 0 & 0 \\
+  0 ~ s_2 & 1/3 & 1 & 1/3 & -2 & 0 & 1 & 0 \\ \hline
+  & -2 & -3 & 1 & 12 & 0 & 0 & 0
 \end{array}
 $$
 \subsection{Método anticiclado}
 \begin{enumerate}
-	\item Elegimos un orden entre las variables.
-	\item En caso de empate en los criterios de entrada o de salida de variables, elegimos la variable más pequeña usando el orden definido en la lista de la fase I.
+\item Elegimos un orden entre las variables.
+\item En caso de empate en los criterios de entrada o de salida de variables, elegimos la variable más pequeña usando el orden definido en la lista de la fase I.
 \end{enumerate}
 \newpage
 \section{Resolución de PPL con restricciones $(=)$ y $(\geq)$}
@@ -1540,28 +1540,28 @@ Sea [P] el siguiente PPL:
 $$ min ~ 3x_1+5x_2 $$
 $$ s.a \left\{
 \begin{array}{c}
-x_1 \leq 4 \\
-x_2 \leq 6 \\
-3x_1+2x_2 \geq 18
+  x_1 \leq 4 \\
+  x_2 \leq 6 \\
+  3x_1+2x_2 \geq 18
 \end{array}
 \right.
 $$
 Lo pasamos a formato estándar, y construimos la tabla SIMPLEX.
 $$
 \begin{array}{c|ccccc|c} 
-& x_1 & x_2 & s_1 & s_3 & b \\ \hline
-s_1 & 1 & 0 & 1 & 0 & 0 & 4 \\
-s_2 & 0 & 1 & 0 & 1 & 0 & 6 \\
-s_3 & -3 & -2 & 0 & 0 & 1 & -18 \\ \hline
-& & & & &
+  & x_1 & x_2 & s_1 & s_3 & b \\ \hline
+  s_1 & 1 & 0 & 1 & 0 & 0 & 4 \\
+  s_2 & 0 & 1 & 0 & 1 & 0 & 6 \\
+  s_3 & -3 & -2 & 0 & 0 & 1 & -18 \\ \hline
+  & & & & &
 \end{array}
 $$
 Es básica pero no factible, por tanto no puede inicializar el simplex.
 
 \subsection{Método de inicialización del SIMPLEX}
 \begin{enumerate}
-	\item Método de las penalizaciones o de la M grande.
-	\item Método de las dos fases.
+\item Método de las penalizaciones o de la M grande.
+\item Método de las dos fases.
 \end{enumerate}
 
 \subsubsection{Método de las penalizaciones}
@@ -1573,58 +1573,58 @@ Volviendo al problema anterior,
 $$ min ~ 3x_1+5x_2+M z_3 $$
 $$ s.a \left\{
 \begin{array}{c}
-x_1+s_1=4 \\
-x_2 + s_2 = 6 \\
-3x_1+2x_2-s_3+z_3=18
+  x_1+s_1=4 \\
+  x_2 + s_2 = 6 \\
+  3x_1+2x_2-s_3+z_3=18
 \end{array}
 \right.
 $$
 Recordemos lo siguiente:
 \begin{itemize}
-	\item Las variables de holgura sirven para transformar las restricciones ($\leq$) o ($\geq$) en $(=)$
-	\item Las variables artificiales sirven para iniciar el método SIMPLEX con una solución básica factible.
+\item Las variables de holgura sirven para transformar las restricciones ($\leq$) o ($\geq$) en $(=)$
+\item Las variables artificiales sirven para iniciar el método SIMPLEX con una solución básica factible.
 \end{itemize}
 
 \textbf{Observación: }
 \begin{itemize}
-	\item El problema ampliado no es equivalente al problema original. 
-	\item Solo coincide cuando en la solución del problema ampliado las variables artificiales sean $0$, $z_i$ para todo $i$.
-	\item Si $x_0$ es solución óptima del problema ampliado y todos los $z_i=0$, entonces $x_0$ es solución óptima del problema original. 
-	\item El problema ampliado siempre tiene solución.
-	\item Si $x_0$ es solución óptima del problema ampliado y existe algún $z_i \neq 0$ \\
-	Entonces el problema original NO tiene solución.
-	\item Si el problema ampliado es no acotado entonces el problema original también es no acotado.
+\item El problema ampliado no es equivalente al problema original. 
+\item Solo coincide cuando en la solución del problema ampliado las variables artificiales sean $0$, $z_i$ para todo $i$.
+\item Si $x_0$ es solución óptima del problema ampliado y todos los $z_i=0$, entonces $x_0$ es solución óptima del problema original. 
+\item El problema ampliado siempre tiene solución.
+\item Si $x_0$ es solución óptima del problema ampliado y existe algún $z_i \neq 0$ \\
+  Entonces el problema original NO tiene solución.
+\item Si el problema ampliado es no acotado entonces el problema original también es no acotado.
 \end{itemize} 
 Resolvamos entonces:
 $$ min ~ 3x_1+5x_2+M z_3 $$
 $$ s.a \left\{
 \begin{array}{c}
-x_1+s_1=4 \\
-x_2 + s_2 = 6 \\
-3x_1+2x_2-s_3+z_3=18
+  x_1+s_1=4 \\
+  x_2 + s_2 = 6 \\
+  3x_1+2x_2-s_3+z_3=18
 \end{array}
 \right.
 $$
 
 $$ \begin{array}{c|cccccc|c}
-& 3 & 5 & 0 & 0 & 0 & M & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
-0 ~ s_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
-0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
-M ~ z_3 & 3 & 2 & 0 & 0 & -1 & 1 & 18 \\ \hline
-& 3M-3 & 2M-5 & 0 & 0 & -M & 0 & 18M
+  & 3 & 5 & 0 & 0 & 0 & M & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  0 ~ s_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+  M ~ z_3 & 3 & 2 & 0 & 0 & -1 & 1 & 18 \\ \hline
+  & 3M-3 & 2M-5 & 0 & 0 & -M & 0 & 18M
 \end{array}
 $$
 En este caso entra $x_1$ y sale $s_1$
 $$F_3'=F_3-3F_1$$
 
 $$ \begin{array}{c|cccccc|c}
-& 3 & 5 & 0 & 0 & 0 & M & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
-3 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
-0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
-M ~ z_3 & 0 & 2 & -3 & 0 & -1 & 1 & 6 \\ \hline
-& 0 & 2M-5 & -3M+3 & 0 & -M & 0 & 6M+12
+  & 3 & 5 & 0 & 0 & 0 & M & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  3 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+  M ~ z_3 & 0 & 2 & -3 & 0 & -1 & 1 & 6 \\ \hline
+  & 0 & 2M-5 & -3M+3 & 0 & -M & 0 & 6M+12
 \end{array}
 $$
 
@@ -1633,27 +1633,27 @@ El lector debe continuar este ejercicio.
 
 \subsubsection{Método de las dos fases}
 \begin{enumerate}
-	\item Fase 1
-	\begin{enumerate}
-		\item Añadimos una variable artificial $z_i$ para cada restricción de $(=)$ o $(\geq)$ igual que en el método de las penalizaciones.
-		\item Cambiamos la función objetivo por
-		$$ min ~ \sum_{i=1}^{k}z_i $$
-		\item Si el problema de la fase 1 tiene solución optima con alguna variable artificial no nula, entonces el problema original no tiene solución.
-		\item Si tiene solución óptima y todas las variables artificiales son cero, entonces pasamos a la fase 2.
-	\end{enumerate}
-	\item Fase 2
-	\begin{enumerate}
-		\item Cambiamos la función objetivo de la fase 1 por la función objetivo original y eliminamos las columnas de las variables artificiales.
-	\end{enumerate}
+\item Fase 1
+  \begin{enumerate}
+  \item Añadimos una variable artificial $z_i$ para cada restricción de $(=)$ o $(\geq)$ igual que en el método de las penalizaciones.
+  \item Cambiamos la función objetivo por
+	$$ min ~ \sum_{i=1}^{k}z_i $$
+  \item Si el problema de la fase 1 tiene solución optima con alguna variable artificial no nula, entonces el problema original no tiene solución.
+  \item Si tiene solución óptima y todas las variables artificiales son cero, entonces pasamos a la fase 2.
+  \end{enumerate}
+\item Fase 2
+  \begin{enumerate}
+  \item Cambiamos la función objetivo de la fase 1 por la función objetivo original y eliminamos las columnas de las variables artificiales.
+  \end{enumerate}
 \end{enumerate}
 
 \textbf{Ejemplo: }
 $$ min ~ 3x_1+5x_2+M z_3 $$
 $$ s.a \left\{
 \begin{array}{c}
-x_1+s_1=4 \\
-x_2 + s_2 = 6 \\
-3x_1+2x_2-s_3+z_3=18
+  x_1+s_1=4 \\
+  x_2 + s_2 = 6 \\
+  3x_1+2x_2-s_3+z_3=18
 \end{array}
 \right.
 $$
@@ -1661,338 +1661,372 @@ $$
 $$ min ~ z_3 $$
 $$ s.a \left\{
 \begin{array}{c}
-x_1+s_1=4 \\
-x_2 + s_2 = 6 \\
-3x_1+2x_2-s_3+z_3=18
+  x_1+s_1=4 \\
+  x_2 + s_2 = 6 \\
+  3x_1+2x_2-s_3+z_3=18
 \end{array}
 \right.
 $$
 
 $$
 \begin{array}{c|cccccc|c}
-& 0 & 0 & 0 & 0 & 0 & 1 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
-0 ~ s_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
-0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
-1 ~ z_3 & 3 & 2 & 0 & 0 & -1 & 1 & 18 \\ \hline
-& 3 & 2 & 0 & 0 & -1 & 0 & 18
+  & 0 & 0 & 0 & 0 & 0 & 1 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  0 ~ s_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+  1 ~ z_3 & 3 & 2 & 0 & 0 & -1 & 1 & 18 \\ \hline
+  & 3 & 2 & 0 & 0 & -1 & 0 & 18
 \end{array}
 $$
 
 $$
 \begin{array}{c|cccccc|c}
-& 0 & 0 & 0 & 0 & 0 & 1 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
-0 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
-0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
-1 ~ z_3 & 0 & 2 & -3 & 0 & -1 & 1 & 6 \\ \hline
-& 0 & 2 & -3 & 0 & -1 & 0 & 6
+  & 0 & 0 & 0 & 0 & 0 & 1 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  0 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+  1 ~ z_3 & 0 & 2 & -3 & 0 & -1 & 1 & 6 \\ \hline
+  & 0 & 2 & -3 & 0 & -1 & 0 & 6
 \end{array}
 $$
 
 $$
 \begin{array}{c|cccccc|c}
-& 0 & 0 & 0 & 0 & 0 & 1 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
-0 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
-0 ~ s_2 & 0 & 0 & 3/2 & 1 & 1/2 & -1/2 & 3 \\
-1 ~ x_2 & 0 & 1 & -3/2 & 0 & -1/2 & 1/2 & 3 \\ \hline
-& 0 & 0 & 0 & 0 & 0 & -1 & 0 
+  & 0 & 0 & 0 & 0 & 0 & 1 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  0 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 0 & 3/2 & 1 & 1/2 & -1/2 & 3 \\
+  1 ~ x_2 & 0 & 1 & -3/2 & 0 & -1/2 & 1/2 & 3 \\ \hline
+  & 0 & 0 & 0 & 0 & 0 & -1 & 0 
 \end{array}
 $$
 \textbf{Fase 2: }
 $$
 \begin{array}{c|ccccc|c}
-& 3 & 5 & 0 & 0 & 0 & \\
-& x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
-3 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 4 \\
-0 ~ s_2 & 0 & 0 & 3/2 & 1 & 1/2 & 3 \\
-5 ~ x_2 & 0 & 1 & -3/2 & 0 & -1/2 & 3 \\ \hline
-& 0 & 0 & -9/2 & 0  & 5/2 & 27 
+  & 3 & 5 & 0 & 0 & 0 & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+  3 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 0 & 3/2 & 1 & 1/2 & 3 \\
+  5 ~ x_2 & 0 & 1 & -3/2 & 0 & -1/2 & 3 \\ \hline
+  & 0 & 0 & -9/2 & 0  & 5/2 & 27 
 \end{array}
 $$
 
 \textbf{Ejercicio} Resolver el siguiente PPL.
 
 \begin{enumerate}
-	\item 
-	$$min ~x_1 + x_3 $$
-	$$s.a \left\{
-	\begin{array}{c}
+\item 
+  $$min ~x_1 + x_3 $$
+  $$s.a \left\{
+  \begin{array}{c}
 	x_1+2x_2 \leq -5 \\
 	x_2 + 2x_3 = 6 
-	\end{array}
-	\right.
-	$$
-	\item $$min ~ 15 x_1 + 77 x_2 $$
-	$$s.a \left\{
-	\begin{array}{c}
+  \end{array}
+  \right.
+  $$
+\item $$min ~ 15 x_1 + 77 x_2 $$
+  $$s.a \left\{
+  \begin{array}{c}
 	2x_1+28x_2 \geq 1 \\
 	6x_1+8x_2 \geq 1
-	\end{array}
-	\right.
-	$$
+  \end{array}
+  \right.
+  $$
 \end{enumerate}
 
 \part{Tema 2:}
 \chapter{El problema dual}
 \begin{definition}[Formato canónico]
-	Dado un PPL [P], decimos que está expresado en forma canónica  si:
-	$$
-		min ~ c^t x
-		$$
-		$$s.a \left\{
-		\begin{array}{c}
-		Ax\geq b \\
-		x \geq 0
-		\end{array}
-		\right.
-	$$
+  Dado un PPL [P], decimos que está expresado en forma canónica  si:
+  $$
+  min ~ c^t x
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
+	Ax\geq b \\
+	x \geq 0
+  \end{array}
+  \right.
+  $$
 \end{definition}
 
 
 \begin{definition}[Problema dual]
-	Dado un PPL [P], se define el problema dual asociado a [P] como:
-	$$
-	max ~ b^t w
-	$$
-	$$s.a \left\{
-	\begin{array}{c}
+  Dado un PPL [P], se define el problema dual asociado a [P] como:
+  $$
+  max ~ b^t w
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
 	A^t  w \leq c \\
 	w \geq 0
-	\end{array}
-	\right.
-	$$
+  \end{array}
+  \right.
+  $$
 \end{definition}
 
 \begin{proposition}
-	El dual del dual es el primal.
+  El dual del dual es el primal.
 \end{proposition}
 \begin{proof}
-	$$
-min ~ c^t x
-$$
-$$s.a \left\{
-\begin{array}{c}
-Ax\geq b \\
-x \geq 0
-\end{array}
-\right.
-$$
+  $$
+  min ~ c^t x
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
+    Ax\geq b \\
+    x \geq 0
+  \end{array}
+  \right.
+  $$
 
-$$ \Downarrow ~ (Dual)$$
+  $$ \Downarrow ~ (Dual)$$
 
-	$$
-max ~ b^t w
-$$
-$$s.a \left\{
-\begin{array}{c}
-A^t  w \leq c \\
-w \geq 0
-\end{array}
-\right.
-$$
+  $$
+  max ~ b^t w
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
+    A^t  w \leq c \\
+    w \geq 0
+  \end{array}
+  \right.
+  $$
 
-$$ \Downarrow ~ (Canonico) $$
-$$
-min ~ - b^t w
-$$
-$$s.a \left\{
-\begin{array}{c}
--A^t  w \geq -c \\
-w \geq 0
-\end{array}
-\right.
-$$
+  $$ \Downarrow ~ (Canonico) $$
+  $$
+  min ~ - b^t w
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
+    -A^t  w \geq -c \\
+    w \geq 0
+  \end{array}
+  \right.
+  $$
 
-$$ \Downarrow ~ (Dual) $$
-$$
-max ~ -c^t y
-$$
-$$s.a \left\{
-\begin{array}{c}
--A  y \leq -b \\
-w \geq 0
-\end{array}
-\right.
-$$
+  $$ \Downarrow ~ (Dual) $$
+  $$
+  max ~ -c^t y
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
+    -A  y \leq -b \\
+    w \geq 0
+  \end{array}
+  \right.
+  $$
 
-$$ \Downarrow $$
-$$
-min ~ c^t y
-$$
-$$s.a \left\{
-\begin{array}{c}
-A  y \geq b \\
-w \geq 0
-\end{array}
-\right.
-$$
+  $$ \Downarrow $$
+  $$
+  min ~ c^t y
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
+    A  y \geq b \\
+    w \geq 0
+  \end{array}
+  \right.
+  $$
 \end{proof}
 
 \subsection{Tabla de conversión primal a dual}
 
 \begin{center}
-	\begin{tabular}{| l | l |}
-		\hline
-		Minimizar & Maximizar \\ \hline \hline
-		\textbf{Variables} & \textbf{Restricciones} \\ \hline
-		$\leq$ & $\geq$ \\ \hline
-		libre & $=$ \\ \hline
-		$\geq$ & $\leq$ \\ \hline \hline
-		\textbf{Restricciones} & \textbf{Variables} \\ \hline
-		$\leq$ & $\leq$ \\ \hline
-		$=$ & libre \\ \hline
-		$\geq$ & $\geq$ \\ \hline
-	\end{tabular}
+  \begin{tabular}{| l | l |}
+	\hline
+	Minimizar & Maximizar \\ \hline \hline
+	\textbf{Variables} & \textbf{Restricciones} \\ \hline
+	$\leq$ & $\geq$ \\ \hline
+	libre & $=$ \\ \hline
+	$\geq$ & $\leq$ \\ \hline \hline
+	\textbf{Restricciones} & \textbf{Variables} \\ \hline
+	$\leq$ & $\leq$ \\ \hline
+	$=$ & libre \\ \hline
+	$\geq$ & $\geq$ \\ \hline
+  \end{tabular}
 \end{center}
 \newpage
-\subsection{Teoremas de dualidad débil y fuerte}
+\section{Teoremas de dualidad débil y fuerte}
 \begin{theorem}
-	Dado un PPL [P] en formato canónico, y [D] su dual. Si $x_0$ y $w_0$ son soluciones factibles de [P] y [D] entonces $c^t w_0 \geq b^t x_0$.
+  Dado un PPL [P] en formato canónico, y [D] su dual. Si $x_0$ y $w_0$ son soluciones factibles de [P] y [D] entonces $c^t w_0 \geq b^t x_0$.
 \end{theorem}
 
 \begin{proof}
-	Sea $x_0$ una solución del problema [P] y $w_0$ una solución del problema [D], entonces se cumple $Ax_0 \geq b$ y $A^t w_0 \leq c$.
-	\begin{itemize}
-		\item Multiplicamos la primera desigualdad por $w_0^t$ a la izquierda: 
-		$$ w_0^t A x_0 \geq w_0^t b $$
-		\item Hacemos lo mismo para segunda desigualdad, pero esta vez multiplicando por $x_0^t$:
-		$$ x_0^t A^t w_0 \leq x_0^t c $$
-		\item Por tanto, 
-		$$ x_0^t c \geq x_0^t A^t w_0 = w_0^t A x_0 \geq w_0^t b$$
-	\end{itemize}
+  Sea $x_0$ una solución del problema [P] y $w_0$ una solución del problema [D], entonces se cumple $Ax_0 \geq b$ y $A^t w_0 \leq c$.
+  \begin{itemize}
+  \item Multiplicamos la primera desigualdad por $w_0^t$ a la izquierda: 
+	$$ w_0^t A x_0 \geq w_0^t b $$
+  \item Hacemos lo mismo para segunda desigualdad, pero esta vez multiplicando por $x_0^t$:
+	$$ x_0^t A^t w_0 \leq x_0^t c $$
+  \item Por tanto, 
+	$$ x_0^t c \geq x_0^t A^t w_0 = w_0^t A x_0 \geq w_0^t b$$
+  \end{itemize}
 \end{proof}
 \begin{theorem}[Teorema de la dualidad fuerte]
-	Sea un PPL [P] y su dual asociado [D] con $x_0$ y $w_0$ soluciones factibles de [P] y [D] respectivamente. \\
-	Si $f(x_0)=c^t x_0=b^t w_0=f^*(w_0)$ entonces $x_0$ y $w_0$ son soluciones óptimas de sus respectivos problemas.
+  Sea un PPL [P] y su dual asociado [D] con $x_0$ y $w_0$ soluciones factibles de [P] y [D] respectivamente. \\
+  Si $f(x_0)=c^t x_0=b^t w_0=f^*(w_0)$ entonces $x_0$ y $w_0$ son soluciones óptimas de sus respectivos problemas.
 \end{theorem}
 
 \begin{proof}
-	Sea $x$ solución factible de [P] con [P] problema de minimizar (se razona igual para maximizar). \\
-	Por el teorema de la dualidad débil, $c^t x \geq b^t w_0=c^tx_0$, lo que implica que $x_0$ es solución óptima de [P].
+  Sea $x$ solución factible de [P] con [P] problema de minimizar (se razona igual para maximizar). \\
+  Por el teorema de la dualidad débil, $c^t x \geq b^t w_0=c^tx_0$, lo que implica que $x_0$ es solución óptima de [P].
 \end{proof}
 
 
 \begin{theorem}
-	Sea [P] un PPL y [D] su dual asociado. Si $x_0$ es la solución óptima de [P] entonces [D] tambien tiene solución óptima y está viene dada por $w_0^t=c_0^t B^{-1}$ con $B$ la base asociada a la solución $x_0$ y $c_B$ los costos asociados a las variables básicas. Además ambas soluciones $x_0$ y $w_0$ alcanzan el mismo valor de la función objetivo.
+  Sea [P] un PPL y [D] su dual asociado. Si $x_0$ es la solución óptima de [P] entonces [D] tambien tiene solución óptima y está viene dada por $w_0^t=c_0^t B^{-1}$ con $B$ la base asociada a la solución $x_0$ y $c_B$ los costos asociados a las variables básicas. Además ambas soluciones $x_0$ y $w_0$ alcanzan el mismo valor de la función objetivo.
 \end{theorem}
 
 \begin{proof}
-	Sea [P] PPL en formato canónico:
-	$$
-	min ~ c^t x
-	$$
-	$$s.a \left\{
-	\begin{array}{c}
+  Sea [P] PPL en formato canónico:
+  $$
+  min ~ c^t x
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
 	Ax\geq b \\
 	x \geq 0
-	\end{array}
-	\right.
-	$$
-	Pasando a formato estándar:
-		$$
-	min ~ c^t x
-	$$
-	$$s.a \left\{
-	\begin{array}{c}
+  \end{array}
+  \right.
+  $$
+  Pasando a formato estándar:
+  $$
+  min ~ c^t x
+  $$
+  $$s.a \left\{
+  \begin{array}{c}
 	Ax-Is=b \\
 	x, s \geq 0
-	\end{array}
-	\right.
-	$$
-	Escribimos la tabla simplex:
-	$$
-	\begin{array}{c|cc|c}
+  \end{array}
+  \right.
+  $$
+  Escribimos la tabla simplex:
+  $$
+  \begin{array}{c|cc|c}
 	& x & s & b\\ \hline
 	& A & - Id & b \\ \hline
 	& & &
-	\end{array}
-	$$
-	Sin pérdida de generalidad podemos suponer que la solución óptima se encuentra en las $n$ primeras columnas (Es como hacer el simplex pero suponiendo de antemano quienes serán las soluciones óptimas):
-	$$
-	\begin{array}{c|ccc|c}
+  \end{array}
+  $$
+  Sin pérdida de generalidad podemos suponer que la solución óptima se encuentra en las $n$ primeras columnas (Es como hacer el simplex pero suponiendo de antemano quienes serán las soluciones óptimas):
+  $$
+  \begin{array}{c|ccc|c}
 	& x_b^t & x_n^t & s^t  & b\\ \hline
 	x_b& B & N & - Id & b \\ \hline
 	& & & &
-	\end{array}
-	$$
-	$$
-	\begin{array}{c|ccc|c}
+  \end{array}
+  $$
+  $$
+  \begin{array}{c|ccc|c}
 	& x_b^t & x_n^t & s^t  & b\\ \hline
 	c_b ~ x_b & Id &B^{-1} N & - B^{-1} &  B^{-1}b \\ \hline
 	& 0^t & c_b^tB^{-1}N-c_N^t& -c_b^t B^{-1} &
-	\end{array}
-	$$
-	Nuestro $x_0$ es $x_0=B^{-1}b$, por tanto el valor de nuestra función objetivo es $c_B^t B^{-1}b$. \\
-	¿Es $w_0=c_b^t B^{-1}$ solución factible del dual? Observemos:
-	$$A^tw_0=[B ~ ~N]^t[c_B^t B^{-1}]^t=$$
-	$$=\left[\begin{array}{c}
-		B^t \\ N^t
+  \end{array}
+  $$
+  Nuestro $x_0$ es $x_0=B^{-1}b$, por tanto el valor de nuestra función objetivo es $c_B^t B^{-1}b$. \\
+  ¿Es $w_0=c_b^t B^{-1}$ solución factible del dual? Observemos:
+  $$A^tw_0=[B ~ ~N]^t[c_B^t B^{-1}]^t=$$
+  $$=\left[\begin{array}{c}
+	  B^t \\ N^t
 	\end{array}\right](B^{-1})^t c_B=\left[\begin{array}{c}
-	B^t (B^{-1})^t c_b \\ N^t(B^{-1})^tc_b)
+	  B^t (B^{-1})^t c_b \\ N^t(B^{-1})^tc_b)
 	\end{array}\right]=\left[\begin{array}{c}
-	c_b \\ N^t(B^{-1})^t c_B
+	  c_b \\ N^t(B^{-1})^t c_B
 	\end{array}\right]=\left[\begin{array}{c}
-	c_B \\ (B^{-1}N )^t c_b
+	  c_B \\ (B^{-1}N )^t c_b
 	\end{array}\right] \leq \left[\begin{array}{c}
-	c_b \\ c_n
+	  c_b \\ c_n
 	\end{array}\right]$$
-	Por otro lado, $w_0^t=c_b^t B^{-1}\geq 0$, aplicando que las cotas relativas de las variables de holgura $-c_b^tB^{-1} \leq 0$. \\
-	Ahora veremos que $c^tx_0=b^t w_0$
-	$$b^t w_0= b^t (c_b^t B^{-1})^t=b^t (B^{-1})^t c_b=(B^{-1}b)^tc_b=((B^{-1}b)^t c_B)^t=c_B^t B^{-1}b=c_B^t x_b=c^t x_0$$
+  Por otro lado, $w_0^t=c_b^t B^{-1}\geq 0$, aplicando que las cotas relativas de las variables de holgura $-c_b^tB^{-1} \leq 0$. \\
+  Ahora veremos que $c^tx_0=b^t w_0$
+  $$b^t w_0= b^t (c_b^t B^{-1})^t=b^t (B^{-1})^t c_b=(B^{-1}b)^tc_b=((B^{-1}b)^t c_B)^t=c_B^t B^{-1}b=c_B^t x_b=c^t x_0$$
 \end{proof}
 
-\subsection{Condiciones de holgura complementarias}
+\section{Condiciones de holgura complementarias}
 
 Sea [P] un PPL en formato canónico y [D] su dual asociado. \\
 Sea $x_0$ solución óptima de [P] y $w_0$ solución óptima de [D]. 
 \begin{itemize}
-	\item $A x_0 \geq b$ $\longrightarrow$ multiplicamos por $w_0^t$ a la izquierda: 
-	$$ w_0^t A x_0 \geq w_0^t b $$
-	\item $w_0^t A \leq c_0^t$ $\longrightarrow$ multiplicamos por $x_0^t$ a la derecha: 
-	$$ x_0^t A^t w_0 \leq x_0^t c $$
-	\item Por tanto, dado que $x_0$ y $w_0$ son soluciones óptimas:
-	$$ x_0^t c = w_0^t A x_0 = w_0^t b$$
+\item $A x_0 \geq b$ $\longrightarrow$ multiplicamos por $w_0^t$ a la izquierda: 
+  $$ w_0^t A x_0 \geq w_0^t b $$
+\item $w_0^t A \leq c_0^t$ $\longrightarrow$ multiplicamos por $x_0^t$ a la derecha: 
+  $$ x_0^t A^t w_0 \leq x_0^t c $$
+\item Por tanto, dado que $x_0$ y $w_0$ son soluciones óptimas:
+  $$ x_0^t c = w_0^t A x_0 = w_0^t b$$
 \end{itemize}
 
 Ahora usando esa última igualdad, observemos:
 
 \begin{itemize}
-	\item $w_0^t A x_0 = w_0^t b$: \\
-	$$ w_0^t A x_0 - w_0^t b = 0 \Rightarrow w_0^t [Ax_0-b] = w_0^t S = 0$$
-	Donde $S$ es la matriz de las variables de holguras de [P], por tanto:
-	$$ w_{0j} s_j = 0 $$
-	De lo que se concluye que si $s_j \neq 0$ para algún $j$ entonces necesariamente $w_{0j}=0$.
-	\item $ x_0^t c = w_0^t A x_0$: \\
-	$$ c^t x_0 - w_0^t A x_0 = 0 \Rightarrow [c^t-w_0^t A]x_0 = 0=S'x_0=0$$
-	
-	Donde $S'$ es la matriz de las variables de holguras de [D], por tanto:
-	$$ x_{0j} s'_j = 0 $$
-	
-	De lo que se concluye que si $s'_j \neq 0$ para algún $j$ entonces necesariamente $x_{0j}=0$.
+\item $w_0^t A x_0 = w_0^t b$: \\
+  $$ w_0^t A x_0 - w_0^t b = 0 \Rightarrow w_0^t [Ax_0-b] = w_0^t S = 0$$
+  Donde $S$ es la matriz de las variables de holguras de [P], por tanto:
+  $$ w_{0j} s_j = 0 $$
+  De lo que se concluye que si $s_j \neq 0$ para algún $j$ entonces necesariamente $w_{0j}=0$.
+\item $ x_0^t c = w_0^t A x_0$: \\
+  $$ c^t x_0 - w_0^t A x_0 = 0 \Rightarrow [c^t-w_0^t A]x_0 = 0=S'x_0=0$$
+  
+  Donde $S'$ es la matriz de las variables de holguras de [D], por tanto:
+  $$ x_{0j} s'_j = 0 $$
+  
+  De lo que se concluye que si $s'_j \neq 0$ para algún $j$ entonces necesariamente $x_{0j}=0$.
 \end{itemize}
 \begin{proposition}
-	Si el dual es degenerado,entonces el primal tiene solución múltiple.
+  Si el dual es degenerado,entonces el primal tiene solución múltiple.
 \end{proposition}
 
 \begin{proof}
-	Sin perdida de generalidad, sea $x_0$ la solución básica óptima, sea $B$ la matriz básica asociada a la solución básica, entonces la solución óptima del dual viene dada por $w_0^t=c_B^t B^{-1}$. \\
-	$w_0^t$ tiene alguna componente nula por hipótesis, entonces en la tabla óptima [P], $w_0^t$ aparece en los costes relativos de las variables de holguras (Véanse las condiciones de holgura complementarias). \\
-	Sabemos entonces que si existen variables no básicas con costos relativos distintos de cero, entonces [P] tiene solución múltiple.
+  Sin perdida de generalidad, sea $x_0$ la solución básica óptima, sea $B$ la matriz básica asociada a la solución básica, entonces la solución óptima del dual viene dada por $w_0^t=c_B^t B^{-1}$. \\
+  $w_0^t$ tiene alguna componente nula por hipótesis, entonces en la tabla óptima [P], $w_0^t$ aparece en los costes relativos de las variables de holguras (Véanse las condiciones de holgura complementarias). \\
+  Sabemos entonces que si existen variables no básicas con costos relativos distintos de cero, entonces [P] tiene solución múltiple.
 \end{proof}
 
 En resumen,
 \begin{center}
-	\begin{tabular}{|l|l|}
-		\hline
-		\textbf{Primal} & \textbf{Dual} \\ \hline
-		Solución óptima & Solución óptima \\ \hline
-		Ilimitado & Infactible \\ \hline
-		Infactible & Ilimitado o infactible \\ \hline
-	\end{tabular}
+  \begin{tabular}{|l|l|}
+	\hline
+	\textbf{Primal} & \textbf{Dual} \\ \hline
+	Solución óptima & Solución óptima \\ \hline
+	Ilimitado & Infactible \\ \hline
+	Infactible & Ilimitado o infactible \\ \hline
+  \end{tabular}
 \end{center}
 
-\subsection{Método simplex dual}
-
+\section{Método simplex dual}
+Sea [P] un PPL en formato canónico, sea $x_0$ una solución básica de [P] (No necesariamente óptima). Supongamos además que la solución asociada a la base $B$ de $x_0$, $w^t = c_B^t B^{-1}$ cumple las restricciones del dual. Como $w_0^t$ verifica las condiciones del dual, se tiene: $$w_0^t= c_B^t B^{-1} [B ~ N]=[c_B^tB^{-1} B ~~ c_B^t B^{-1} N]=[c_B^t ~~ c_B^t B^{-1} N]$$
+Dado que $w_0$ cumple todas las restricciones del dual, $w_0^t A \leq c^t$, en particular, 
+$$ [c_B^t ~~ c_B^t B^{-1} N] \leq [c_B^t ~~ c_N^t]$$
+Por tanto, todos los costes relativos son negativos, de donde  se cumple la condición de optimalidad en el primal. \\
+$x_0$ sólo será solución básica cuando $x_0 \geq 0$, por tanto partimos de $x_0$ que verifica $Ax_0 = b$ y $w_0^t$ verifica las restricciones del dual.
+\begin{itemize}
+\item Si $x_0 \geq 0$ entonces es óptima.
+\item Si $x_0$ tiene alguna componente negativa:
+  $$x_0 = \left(
+  \begin{array}{c}
+	B^{-1} b \\
+	0
+  \end{array}
+  \right)$$
+  Supongamos que la componente $i$ de $B^{-1} b$ es negativa. \\
+  Construyamos la tabla simplex:
+  $$
+  \begin{array}{c|cc|c}
+	& x_b^t & x_n^t  & b\\ \hline
+	x_b& B & N  & b \\ \hline
+	& & & 
+  \end{array}
+  $$
+  Para obtener la última tabla simplex, simplemente 
+  multiplicamos por $B^{-1}$
+  
+  $$
+  \begin{array}{c|cc|c}
+	& x_b^t & x_n^t  & b\\ \hline
+	x_b& Id & B^{-1} N & B^{-1} b \\ \hline
+	& & &
+  \end{array}
+  $$
+  Podemos suponer sin pérdida de generalidad que el dual es no degenerado, si lo fuese, aplicamos algún método anticiclado, además, $w_0^t=c_B^t B^{-1}$ verifica por hipótesis las restricciones del dual.
+\end{itemize}
 \end{document}
