@@ -1199,8 +1199,8 @@ $$=c_1b_1+c_2+...+c_mb_m-c_1\sum_{j=m+1}^{n}a_{1j}x_j-c_2\sum_{j=m+1}^{n}a_{2j}x
 $$=z_0+\left[c_{m+1}-\sum_{i=1}^{m}c_i a_{i~m+1}\right]x_{m+1}+\left[c_{m+2}-\sum_{i=1}^{m}c_ia_{i~m+2}\right]x_{m+2}+...+\left[c_n-\sum_{i=1}^{m}c_ia_{in}\right]x_n=$$
 $$=z_0-\left[\sum_{i=1}^{m}c_i a_{i~m+1}-c_{m+1}\right]x_{m+1}-\left[\sum_{i=1}^{m}c_ia_{i~m+2}-c_{m+2}\right]x_{m+2}-...-\left[\sum_{i=1}^{m}c_ia_{in}-c_n\right]x_n=$$
 Definimos $r_q=\displaystyle \sum_{i=1}^{m}c_ia_{i~q}-c_{q}$ como costo relativo asociado a la variable $x_i$. \\
-Si el problema es de minimizar, queremos que todos los $r_q>0$, de esta manera reducimos el valor objetivo. \\
-Por otro lado, si el problema es de maximizar queremos que todos los $r_q<0$, de esta manera aumentamos el valor objetivo. \\
+Si el problema es de minimizar, queremos que todos los $r_q<0$.\\
+Por otro lado, si el problema es de maximizar queremos que todos los $r_q>0$, de esta manera aumentamos el valor objetivo. \\
 Por tanto, salen aquellos que no cumplan la condición de optimalidad.
 \newpage
 \begin{theorem}
@@ -1408,22 +1408,22 @@ $$ x_0=\left(
 \right)
 $$
 \subsection{Ejemplo de problema no acotado}
-$$ max ~2x_1 - 5x_2 + x_3$$
+$$ min ~2x_1 - 5x_2 + x_3$$
 $$
 s.a \left\{ 
 \begin{array}{c}
-  x_1-x_1 \leq 4 \\
+  x_1-x_2 \leq 4 \\
   4x_1 \leq 2 \\
   x_1 - 2x_2 - x_3 \leq 1
 \end{array}
 \right.$$
 $$x_1, x_2, x_3 \geq 0$$ \newpage
 Pasamos el problema a formato estándar:
-$$ max ~2x_1 - 5x_2 + x_3$$
+$$ min ~2x_1 - 5x_2 + x_3$$
 $$
 s.a \left\{ 
 \begin{array}{c}
-  x_1-x_1+s_1 = 4 \\
+  x_1-x_2+s_1 = 4 \\
   4x_1 s_2 = 2 \\
   x_1 - 2x_2 - x_3 + s_3 = 1
 \end{array}
@@ -2027,6 +2027,76 @@ $x_0$ sólo será solución básica cuando $x_0 \geq 0$, por tanto partimos de $
 	& & &
   \end{array}
   $$
-  Podemos suponer sin pérdida de generalidad que el dual es no degenerado, si lo fuese, aplicamos algún método anticiclado, además, $w_0^t=c_B^t B^{-1}$ verifica por hipótesis las restricciones del dual.
+  Podemos suponer sin pérdida de generalidad que el dual es no degenerado, si lo fuese, aplicamos algún método anticiclado, además, $w_0^t=c_B^t B^{-1}$ verifica por hipótesis las restricciones del dual. \\
+  \begin{itemize}
+  	\item $w_0^t a_1=c_B^t B^{-1} a_1 = c_1$ (Básica)
+  	\item ...
+  	\item $w_0^t a_m=c_B^t B^{-1} a_m = c_m$ (Básica)
+  	\item $w_0^t a_{m+1}=c_B^t B^{-1} a_{m+1} < c_{m+1}$ (No básica)
+  	\item ...
+  	\item $w_0^t a_{n}=c_B^t B^{-1} a_{n} < c_{n}$ (No básica)	
+  \end{itemize}
+
+   Sea ahora $w_\varepsilon^t$ con $\varepsilon>0$ una nueva solución del dual que transforma una de las restricciones de igualdad en $(<)$ y una restricción de $(<)$ en una de igualdad. \\
+   Esto hace que la solución del primal asociada siga verificando la condición de optimalidad, y además, $w_\varepsilon^t$ consigue un valor de la función objetivo mejor.
+   $$
+	   w_\varepsilon^t=w_0^t-\varepsilon u_i^t
+   $$	
+   Donde $u_i^t$ es la fila i-ésima de $B^{-1}$
+   
+   \subsubsection{¿Verifica $w_\varepsilon^t$ las restricciones del dual? ¿$w_\varepsilon^t A \leq c^t$?}
+   \begin{itemize}
+		\item $w_\varepsilon^t a_j=(w_0^t-\varepsilon u_i ^t)a_j=w_0^ta_j-\varepsilon u_i^t a_j$
+		\item Sí $i=j$ $u_i^t a_j=1$ en otro caso, es cero.
+		\item Por tanto, en las $m$ primeras filas distintas de $i$ tenemos:
+		$$
+			w_\varepsilon^t a_j=(w_0^t-\varepsilon u_i ^t)a_j=w_0^ta_j=c_j
+		$$
+		Por otro lado, en la fila i-ésima tendríamos:
+		$$
+			w_\varepsilon^t a_i=(w_0^t-\varepsilon u_i ^t)a_i=w_0^ta_i-\varepsilon1\leq c_i
+		$$
+		\item En el resto de filas sólo podemos asegurar $m<j<n$:
+		$$
+			w_\varepsilon^t a_j=(w_0^t-\varepsilon u_i ^t)a_j=w_0^ta_j-\varepsilon u_i^t a_j
+		$$
+		\item Llamemos $y_{ij}=u_i^t a_{j}$
+		\begin{enumerate}
+			\item Supongamos que todos los $y_{ij}\geq 0$ para todo $m<j\leq n$, podríamos afirmar entonces que $w_\varepsilon^t$ es factible para todo epsilon. \\
+			Además, dado que el valor de la función objetivo es $w_\varepsilon^t b = w_0^t b - \varepsilon u_i^tb$ podemos asegurar que el valor de la función objetivo aumenta.
+			\item Supongamos que existe un $y_{ij}<0$, entonces tomando epsilo de la siguiente forma:
+			$$ c_B^t B^{-1}a_j-\varepsilon y_{ij}=c_j \Rightarrow \varepsilon = \frac{c_B^t B^{-1}a_j-c_j}{y_{ij}} $$
+			Una de las restricciones de $(<)$ (al menos) se convierte de igualdad, tomando el mínimo de los épsilon ($\varepsilon_0$), lo tenemos. \\
+			Además, $w_{\varepsilon_0}^t b = w_0^t b - \varepsilon u_i^t b>w_0^t b $.
+		\end{enumerate}
+		
+   \end{itemize}
+
+	\subsection{Algoritmo Simplex Dual}
+	Sea $[P]$ un PPL en formato estándar
+	$$ min ~ c^t x $$
+	$$ 
+		s.a \left\{ 
+				\begin{array}{c}
+					Ax=b \\
+					x\geq 0
+				\end{array}
+			\right.
+	$$
+	Se define el algoritmo simplex dual de la siguiente forma:
+	
+	\begin{enumerate}
+		\item Dada una solución básica óptima de [P] $x_0$ (No necesariamente factible) y $w_0^t=c_B^t B^{-1}$ factible dual asociada a $x_0$ entonces:
+		\begin{itemize}
+			\item Si $x_B\geq0$ entonces $x_0$ será solución básica factible y óptima.
+			\item Si existe alguna componente $x_B$ negativa: PASO 2.
+		\end{itemize}
+		\item Seleccionamos la componente de $x_B$ mayor en valor absoluto. Supongamos que dicha componente es $x_{B_i}<0$ entonces \textbf{esa variable abandonará la base.}
+		\item La variable $j$ asociada a $\varepsilon_0$ será \textbf{la variable que va a entrar en la base.}
+		$$
+			\varepsilon_0=\min_j \{\frac{c_B^tB^{-1}a_j-c_j}{y_{ij}}: y_{ij}< 0\}
+		$$
+		\item Realizamos operaciones gaussianas para convertir la variable $x_j$ en la variable $x_i$, y volvemos al paso 1.
+	\end{enumerate}
 \end{itemize}
 \end{document}
