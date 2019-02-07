@@ -53,3 +53,17 @@ main.ptc
 *.gz
 main.run.xml
 *.toc
+
+# HTML generator
+src/*.aux
+src/*.fdb_latexmk
+src/*.log
+src/*.css
+src/*.dvi
+src/*.idv
+src/*.lg
+src/*.tmp
+src/*.xhtml
+src/*.4tc
+src/*.4ct
+src/*.ncx
