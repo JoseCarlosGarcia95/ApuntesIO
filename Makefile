@@ -3,7 +3,7 @@ PDF_BUILD="build/pdf/ApuntesIO.pdf"
 EPUB_BUILD="build/epub/ApuntesIO.epub"
 
 # Compile everything
-all: $(PDF_BUILD) $(EPUB_BUILD)
+all: $(PDF_BUILD) $(EPUB_BUILD) clean
 
 # Generates PDF file
 $(PDF_BUILD):
@@ -23,6 +23,7 @@ $(EPUB_BUILD):
 	@mv src/*.css build/html/
 	@mv src/*.png build/html/
 	@mv build/html/main.html build/html/ApuntesIO.html
+	@./tools/cleanup-html.py
 	@ebook-convert build/html/ApuntesIO.html build/epub/ApuntesIO.epub
 
 
@@ -44,3 +45,4 @@ clean:
 	@rm -rf src/*.xref
 	@rm -rf src/*.fls
 	@rm -rf src/main-epub3
+	@rm -rf src/dist.tex
