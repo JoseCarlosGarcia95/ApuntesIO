@@ -18,7 +18,7 @@ $(EPUB_BUILD):
 	@echo "Generating EPUB files"
 	@echo "Copying distribution"
 	@cp dist/epub.tex src/dist.tex
-	@cd src && htlatex main.tex
+	@cd src && htlatex main.tex "xhtml, charset=utf-8" " -cunihtf -utf8"
 	@mv src/*.html build/html/
 	@mv src/*.css build/html/
 	@mv src/*.png build/html/

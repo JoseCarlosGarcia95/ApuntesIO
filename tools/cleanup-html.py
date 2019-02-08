@@ -19,13 +19,17 @@ sanitize_values ={
     'Ú´U'        : '&Uacute;',
 }
 
-with open('build/html/ApuntesIO.html', 'r', encoding='iso-8859-1') as f:
+with open('build/html/ApuntesIO.html', 'r') as f:
     current_buffer = f.read()
 
-current_buffer = re.sub(r"<span[\s\S]+class=\"cmr-12\">([A-Za-z]+)</span>", '\\1', current_buffer, 0, re.MULTILINE)
+current_buffer = current_buffer.replace("\n", "").replace("\r", "")
+current_buffer = current_buffer.strip()
 
+current_buffer = current_buffer.replace('ı', 'i')
+
+current_buffer = re.sub(r"<span class=\"cmr-12\">([A-Za-z'\d\s´]+)</span>", '\\1', current_buffer, 0, re.MULTILINE)
 for bad_value, sanitize_value in sanitize_values.items():
     current_buffer = current_buffer.replace(bad_value, sanitize_value)
     
-with open('build/html/ApuntesIO.html', 'w', encoding='iso-8859-1') as f:
+with open('build/html/ApuntesIO.html', 'w') as f:
     f.write(current_buffer)
