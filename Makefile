@@ -24,6 +24,7 @@ $(EPUB_BUILD):
 	@mv src/*.png build/html/
 	@mv build/html/main.html build/html/ApuntesIO.html
 	@./tools/cleanup-html.py
+	@./tools/inject-css.py
 	@ebook-convert build/html/ApuntesIO.html build/epub/ApuntesIO.epub
 
 
