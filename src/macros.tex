@@ -1,4 +1,53 @@
+% Configuración
+\title{Resolución}
+\university{Universidad de Cádiz}
+\author{Yo}
+%\advisortwo{Segundo tutor}
+\city{Jerez de la Frontera, Cádiz}
+
+
 % Language
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 
+% Fuentes
+\usepackage[math]{kurier}
+\usepackage[sfdefault,condensed]{roboto}
+\usepackage[T1]{fontenc}
+
+% Símbolos matemáticos
+\def\IR{\ensuremath{\mathbb R}}
+\def\IK{\ensuremath{\mathbb K}}
+\def\IC{\ensuremath{\mathbb C}}
+\def\IN{\ensuremath{\mathbb N}}
+\def\IZ{\ensuremath{\mathbb Z}}
+\def\IQ{\ensuremath{\mathbb Q}}
+\def\IA{\ensuremath{\mathbb A}}
+
+% Tabla simplex (thanks Javi)
+\usepackage{multicol}
+\usepackage{forloop}
+\usepackage{calculator}
+
+\newcounter{ct}
+\def\fin{\multicolumn{1}{c}}
+	
+\newenvironment{simplex}[4]
+{ 
+	\def\myslines{} %
+	\forloop{ct}{0}{\value{ct} < #1}{\expandafter\def\expandafter\myslines\expandafter{%
+			\myslines r
+		}
+	}
+	\ADD{#1}{3}{\sol}
+	\begin{array}{rr|\myslines|c}
+		& \multicolumn{1}{c}{} &#2&\\
+		& & #3\\
+		\cline{2-\sol}
+		#4
+		\cline{2-\sol}
+		& & }
+{\\\end{array}}
+
+% Definiciones
+\newtheorem{definicion}{Definición}

@@ -6,13 +6,17 @@
 % General configuration for any distribution.
 \input{macros.tex}
 
-
 \title{Programación lineal}
-\author{José Carlos García Ortega}
+\author{JCGO}
 
 \begin{document}
 
 \maketitle
+
+% EPUB does not support table of contents
+\ifx\PDFMODE\1
+\tableofcontents
+\fi
 
 \input{capitulos/introduccion.tex}
 \input{capitulos/programacion_lineal.tex}
