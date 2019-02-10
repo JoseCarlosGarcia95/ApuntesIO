@@ -71,7 +71,7 @@
 
 % Logo
 \def\logo#1{\gdef\@logo{#1}}
-\logo{university_logo.jpeg}
+\logo{graficos/university_logo.jpeg}
 
 % Type
 \def\type#1{\gdef\@type{#1}}
