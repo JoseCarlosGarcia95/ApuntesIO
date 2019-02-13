@@ -1,3 +1,6 @@
 .chapterHead .titlemark { display: none; }
 .titleHead { font-size: 400%; text-align: center; }
 img { width: 50%; }
+.figure .noindent img { display: block; margin: auto; max-height: 500px; width: auto}
+.endfigure  { display: none }
+hr .figure { display: none }

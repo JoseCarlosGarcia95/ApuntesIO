@@ -48,8 +48,7 @@
 \usepackage{emptypage}
 
 % Gráficos
-\usepackage{graphicx}
-\graphicspath{{graphics/}}
+\usepackage{xcolor,graphicx}
 
 % Citas
 \usepackage{cite}

@@ -54,4 +54,7 @@
 
 % Gráficos
 \graphicspath{{graficos/}}
+\ifthenelse{\equal{\PDFMODE}{1}}{
+  \usepackage{subcaption}
+}{}
 

@@ -11,12 +11,10 @@
 
 \begin{document}
 
-\maketitle
-
-% EPUB does not support table of contents
-\ifx\PDFMODE\1
-\tableofcontents
-\fi
+\ifthenelse{\equal{\PDFMODE}{1}}{
+  \maketitle
+  \tableofcontents
+}{}
 
 \input{capitulos/introduccion.tex}
 \input{capitulos/programacion_lineal.tex}
