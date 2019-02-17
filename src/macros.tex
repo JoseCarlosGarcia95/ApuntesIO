@@ -1,7 +1,12 @@
 % Configuración
-\title{Resolución}
+\title{Programación lineal}
 \university{Universidad de Cádiz}
-\author{Yo}
+\author{Antonio J. \textsc{Arriaza Gómez}\\
+Manuel \textsc{Muñoz Márquez}\\
+Francisco J. \textsc{Navarro Izquierdo}\\
+Inmaculada \textsc{Espejo Miranda} \\
+J. Carlos \textsc{García Ortega}}
+
 %\advisortwo{Segundo tutor}
 \city{Jerez de la Frontera, Cádiz}
 
@@ -11,9 +16,12 @@
 \usepackage[spanish]{babel}
 
 % Fuentes
-\usepackage[math]{kurier}
+%\usepackage[math]{kurier}
 \usepackage[sfdefault,condensed]{roboto}
 \usepackage[T1]{fontenc}
+
+\usepackage{blkarray, bigstrut}
+\usepackage{multirow}
 
 % Símbolos matemáticos
 \def\IR{\ensuremath{\mathbb R}}
@@ -49,12 +57,28 @@
 		& & }
 {\\\end{array}}
 
-% Definiciones
-\newtheorem{definicion}{Definición}
-
 % Gráficos
 \graphicspath{{graficos/}}
 \ifthenelse{\equal{\PDFMODE}{1}}{
   \usepackage{subcaption}
 }{}
 
+
+% Legacy
+\newenvironment{formulacion}[4][1]
+{ 
+  \def\myflines{} %
+  \forloop{ct}{-2}{\value{ct} < #3}{\expandafter\def\expandafter\myflines\expandafter{%
+      \myflines
+      r
+    }%
+  }
+  \begin{array}{c}
+    #2 \quad #4\vspace*{0.3cm}\\
+    \text{s.a}\;
+    \left\{
+    \renewcommand{\arraystretch}{1.2}
+    \begin{array}{\myflines}}
+      {\end{array}\right.
+  \end{array}
+}

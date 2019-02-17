@@ -3,7 +3,7 @@ PDF_BUILD="build/pdf/ApuntesIO.pdf"
 EPUB_BUILD="build/epub/ApuntesIO.epub"
 
 # Compile everything
-all: $(PDF_BUILD) $(EPUB_BUILD) clean
+all: $(PDF_BUILD) $(EPUB_BUILD)
 
 # Generates PDF file
 $(PDF_BUILD):

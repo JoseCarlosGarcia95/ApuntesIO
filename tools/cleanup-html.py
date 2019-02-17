@@ -26,6 +26,7 @@ current_buffer = current_buffer.replace("\n", "").replace("\r", "")
 current_buffer = current_buffer.strip()
 
 current_buffer = current_buffer.replace('ı', 'i')
+current_buffer = current_buffer.replace('ﬀ', 'fi')
 
 current_buffer = re.sub(r"<span class=\"cmr-12\">([A-Za-z'\d\s´]+)</span>", '\\1', current_buffer, 0, re.MULTILINE)
 for bad_value, sanitize_value in sanitize_values.items():

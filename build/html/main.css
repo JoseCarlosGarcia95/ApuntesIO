@@ -1,6 +1,11 @@
 .chapterHead .titlemark { display: none; }
 .titleHead { font-size: 400%; text-align: center; }
-img { width: 50%; }
+.figure img { width: 50%; }
 .figure .noindent img { display: block; margin: auto; max-height: 500px; width: auto}
 .endfigure  { display: none }
 hr .figure { display: none }
+.framedenv { border: solid 1px; padding: 6px; }
+.RobotoCondensed-Bold-lf-t1-x-x-109 { font-weight: bold; }
+.RobotoCondensed-Italic-lf-t1-x-x-109 { font-style: italic; }
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: sup; font-size: smaller; }

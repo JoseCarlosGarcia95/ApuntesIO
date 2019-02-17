@@ -1,3 +1,100 @@
 % Configuration to better between platform compilation
 \newcommand\EPUBMODE{0}
 \newcommand\PDFMODE{1}
+
+% Theorem
+\definecolor{darkjose}{HTML}{4a4a4a}
+
+\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+% Theorem box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+backgroundcolor=black!5,
+linecolor=darkjose,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+innerbottommargin=5pt]{tBox}
+\usepackage{amsthm}
+
+\usepackage{cleveref}
+\usepackage[most]{tcolorbox}
+\newtcbtheorem{teorema_nuevo}{Teorema}{
+  breakable,
+  fonttitle = \bfseries,
+  colframe = darkjose,
+  colback = black!5
+}{thm}
+
+\newenvironment{teorema}[1][]
+{
+\begin{teorema_nuevo}{#1}{}
+}
+{\end{teorema_nuevo}}
+
+
+\newtcbtheorem{definicion_nuevo}{Definición}{
+  breakable,
+  fonttitle = \bfseries,
+  colframe = orange!70,
+  colback = orange!5
+}{thm}
+
+\newenvironment{definicion}[1][]
+{
+\begin{definicion_nuevo}{#1}{}
+}
+{\end{definicion_nuevo}}
+
+\newtcbtheorem{ejemplo_nuevo}{Ejemplo}{
+  breakable,
+  fonttitle = \bfseries,
+  colframe = olive!90,
+  colback = olive!20
+}{thm}
+
+\newenvironment{ejemplo}[1][]
+{
+\begin{ejemplo_nuevo}{#1}{}
+}
+{\end{ejemplo_nuevo}}
+
+\newenvironment{nota}[1][]
+{
+ \itshape\textbf{Nota: }
+}
+{}
+
+\newtcbtheorem{proposicion_nuevo}{Proposición}{
+  breakable,
+  fonttitle = \bfseries,
+  colframe = blue!70,
+  colback = blue!5
+}{thm}
+
+\newenvironment{proposicion}[1][]
+{
+\begin{proposicion_nuevo}{#1}{}
+}
+{\end{proposicion_nuevo}}
+
+\newtcbtheorem{corolario_nuevo}{Corolario}{
+  breakable,
+  fonttitle = \bfseries,
+  colframe = cyan!70,
+  colback = cyan!5
+}{thm}
+
+\newenvironment{corolario}[1][]
+{
+\begin{corolario_nuevo}{#1}{}
+}
+{\end{corolario_nuevo}}
+
+\newenvironment{solucion}[1][]
+{
+\textbf{Solución #1:} \emph
+}
+{}

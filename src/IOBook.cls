@@ -23,10 +23,10 @@
 \setlength{\hoffset}{0.00cm}
 \setlength{\voffset}{0.00cm}
 
-\setlength{\oddsidemargin}{1.5cm}
+\setlength{\oddsidemargin}{0.5cm}
 \setlength{\evensidemargin}{0.5cm}
 \setlength{\topmargin}{1mm}
-\setlength{\headheight}{1.36cm}
+\setlength{\headheight}{0.5cm}
 \setlength{\headsep}{1.00cm}
 \setlength{\textheight}{20.84cm}
 \setlength{\textwidth}{13.9cm}
@@ -131,6 +131,5 @@
 \ChTitleVar{\bfseries\Large\sf}
 
 % Teoremas, Definiciones, Lemas, Corolarios...
-\usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}

@@ -1,0 +1,2 @@
+\input pgfsys-tex4ht.def
+\def\pgfsys@svg@newline{^^J}
