@@ -218,40 +218,62 @@ De la misma forma se prueba que $[P_2]$ tiene las mismas soluciones que $[P_1]$.
   ¿Cuántos soldados y trenes debemos producir por semana para obtener el máximo beneficio?
 \end{ejemplo}
 
-\ifthenelse{\equal{\PDFMODE}{1}}{
-  \begin{figure}[h]
+\begin{solucion}
+  En primer lugar, encontramos las variables de interés:
+  $$s:=\text{Soldados a la semana}$$
+  $$t:=\text{Trenes a la semana}$$
+  A continuación, buscamos la función objetivo:
+  $$(27-10-14)s+(21-9-10)t=3s+2t$$
+  Por otro lado, las restricciones del problema anterior vienen dadas
+  por:
+  $$
+  \begin{array}{l}
+    1s+1t \leq 80 \\
+    2s+1t \leq 100 \\
+    s \leq 40
+  \end{array}
+  $$
+  Por tanto, nuestro PPL queda de la siguiente forma:
+  \begin{center}
+    máx $3s+2t$
+    $$s.a\left\lbrace
+      \begin{array}{l}
+	s+t \leq 80 \\
+	2s+t \leq 100 \\
+	s \leq 40
+      \end{array}
+    \right.
+    $$
+    $$s, t>0$$
+  \end{center}
+  Para resolverlo gráficamente, en primer lugar debemos dibujar todas
+  las restricciones:
+  \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{2_RGRAFICA_1.pdf}
-      \caption{Todas las restricciones}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{2_RGRAFICA_2.pdf}
-      \caption{Intersección restricciones}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.3\textwidth}
-      \includegraphics[width=\textwidth]{2_RGRAFICA_3.pdf}
-      \caption{Dirección soluciones}
-    \end{subfigure}
-  \end{figure}
-}{
-  \begin{figure}
-    \includegraphics[width=\textwidth]{2_RGRAFICA_1.pdf}
-    \caption{Todas las restricciones}
+    \includegraphics[width=2in]{2_RGRAFICA_1.pdf}
+    \caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
   \end{figure}
 
-  \begin{figure}
-    \includegraphics[width=\textwidth]{2_RGRAFICA_2.pdf}
-    \caption{Intersección restricciones}
+  Una vez planteada las restricciones nos quedamos con su restricción,
+  esto es:
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=2in]{2_RGRAFICA_2.pdf}
+    \caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
   \end{figure}
 
-  \begin{figure}
-    \includegraphics[width=\textwidth]{2_RGRAFICA_3.pdf}
-    \caption{Dirección soluciones}
+  Finalmente, para mejorar nuestra función objetivo debemos movernos
+  de forma perpendicular a la gráfica de la función $3s+2t$, esto es,
+  que debemos movernos en la dirección del vector gradiente de
+  $3s+2t$, esta dirección es $(3, 2)$, por tanto:
+
+  esto es:
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=2in]{2_RGRAFICA_3.pdf}
+    \caption[Gráfica de las restricciones de nuestro problema]{Gráfica de las restricciones de nuestro problema}
   \end{figure}
-}
+\end{solucion}
 
 \begin{definicion}[Restricción activa]
   Dado un P.P.L $[P]$ se dice que una restricción está activa en $x_0$ si se cumple por igualdad en $x_0$.

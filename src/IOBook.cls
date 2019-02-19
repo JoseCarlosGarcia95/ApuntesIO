@@ -88,6 +88,8 @@
 \def\license#1{\gdef\@license{#1}}
 \license{}
 
+\usepackage{float}
+
 \usepackage{datetime}
 \renewenvironment{maketitle}{
 	\pagestyle{empty}
