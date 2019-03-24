@@ -98,3 +98,19 @@ innerbottommargin=5pt]{tBox}
 \textbf{Solución #1:} \emph
 }
 {}
+
+
+\usepackage[
+type={CC},
+modifier={by-sa},
+version={3.0},
+]{doclicense}
+
+\usepackage{fix-cm}
+\makeatletter
+\DeclareRobustCommand{\regmark}{\raisebox{1.13ex}{%
+    \fontsize{.6\dimexpr\f@size pt}\z@\selectfont\textregistered}%
+}
+\makeatother
+
+\license{\doclicenseThis}

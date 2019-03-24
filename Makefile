@@ -27,6 +27,8 @@ $(EPUB_BUILD):
 	@./tools/inject-css.py
 	@cp -r src/graficos build/html
 	@ebook-convert build/html/ApuntesIO.html build/epub/ApuntesIO.epub
+	@ebook-convert build/html/ApuntesIO.html build/mobi/ApuntesIO.mobi
+
 
 
 # Clean latex files

@@ -1,1 +1,921 @@
 \chapter{Método Simplex}
+En el capítulo anterior se ha hecho una introducción de que es la
+programación lineal y los distintos teoremas que relacionan los
+problemas de optimización con representaciones geométricas.
+
+En este capítulo se introducirá el método simplex, un algoritmo para
+poder resolver problemas de programación lineal.
+
+En resumen, el método simplex nos calcula soluciones óptimas de un
+problema, teniendo en cuenta:
+
+\begin{enumerate}
+  \item Hay que cambiar de soluciones básicas adyacentes en soluciones
+  básicas adyacentes.
+  \item Conseguir que la solución básica sea factible.
+  \item Calcular que variable debe entrar en la base para mejorar la
+  función objetivo.
+\end{enumerate}
+
+Teniendo en cuenta esto, a continuación se describirán las distintas
+fases del método simplex
+\section{Las tres fases del método simplex}
+
+\subsection{Pivotar, "saltar" de solución básica factible en solución básica factible}
+Sea $[P]$ un PPL en formato estándar:
+$$ min(max) c^t x$$
+$$
+s.a \left\{
+  \begin{array}{c}
+    Ax=b \\
+    x \geq 0
+  \end{array}
+\right.
+$$
+$$ A \in \mathcal{M}_{mxn}, b\geq 0, rango(A)=m$$
+Podemos suponer sin perdida de generaldiad que la matriz $A$ se puede
+escribir como $$[A][x]=[B_{mxn} ~ N_{mx(n-m)}]
+\left[
+  \begin{array}{c}
+    x_B \\
+    x_N
+  \end{array}
+\right]=[b]$$
+La matriz $B$ es invertible, por tanto podemos multiplicar por $B^{-1}$ y tenemos:
+$$[Id_{mxn} ~ N_{mx(n-m)}]
+\left[
+  \begin{array}{c}
+    x_B \\
+    x_N
+  \end{array}
+\right]=[B^{-1}][b]$$
+\begin{ejemplo}
+  $$ max/min ~c^t x$$
+  $$s.a \left\{
+    \begin{array}{c}
+      x_1+5x_4=57 \\
+      x_1-4 x_4=12 \\
+      x_1+x_4 = 5
+    \end{array}
+  \right.$$
+  \textbf{Tabla simplex}
+  $$
+  \begin{array}{c|cccc|c}
+    & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+    x_1 & 1 & 0 & 0 & 5 & 57 \\
+    x_2 & 0 & 1 & 0 & -4 & 12 \\
+    x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
+    & & & & &
+  \end{array}
+  $$
+  Supongamos que $x_4$ mejora a la solución actual. Cambiamos por ejemplo, $x_4$ por $x_3$
+  $$
+  \begin{array}{c|cccc|c}
+    & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+    x_1 & 1 & 0 & 0 & 5 & 57 \\
+    x_2 & 0 & 1 & 0 & -4 & 12 \\
+    x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
+    & & & & \uparrow &
+  \end{array}
+  $$
+  Hacemos operaciones Gaussianas para poner la columna $x_4$ como básica:
+  $$
+  \begin{array}{c|cccc|c}
+    & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+    x_1 & 1 & 0 & -5 & 0 & 32 \\
+    x_2 & 0 & 1 & 4 & 0 & 32 \\
+    x_4 & 0 & 0 & 1 & 1 & 5 \\ \hline
+    & & & &  &
+  \end{array}
+  $$
+  Ahora volvemos a la solución básica inicial
+  $$
+  \begin{array}{c|cccc|c}
+    & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+    x_1 & 1 & 0 & 0 & 5 & 57 \\
+    x_2 & 0 & 1 & 0 & -4 & 12 \\
+    x_3 & 0 & 0 & 1 & 1 & 5 \\ \hline
+    & & & & &
+  \end{array}
+  $$
+  Ahora queremos que entre en la base la variable $x_4$ y que salga la variable $x_2$
+  $$
+  \begin{array}{c|cccc|c}
+    & x_1 & x_2 & x_3 & x_4 &  \\ \hline
+    x_1 & 1 & \frac{5}{4} & 0 & 0 & 72 \\
+    x_4 & 0 & -\frac{1}{4} & 0 & 1 & -3 \\
+    x_3 & 0 & \frac{1}{4} & 1 & 0 & 8 \\ \hline
+    & & & & &
+  \end{array}
+  $$
+\end{ejemplo}
+\subsection{Dada una variable no básica que mejore la solución actual, ¿Qué variable no básica debe salir?}
+Sea $[P]$ un PPL en formato estándar:
+$$ min ~(max) c^tx$$
+$$s.a \left\{
+  \begin{array}{c}
+    Ax=b \\x \geq 0
+  \end{array}
+\right. $$
+La matriz
+$$ [A][x]=[b]$$
+Podemos reescribirla de forma que
+$$[B ~ N]
+\left[
+  \begin{array}{c}
+    x_B \\
+    x_N
+  \end{array}
+\right]=[b]
+$$
+Podemos suponer sin pérdida de generalidad que
+la $$B=I_{mxn}=\left(
+  \begin{array}{cccc}
+    1 & ... & ... & ... \\
+    0 & 1 & ... & ... \\
+    ... & ... & ... & ... \\
+    ... & ... &  0  & 1
+  \end{array}
+\right)
+$$
+Podemos escribir en formato tabla en formato simplex:
+
+$$\left[
+  \begin{array}{cccc}
+    1 & ... & ... & ... \\
+    0 & 1 & ... & ... \\
+    ... & ... & ... & ... \\
+    ... & ... &  0  & 1
+  \end{array} \left| 
+    \begin{array}{ccccc}
+      a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+      a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+      ... & ... & ... & ... & ... \\
+      a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn}
+    \end{array}
+  \right.
+\right]=
+\left[
+  \begin{array}{c}
+    x_B \\
+    x_N
+  \end{array}
+\right]=[b]
+$$
+$$
+\begin{array}{c}
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  x_m \\ \hline
+  ~
+\end{array}
+\left|
+  \begin{array}{cccc}
+    x_1 & x_2 & ... & x_m \\ \hline
+    1 & ... & ... & ... \\
+    0 & 1 & ... & ... \\
+    ... & ... & ... & ... \\
+    ... & ... &  0  & 1\\ \hline
+        & & & 
+  \end{array}
+  \begin{array}{ccccc}
+    x_{m+1} & ... & x_q & ... & x_n \\ \hline
+    a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+    a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+    ... & ... & ... & ... & ... \\
+    a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+            & & & &
+  \end{array}
+\right|
+\begin{array}{c}
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  b_m \\ \hline
+  ~
+\end{array}
+$$
+Supongamos que $x_q$ mejora la solución actual, entonces $x_q$ quiere entrar en la base. \\ ¿Qué variable básica $x_1, ..., x_m$ debe salir?
+$$b_1(a_1)+b_2(a_2)+...+b_m(a_m)=b $$
+$$b_{1~q}(a_1)+b_{2~q}(a_2)+...+b_{m~q}(a_m)=b $$
+$$
+b_1a_1+b_2a_2+...+b_na_m=b ~ (1)
+$$
+$$
+a_{1~q}a_1+a_{2~q}a_2+...+a_{n~q}a_m=a_q ~(2)
+$$
+Sea $\varepsilon\geq0$ y realicemos la siguiente operación:
+$$(1)-\varepsilon(2)$$
+$$(b_1-\varepsilon a_{1 ~ q})a_1+(b_2-\varepsilon a_{2 ~ q})+...+(b_m-\varepsilon a_{m ~q})a_m=b-\varepsilon a_q$$
+$$(b_1-\varepsilon a_{1 ~ q})a_1+(b_2-\varepsilon a_{2 ~ q})+...+(b_m-\varepsilon a_{m ~q})a_m+\varepsilon a_q=b$$
+Definamos ahora el vector:
+$$
+x_\varepsilon=\left(
+  \begin{array}{c}
+    b_1-\varepsilon a_{1 ~ q} \\
+    b_2-\varepsilon a_{2 ~ q} \\ 
+    ... \\
+    b_m-\varepsilon a_{m ~ q} \\
+    ... \\
+    \varepsilon \\
+    ... \\
+    0
+  \end{array}
+\right)
+\left(
+  \begin{array}{c}
+    1 \\
+    2 \\
+    ... \\
+    m \\
+    ... \\
+    q \\
+    ... \\
+    0
+  \end{array}
+\right)
+$$
+\textbf{Caso I: } Si $a_{iq}<0$ para $1\leq i \leq m$, entonces $x_\varepsilon \in R$ para todo $\varepsilon \geq 0$. \\
+En este caso, el problema es no acotado, encuentro una solución que hace que la función objetivo mejore todo lo queramos. \\
+\textbf{Caso II: } Si existen algunos $a_{iq}>0$, queremos que:
+$$b_i-\varepsilon a_{iq}=0$$
+Tomando $$\varepsilon=\min\{\frac{b_i}{a_{iq}} : a_{iq} > 0\}$$ \\
+Entonces entra en la base la variable $x_q$, sale de la base la variable asociada a la ecuación $b_i-\varepsilon a_{iq}=0$ (En caso de empate, puede salir la que queramos)
+\subsubsection{Forma alternativa de la fase II}
+Supongamos que $x_q$ entra en la base y que $x_k$ es la variable básica que debe salir.
+$$
+\begin{array}{c}
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  \leftarrow x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
+\end{array}
+\left|
+  \begin{array}{cccccc}
+    x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+    1 & ... & ... &...& ...& ... \\
+    0 & 1 & ... & ...& ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ... & ... & 1 & ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ...& .... & ... &  0  & 1\\ \hline
+        & & & 
+  \end{array}
+  \begin{array}{ccccc}
+    x_{m+1} & ... & x_q & ... & x_n \\ \hline
+    a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+    a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+    ... & ... & ... & ...& ... \\
+    ... & ... & a_{kq} & ...& ... \\
+    ... & ... & ... & ...& ... \\
+    a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+            & & & &
+  \end{array}
+\right|
+\begin{array}{c}
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  b_k \\
+  ... \\
+  b_m \\ \hline
+  ~
+\end{array}
+$$
+Aplicamos operaciones Gaussianas
+$$F_k'=\frac{1}{a_{kq}}F_k$$
+
+$$
+\begin{array}{c}
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  \leftarrow x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
+\end{array}
+\left|
+  \begin{array}{cccccc}
+    x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+    1 & ... & ... &...& ...& ... \\
+    0 & 1 & ... & ...& ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ... & ... & \frac{1}{a_{kq}}  & ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ...& .... & ... &  0  & 1\\ \hline
+        & & & 
+  \end{array}
+  \begin{array}{ccccc}
+    x_{m+1} & ... & x_q & ... & x_n \\ \hline
+    a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+    a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+    ... & ... & ... & ...& ... \\
+    ... & ... & \frac{a_{kq}}{a_{kq}} & ...& ... \\
+    ... & ... & ... & ...& ... \\
+    a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+            & & & &
+  \end{array}
+\right|
+\begin{array}{c}
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  \frac{b_k}{a_{kq}} \\
+  ... \\
+  b_m \\ \hline
+  ~
+\end{array}
+$$
+Hacemos ahora la siguiente operación:
+$$F_j=F_j - a_{jq}F_k ~ \forall j\neq q$$
+
+$$
+\begin{array}{c}
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  \leftarrow x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
+\end{array}
+\left|
+  \begin{array}{cccccc}
+    x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+    1 & ... & ... &...& ...& ... \\
+    0 & 1 & ... & ...& ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ... & ... & ...  & ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ...& .... & ... &  0  & 1\\ \hline
+        & & & 
+  \end{array}
+  \begin{array}{ccccc}
+    x_{m+1} & ... & x_q & ... & x_n \\ \hline
+    a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+    a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+    ... & ... & ... & ...& ... \\
+    ... & ... & 1 & ...& ... \\
+    ... & ... & ... & ...& ... \\
+    a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+            & & & &
+  \end{array}
+\right|
+\begin{array}{c}
+  b \\ \hline
+  b_1 - a_{1q}\frac{b_k}{a_{kq}}\\
+  ... \\
+  ... \\
+  \frac{b_k}{a_{kq}} \\
+  ... \\
+  b_m- a_{mq}\frac{b_k}{a_{kq}} \\ \hline
+  ~
+\end{array}
+$$
+Como $b_i \geq 0$ entonces, $a_{kq}>0$ de modo que 
+$$ b_i-a_{iq}\frac{b_k}{a_{kq}} \geq 0 $$
+$$ b_i\geq a_{iq}\frac{b_k}{a_{kq}} $$
+\begin{enumerate}
+  \item Si $a_{iq}$ para todo $i=1,...,m$ para $i \neq k$ entra la nueva solución factible
+  \item Si existen algunos $a_{iq}>0$
+  $$ b_i-a_{iq}\frac{b_k}{a_{kq}} \geq 0 $$
+  $$ b_i\geq a_{iq}\frac{b_k}{a_{kq}} $$
+  Dado que $ a_{iq}>0$
+  $$ \frac{b_i}{ a_{iq}}\geq\frac{b_k}{a_{kq}} $$
+\end{enumerate}
+La fila asociada a $\displaystyle\min\{\frac{b_i}{a_{iq}}: a_{iq}>0\}$ indica la variable que debe salir.
+
+
+\subsection{¿Qué variable no básica mejora a la solución actual?}
+Partimos del siguiente sistema:
+$$
+\begin{array}{c}
+  \\ \hline
+  x_1 \\
+  ... \\
+  ... \\
+  x_k \\
+  ... \\
+  x_m \\ \hline
+  ~
+\end{array}
+\left|
+  \begin{array}{cccccc}
+    x_1 & x_2 & ... & x_k & ... & x_m \\ \hline
+    1 & ... & ... &...& ...& ... \\
+    0 & 1 & ... & ...& ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ... & ... & 1 & ...& ... \\
+    ... & ... & ... & ... & ...& ... \\
+    ... & ...& .... & ... &  0  & 1\\ \hline
+        & & & 
+  \end{array}
+  \begin{array}{ccccc}
+    x_{m+1} & ... & x_q & ... & x_n \\ \hline
+    a_{1 ~ m+1} & ... & a_{1q} & ... & a_{1n} \\
+    a_{2 ~ m+1} & ... & a_{2q} & ... & a_{2n} \\
+    ... & ... & ... & ...& ... \\
+    ... & ... & a_{kq} & ...& ... \\
+    ... & ... & ... & ...& ... \\
+    a_{m ~ m+1} & ... & a_{mq} & ... & a_{mn} \\ \hline
+            & & & &
+  \end{array}
+\right|
+\begin{array}{c}
+  b \\ \hline
+  b_1 \\
+  ... \\
+  ... \\
+  b_k \\
+  ... \\
+  b_m \\ \hline
+  ~
+\end{array}
+$$
+La solución básica asociada a la tabla anterior viene dada por:
+$$
+x_0=\left(
+  \begin{array}{c}
+    b_1 \\
+    b_2 \\
+    ... \\
+    b_m \\
+    0 \\
+    ... \\
+    0
+  \end{array}
+\right)
+$$
+Sea $f(x_1, x_2, ..., x_n)=c_1 x_1+...+c_n x_n$ para $c_i \in \mathbb{R}$ para todo $i=1, ..., n$ \\
+\textbf{¿Qué valor alcanza $x_0$ en la función objetivo?}
+$$f(x_1, x_2, ..., x_n)=c_1 x_1+...+c_m x_m+c_{m+1} \cdot 0+...+c_n \cdot 0=z_0$$
+Vamos a despejar los $x_i$ para $i=1, ..., m$ en términos del resto de variables.
+$$
+\left\{
+  \begin{array}{c}
+    \displaystyle x_1=b_1-\sum_{j=m+1}^{n}a_{1j}x_j \\
+    \displaystyle x_2=b_2-\sum_{j=m+1}^{n}a_{2j}x_j \\
+    ... \\
+    \displaystyle x_m=b_m-\sum_{j=m+1}^{n}a_{mj}x_j \\
+  \end{array}
+\right.
+$$ 
+\textbf{¿Qué valor alcanza la función objetivo en la solución general $x$?}
+$$f(x_1, x_2, ..., x_n)=c_1 (b_1-\sum_{j=m+1}^{n}a_{1j}x_j)+c_2 (b_2-\sum_{j=m+1}^{n}a_{2j}x_j)+...+c_m (b_m-\sum_{j=m+1}^{n}a_{mj}x_j)+x_{m+1}c_{m+1}+...+c_n x_n$$
+Aplicando la propiedad distributiva ahora:
+$$f(x_1, x_2, ..., x_n)=c_1 (b_1-\sum_{j=m+1}^{n}a_{1j}x_j)+c_2 (b_2-\sum_{j=m+1}^{n}a_{2j}x_j)+...+c_m (b_m-\sum_{j=m+1}^{n}a_{mj}x_j)+x_{m+1}c_{m+1}+...+c_n x_n=$$
+$$=c_1b_1+c_2+...+c_mb_m-c_1\sum_{j=m+1}^{n}a_{1j}x_j-c_2\sum_{j=m+1}^{n}a_{2j}x_j-...-c_m\sum_{j=m+1}^{n}a_{mj}x_j+x_{m+1}c_{m+1}+...+c_n x_n=$$
+$$=z_0+\left[c_{m+1}-\sum_{i=1}^{m}c_i a_{i~m+1}\right]x_{m+1}+\left[c_{m+2}-\sum_{i=1}^{m}c_ia_{i~m+2}\right]x_{m+2}+...+\left[c_n-\sum_{i=1}^{m}c_ia_{in}\right]x_n=$$
+$$=z_0-\left[\sum_{i=1}^{m}c_i a_{i~m+1}-c_{m+1}\right]x_{m+1}-\left[\sum_{i=1}^{m}c_ia_{i~m+2}-c_{m+2}\right]x_{m+2}-...-\left[\sum_{i=1}^{m}c_ia_{in}-c_n\right]x_n=$$
+Definimos $r_q=\displaystyle \sum_{i=1}^{m}c_ia_{i~q}-c_{q}$ como costo relativo asociado a la variable $x_i$. \\
+Si el problema es de minimizar, queremos que todos los $r_q<0$.\\
+Por otro lado, si el problema es de maximizar queremos que todos los $r_q>0$, de esta manera aumentamos el valor objetivo. \\
+Por tanto, salen aquellos que no cumplan la condición de optimalidad.
+
+\subsection{Teorema de condición necesaria y suficiente de
+  optimalidad}
+
+La discusión anterior se puede ver de forma resumida en el siguiente
+teorema:
+\begin{teorema}
+  Dado un PPL 
+  $$min (max) ~ c^t x $$
+  $$s.a \left\{
+    \begin{array}{c}
+      Ax=b \\
+      x\geq 0
+    \end{array}
+  \right.$$
+  Si $x_0$ es una solución básica factible de [P] entonces
+  \begin{enumerate}
+    \item Si todos los costos relativos $r_j$ de las variables básica son positivas o nulas (negativas o nulas) en el caso de maximizar (en el caso de minimizar) entonces $x_0$ es solución óptima de [P].
+    \item Si alguno de los costos relativos es negativo (positivo) en el caso de maximizar (minimizar) entonces la solución actual no es óptima y la variable asociada a dicho coste relativo mejorará la solución actual.
+    \begin{enumerate}
+      \item Si existe $\varepsilon\{\frac{b_i}{a_{ij}} : a_{ij} >0 \}$ entonces la variable que debe de salir es aquella asociada a la fila donde se alcanza el mínimo, $\varepsilon$
+      \item Si todos los componentes $a_{ij}<0$ asociados a la variable que \textit{entrar} entrar entonces el problema es no acotado. Podemos encontrar entonces una dirección de ilimitación.
+    \end{enumerate}
+  \end{enumerate}
+  Recordemos, $$r_j=\sum_{i=1}^{m}c_i a_{ij}-c_j$$ 
+  Los costos relativos asociados a las variables básicas siempre es $0$.
+\end{teorema}
+
+\begin{ejemplo}
+  $$  max ~ 3x_1+x_2+3x_3$$
+  $$ s.a \left\{
+    \begin{array}{c}
+      2x_1+x_2+x_3\leq2\\
+      x_1+2x_2+3x_3\leq 5 \\
+      2x_1+2x_2+x_3\leq 6
+    \end{array}
+  \right.
+  $$
+  $$x_1, x_2, x_3\geq 0$$
+  Pasamos a formato estándar
+  $$  max ~ 3x_1+x_2+3x_3$$
+  $$ s.a \left\{
+    \begin{array}{c}
+      2x_1+x_2+x_3 + s_1=2\\
+      x_1+2x_2+3x_3+ s_2 = 5 \\
+      2x_1+2x_2+x_3 + s_3=  6
+    \end{array}
+  \right.
+  $$
+  $$x_1, x_2, x_3, s_1, s_2, s_3 \geq 0$$
+  Construimos la tabla simplex
+  $$
+  \begin{array}{c|cccccc|c}
+    & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+    & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+    0 ~ s_1 & 2 & 1 & 1 & 1 & 0 & 0 & 2 \\
+    0 ~ s_2 & 1 & 2 & 3 & 0 & 1 & 0 & 5 \\
+    0 ~ s_3 & 2 & 2 & 1 & 0 & 0 & -1 & 6 \\ \hline
+    & -3 & -1 & -3 & 0 & 0 & 0 & 0
+  \end{array}
+  $$
+  Vemos que la variable $x_1$ y $x_3$ quieren entrar, elegimos una, en este caso $x_1$, y debe salir $s_1$. 
+  $$ F_1'=\frac{F_1}{2} $$
+  $$
+  \begin{array}{c|cccccc|c}
+    & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+    & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+    3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
+    0 ~ s_2 & 1 & 2 & 3 & 0 & 1 & 0 & 5 \\
+    0 ~ s_3 & 2 & 2 & 1 & 0 & 0 & -1 & 6 \\ \hline
+    & -3 & -1 & -3 & 0 & 0 & 0 & 0
+  \end{array}
+  $$
+
+  $$ F_2'=F_2-F_1 $$
+  $$ F_3'=F_3-2F_1 $$
+  $$
+  \begin{array}{c|cccccc|c}
+    & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+    & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+    3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
+    0 ~ s_2 & 0 & 3/2 & 5/2 & 1/2 & 1 & 0 & 4 \\
+    0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
+    & 0 & 1/2 & -3/2 & 3/2 & 0 & 0 & 3
+  \end{array}
+  $$
+
+  Debe entrar en la base la variable $x_3$, haciendo cociente, llegamos que la variable que debe salir es $s_2$, por tanto debemos convertir la columna de $x_3$ en la forma $(0, 1, 0)^t$
+  $$F_2'=\frac{2}{5}F_2$$
+
+  $$
+  \begin{array}{c|cccccc|c}
+    & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+    & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+    3 ~ x_1 & 1 & 1/2 & 1/2 & 1/2 & 0 & 0 & 1 \\
+    3 ~ x_3 & 0 & 3/5 & 1 & -2/10 & 2/5 & 0 & 8/5 \\
+    0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
+    & 0 & 1/2 & -3/2 & 3/2 & 0 & 0 & 3
+  \end{array}
+  $$
+
+  $$
+  F_1'=F_1-\frac{1}{2}F_2$$$  $
+
+  $$
+  \begin{array}{c|cccccc|c}
+    & 3 & 1 & 3 & 0 & 0 & 0 &  \\
+    & x_1 & x_2 & x_3 & s_1 & s_2 & s_3 & b \\ \hline
+    3 ~ x_1 & 1 & 1/5 & 0 & 6/10 & -2/5 & 0 & 1 \\
+    3 ~ x_3 & 0 & 3/5 & 1 & -2/10 & 2/5 & 0 & 8/5 \\
+    0 ~ s_3 & 0 & 1 & 0 & -1 & 0 & 1 & 4 \\ \hline
+    & 0 &  7/5 & 0 & 6/5 & 3/5 & 0 & 27/5
+  \end{array}
+  $$
+  Por tanto, la solución óptima es:
+  $$ x_0=\left(
+    \begin{array}{c}
+      \displaystyle \frac{1}{5} \\
+      0 \\
+      \displaystyle \frac{8}{5} \\
+      0 \\
+      0 \\
+      4
+    \end{array}
+  \right)
+  $$
+\end{ejemplo}
+\section{Degeneración del ciclado}
+Vamos a ver ahora unos casos donde el método simplex nos lleva a un
+ciclo,
+
+$$ max ~2x_1+3x_2-x_3-12x_4$$
+$$s.a \left\{
+  \begin{array}{c}
+    -2x_1-9x_2+x_3+9x_4 \leq 0 \\
+    1/3x_1+x_2-1/3x_3-2x_4 \leq 0
+  \end{array}
+\right.
+$$
+$$x_1, x_2, x_3, x_4 \geq 0$$
+Pasamos el problema a formato estándar, y construimos la tabla SIMPLEX:
+$$
+\begin{array}{c|cccccc|c}
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  0 ~ s_1 & -2 & -9 & 1 & 9 & 1 & 0 & 0 \\
+  0 ~ s_2 & 1/3 & 1 & 1/3 & -2 & 0 & 1 & 0 \\ \hline
+  & -2 & -3 & 1 & 12 & 0 & 0 & 0
+\end{array}
+$$
+
+$$
+\begin{array}{c|cccccc|c}
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  0 ~ s_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
+  3 ~ x_2 & 1/3 & 1 & -1/3 & -2 & 0 & 1 & 0 \\ \hline
+  & -1 & 0 & 0 & 6 & 0 & 3 & 0
+\end{array}
+$$
+
+$$
+\begin{array}{c|cccccc|c}
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  2 ~ x_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
+  3 ~ x_2 & 0 & 1 & 1/3 & 1 & -1/3 & -2 & 0 \\ \hline
+  & 0 & 0 & -2 & -3 & 1 & 12 & 0
+\end{array}
+$$
+
+$$
+\begin{array}{c|cccccc|c}
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  2 ~ x_1 & 1 & 0 & -2 & -9 & 1 & 9 & 0 \\
+  -12 ~ x_4 & 0 & 1 & 1/3 & 1 & -1/3 & -2 & 0 \\ \hline
+  & 0 & 3 & -1 & 0 & 0 & 6 & 0
+\end{array}
+$$
+$$...$$
+$$
+\begin{array}{c|cccccc|c}
+  & 2 & 3 & -1 & -12 & 0 & 0 & \\
+  & x_1 & x_2 & x_3 & x_4 & s_1 & s_2 & b \\ \hline
+  0 ~ s_1 & -2 & -9 & 1 & 9 & 1 & 0 & 0 \\
+  0 ~ s_2 & 1/3 & 1 & 1/3 & -2 & 0 & 1 & 0 \\ \hline
+  & -2 & -3 & 1 & 12 & 0 & 0 & 0
+\end{array}
+$$
+\subsection{Método anticiclado}
+\begin{enumerate}
+  \item Elegimos un orden entre las variables.
+  \item En caso de empate en los criterios de entrada o de salida de variables, elegimos la variable más pequeña usando el orden definido en la lista de la fase I.
+\end{enumerate}
+
+\section{Métodos para resolver problemas con restricciones}
+Hay casos que al escribir nuestro problema de programación lineal no
+somos capaces de inicializar el método SIMPLEX, pues no somos capaces
+de calcular una solución básica, esto pasa en problemas de
+programación lineal donde aparecen restricciones con $=$ o $\geq$.
+
+Veamos un ejemplo:
+
+\subsection{Resolución de PPL con restricciones $(=)$ y $(\geq)$}
+
+Sea [P] el siguiente PPL:
+$$ min ~ 3x_1+5x_2 $$
+$$ s.a \left\{
+  \begin{array}{c}
+    x_1 \leq 4 \\
+    x_2 \leq 6 \\
+    3x_1+2x_2 \geq 18
+  \end{array}
+\right.
+$$
+Lo pasamos a formato estándar, y construimos la tabla SIMPLEX.
+$$
+\begin{array}{c|ccccc|c} 
+  & x_1 & x_2 & s_1 & s_3 & b \\ \hline
+  s_1 & 1 & 0 & 1 & 0 & 0 & 4 \\
+  s_2 & 0 & 1 & 0 & 1 & 0 & 6 \\
+  s_3 & -3 & -2 & 0 & 0 & 1 & -18 \\ \hline
+  & & & & &
+\end{array}
+$$
+Es básica pero no factible, por tanto no puede inicializar el simplex.
+
+\subsection{Método de las penalizaciones}
+Modificamos el problema original añadiendo una variable artificial $(z_i)$ por cada restricción de $(=)$ y de $(\geq)$. \\
+Dichas variables artificiales tendrán un costo $M>>0$ (muy grande) y entrarán en la función objetivo sumando (restando) si el problema es de minimizar (maximizar). \\
+Al problema con las variables artificiales se le denomina problema ampliado. \\
+
+Volviendo al problema anterior, 
+$$ min ~ 3x_1+5x_2+M z_3 $$
+$$ s.a \left\{
+  \begin{array}{c}
+    x_1+s_1=4 \\
+    x_2 + s_2 = 6 \\
+    3x_1+2x_2-s_3+z_3=18
+  \end{array}
+\right.
+$$
+Recordemos lo siguiente:
+\begin{itemize}
+  \item Las variables de holgura sirven para transformar las restricciones ($\leq$) o ($\geq$) en $(=)$
+  \item Las variables artificiales sirven para iniciar el método SIMPLEX con una solución básica factible.
+\end{itemize}
+
+Observemos que
+\begin{itemize}
+  \item El problema ampliado no es equivalente al problema original. 
+  \item Solo coincide cuando en la solución del problema ampliado las variables artificiales sean $0$, $z_i$ para todo $i$.
+  \item Si $x_0$ es solución óptima del problema ampliado y todos los $z_i=0$, entonces $x_0$ es solución óptima del problema original. 
+  \item El problema ampliado siempre tiene solución.
+  \item Si $x_0$ es solución óptima del problema ampliado y existe algún $z_i \neq 0$ \\
+  Entonces el problema original NO tiene solución.
+  \item Si el problema ampliado es no acotado entonces el problema original también es no acotado.
+\end{itemize} 
+Resolvamos entonces:
+$$ min ~ 3x_1+5x_2+M z_3 $$
+$$ s.a \left\{
+  \begin{array}{c}
+    x_1+s_1=4 \\
+    x_2 + s_2 = 6 \\
+    3x_1+2x_2-s_3+z_3=18
+  \end{array}
+\right.
+$$
+
+$$
+\begin{array}{c|cccccc|c}
+  & 3 & 5 & 0 & 0 & 0 & M & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  0 ~ s_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+  M ~ z_3 & 3 & 2 & 0 & 0 & -1 & 1 & 18 \\ \hline
+  & 3M-3 & 2M-5 & 0 & 0 & -M & 0 & 18M
+\end{array}
+$$
+En este caso entra $x_1$ y sale $s_1$
+$$F_3'=F_3-3F_1$$
+
+$$
+\begin{array}{c|cccccc|c}
+  & 3 & 5 & 0 & 0 & 0 & M & \\
+  & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+  3 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+  0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+  M ~ z_3 & 0 & 2 & -3 & 0 & -1 & 1 & 6 \\ \hline
+  & 0 & 2M-5 & -3M+3 & 0 & -M & 0 & 6M+12
+\end{array}
+$$
+
+Entra $x_2$ y sale $z_3$. \\
+El lector debe continuar este ejercicio.
+
+
+\subsection{Método de las dos fases}
+Otro método que se puede utilizar para calcular una solución básica es
+el método de las dos fases, para ello:
+\begin{enumerate}
+  \item Fase 1
+  \begin{enumerate}
+    \item Añadimos una variable artificial $z_i$ para cada restricción de $(=)$ o $(\geq)$ igual que en el método de las penalizaciones.
+    \item Cambiamos la función objetivo por
+    $$ min ~ \sum_{i=1}^{k}z_i $$
+    \item Si el problema de la fase 1 tiene solución optima con alguna variable artificial no nula, entonces el problema original no tiene solución.
+    \item Si tiene solución óptima y todas las variables artificiales son cero, entonces pasamos a la fase 2.
+  \end{enumerate}
+  \item Fase 2
+  \begin{enumerate}
+    \item Cambiamos la función objetivo de la fase 1 por la función objetivo original y eliminamos las columnas de las variables artificiales.
+  \end{enumerate}
+\end{enumerate}
+
+\begin{ejemplo}
+  
+  $$ min ~ 3x_1+5x_2+M z_3 $$
+  $$ s.a
+  \left\{
+    \begin{array}{c}
+      x_1+s_1=4 \\
+      x_2 + s_2 = 6 \\
+      3x_1+2x_2-s_3+z_3=18
+    \end{array}
+  \right.
+  $$
+  \textbf{Fase 1}
+  $$ min ~ z_3 $$
+  $$ s.a \left\{
+    \begin{array}{c}
+      x_1+s_1=4 \\
+      x_2 + s_2 = 6 \\
+      3x_1+2x_2-s_3+z_3=18
+    \end{array}
+  \right.
+  $$
+
+  $$
+  \begin{array}{c|cccccc|c}
+    & 0 & 0 & 0 & 0 & 0 & 1 & \\
+    & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+    0 ~ s_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+    0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+    1 ~ z_3 & 3 & 2 & 0 & 0 & -1 & 1 & 18 \\ \hline
+    & 3 & 2 & 0 & 0 & -1 & 0 & 18
+  \end{array}
+  $$
+
+  $$
+  \begin{array}{c|cccccc|c}
+    & 0 & 0 & 0 & 0 & 0 & 1 & \\
+    & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+    0 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+    0 ~ s_2 & 0 & 1 & 0 & 1 & 0 & 0 & 6 \\
+    1 ~ z_3 & 0 & 2 & -3 & 0 & -1 & 1 & 6 \\ \hline
+    & 0 & 2 & -3 & 0 & -1 & 0 & 6
+  \end{array}
+  $$
+
+  $$
+  \begin{array}{c|cccccc|c}
+    & 0 & 0 & 0 & 0 & 0 & 1 & \\
+    & x_1 & x_2 & s_1 & s_2 & s_3 & z_3 & b \\ \hline
+    0 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 0 & 4 \\
+    0 ~ s_2 & 0 & 0 & 3/2 & 1 & 1/2 & -1/2 & 3 \\
+    1 ~ x_2 & 0 & 1 & -3/2 & 0 & -1/2 & 1/2 & 3 \\ \hline
+    & 0 & 0 & 0 & 0 & 0 & -1 & 0 
+  \end{array}
+  $$
+  \textbf{Fase 2: }
+  $$
+  \begin{array}{c|ccccc|c}
+    & 3 & 5 & 0 & 0 & 0 & \\
+    & x_1 & x_2 & s_1 & s_2 & s_3 & b \\ \hline
+    3 ~ x_1 & 1 & 0 & 1 & 0 & 0 & 4 \\
+    0 ~ s_2 & 0 & 0 & 3/2 & 1 & 1/2 & 3 \\
+    5 ~ x_2 & 0 & 1 & -3/2 & 0 & -1/2 & 3 \\ \hline
+    & 0 & 0 & -9/2 & 0  & 5/2 & 27 
+  \end{array}
+  $$
+\end{ejemplo}
+
+\section{Coste computacional}
+
+Supongamos que tenemos un problema de programación lineal de maximizar
+escrito en formato estándar. Vamos a contar el número de operaciones
+máximas para resolver un problema de programación lineal.
+
+\subsection{Operaciones de una iteración}
+\subsubsection{Cálculo de los costes relativos}
+Tenemos que calcular los costes relativos de las variables no básicas,
+por tanto por cada variable no básica, calcular el coste relativo nos
+cuesta:
+
+\begin{enumerate}
+  \item $m$ multiplicaciones.
+  \item $m$ sumas.
+  \item 1 resta.
+\end{enumerate}
+
+Por tanto hay que hacer $2m+1$ operaciones para calcular cada coste
+relativo.
+
+Además, tenemos $n-m$ variables no básicas, esto hace un total de:
+$$
+(2m+1) \cdot (n-m) = 2mn - 2m^2+n-m
+$$
+
+Si $n >> m$, se tiene que calcular el coste relativo tiene un coste
+$o(mn)$
+
+\subsubsection{Calculo del mínimo de los costes relativos}
+Para cálcular el mínimo de los costes relativos tenemos que iterar
+entre todos los costes relativos de las variables no básicas, esto es
+que tenemos que hacer $n-m$ comparaciones.
+
+\subsection{Operaciones totales}
+De esta forma, dado que el método simplex explora todos los puntos
+extremos, y el número máximo de puntos extremos viene dado por
+$$
+{n\choose m}
+$$
+
+Supongamos que $n \geq 2m$, entonces:
+$$
+{n\choose m} = \frac{n!}{m!(n-m)!} \geq \left(\frac{n}{m}\right)^m \geq 2^m
+$$
+
+Por tanto, parece lógico temerse que vamos a tener un número de
+iteraciones exponencial.
+
+En la práctica se observa, que el orden del método simplex $o(m^2n)$,
+para ver casos extremos donde el método simplex alcanza un orden
+exponencial se puede ver el ejemplo clásico de Klee y Minty.
